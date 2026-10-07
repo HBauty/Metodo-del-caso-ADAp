@@ -33,6 +33,14 @@
 - El sistema debe crear recordatorios de impagos.
 - El sistema deberá realizar informes.
 
+### Jose
+- De cada cliente se ha de almacenar obligatoriamente NIF y dirección fiscal
+- El sistema debe notificar tanto facturas puntuales (avisos) como facturas recurrentes (cobros comunes)
+- El rol de administrado ha de tener acceso a todo el historial de facturación de todos los clientes , mientras que el lector solo a sus propias facturas.
+- El sistema de notificación de facturación debe estar automatizado
+- 
+  
+
 ---
 
 ## 2. Requisitos No Funcionales
@@ -62,6 +70,12 @@
 - Se debe verificar que el email del registro sea del dominio de TurbineH.
 - Solo el administrador puede registrar a un usuario.
 - Debe haber al menos un superadministrador en el sistema.
+  
+### Jose
+- Interfaz optimizada e intuitiva , mínimo numero de clics posible
+- Aplicación debe ser multidispositivo y plenamente funcional desde la web
+- Independencia entre la aplicación de facturación y el producto principal(Brain)
+- Protección de los datos mediante restricciones ( roles )
 
 ---
 
@@ -79,6 +93,10 @@
 
 ### Rubén
 - Los pagos dependen de la facturación del cliente y son de carácter mensual.
+
+## Jose
+- El sistema debe ser escalable para poder soportar el crecimiento y un amplio volumen de usuarios
+- Gestionar impagos  y dar de baja a clientes con deudas pendiente 
 
 ---
 
