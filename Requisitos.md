@@ -2,117 +2,47 @@
 
 ## 1. Requisitos Funcionales
 
-### Gabriel
-- Login de usuario, administrador y superadministrador.
-- Creación de clientes.
-- El superadministrador proporciona permisos de administrador a *x* trabajadores.
-- El administrador le da permisos al usuario para modificar, crear y gestionar clientes.
-- Recibir información de facturas pendientes de forma automática (a los 3 días y a los 5 días).
-- Recibir información de facturas que ya se han pagado y almacenarlas.
-- El superadministrador debe ser capaz de modificar la información, formato o variables de las fichas de factura en cualquier momento.
+Requisitos Funcionales Generalizados:
+1. Gestión de Accesos, Usuarios y Roles  
+Acceso multi-rol: Autenticación en el sistema mediante cuatro niveles de permisos: Superadministrador, Administrador, Usuario (lector). 
+Uso interno Aislado
+Gestión de permisos jerárquica:
+El Superadministrador gestiona y otorga permisos a los Administradores.
+El Administrador registra usuarios y asigna permisos para crear, modificar y gestionar clientes.
+Uso exclusivo interno: Acceso restringido únicamente a empleados de la empresa. Los clientes finales no tienen acceso ni registro en la plataforma.
+Diseño responsivo: Interfaz completamente adaptada para funcionar y ser operativa desde dispositivos móviles.
+2. Gestión de Clientes y Bajas
+Fichas de clientes: Creación, modificación y almacenamiento de la información de los clientes.
+Flujo de baja con borrado lógico: Al solicitar una baja, el sistema detiene inmediatamente la generación de facturas recurrentes, pero mantiene los datos del cliente bloqueados (borrado lógico) durante el tiempo máximo legal permitido.
+Liquidación de bajas: Notificación automática por email de todos los impagos pendientes al tramitar la baja de un cliente.
+3. Facturación y Pagos
+Emisión automatizada: Generación automática de facturas recurrentes, almacenamiento en el sistema y envío directo al cliente por correo electrónico.
+Creación manual: Permiso para que los usuarios autorizados creen facturas de forma manual.
+Política de pago único: El sistema solo procesará y registrará pagos completos; no se admiten pagos fraccionados.
+Configuración avanzada: Panel exclusivo para el Superadministrador que permite modificar en cualquier momento el formato, variables de las facturas y el plazo límite de pago.
+4. Notificaciones, Filtros e Informes
+Alertas automáticas de impago: Envío de recordatorios automáticos por email ante facturas pendientes (por ejemplo, a los 3 y a los 5 días del vencimiento).
+Persistencia de reclamación: Continuar enviando recordatorios de impagos pendientes incluso si el cliente ya ha iniciado el proceso de baja.
+Histórico de pagados: Registro, confirmación y almacenamiento de las facturas que ya han sido abonadas.
+Buscador y filtros avanzados: Herramienta de filtrado de facturas por criterios como ubicación, temática del cliente, estado del pago y fecha de emisión.
+Módulo de informes: Generación de reportes periódicos y estadísticos sobre el estado financiero y de facturación.
 
-### Hugo
-- Cuando el cliente se da de baja, notificar los impagos y después, guardar sus datos durante el máximo tiempo permitido (borrado lógico).
-- Las notificaciones se deben mandar por email.
-- Funcionar desde el móvil.
-- Dos roles: administrador y lector.
 
-### Rubén
-- La aplicación debe ser interna e independiente de Brain, los clientes no acceden ni se registran.
-- El pago tiene que ser realizado completo, no fraccionado.
-- Cuando el cliente solicita la baja, detener las facturas recurrentes pero seguir recordando los pagos pendientes.
-- El superadministrador tiene que tener una configuración avanzada que le permita, por ejemplo, cambiar el plazo de pago.
-- Se deben implementar filtros para las facturas (ubicación, temática, clientes, fecha de factura, etc.).
-- Generar una factura automática, guardarla y enviarla al cliente.
 
-### Aquiles
-- El sistema debe permitir la creación de facturas.
-- El sistema debe funcionar desde un dispositivo móvil.
-- El sistema debe permitir que el administrador registre a un usuario.
-- El sistema debe crear recordatorios de pagos.
-- El sistema debe crear recordatorios de impagos.
-- El sistema deberá realizar informes.
 
-### Jose
-- De cada cliente se ha de almacenar obligatoriamente NIF y dirección fiscal
-- El sistema debe notificar tanto facturas puntuales (avisos) como facturas recurrentes (cobros comunes)
-- El rol de administrado ha de tener acceso a todo el historial de facturación de todos los clientes , mientras que el lector solo a sus propias facturas.
-- El sistema de notificación de facturación debe estar automatizado
-- 
-  
+Requisitos no Funcionales Generalizados:
 
----
-
-## 2. Requisitos No Funcionales
-
-### Gabriel
-- Facturas creadas en menos de 1 minuto.
-- La web/aplicación debe ser lo suficientemente sencilla e intuitiva como para hacer una ficha de cliente desde cualquier dispositivo.
-- Las fichas que se guardan en el sistema son las que no están activas, es decir, las facturas ya pagadas.
-- El sistema debe soportar el login de todos los usuarios, administradores y del superadministrador.
-
-### Hugo
-- Privacidad de los datos.
-- Facturar en menos de 1 minuto.
-
-### Rubén
-- Se puede utilizar desde cualquier dispositivo.
-- Capacidad de escalar a miles de clientes.
-- No requiere doble factor de autorización.
-- Se prioriza la eficiencia.
-- La aplicación no tiene nada que ver con Brain, están completamente separadas.
-
-### Aquiles
-- El proceso de facturar debe durar menos de un minuto.
-- Un usuario no podrá darse de baja si tiene pagos pendientes.
-- Los informes serán mensuales, trimestrales o semanales.
-- Las notificaciones de impagos son perpetuas y solo paran al ser pagadas.
-- Se debe verificar que el email del registro sea del dominio de TurbineH.
-- Solo el administrador puede registrar a un usuario.
-- Debe haber al menos un superadministrador en el sistema.
-  
-### Jose
-- Interfaz optimizada e intuitiva , mínimo numero de clics posible
-- Aplicación debe ser multidispositivo y plenamente funcional desde la web
-- Independencia entre la aplicación de facturación y el producto principal(Brain)
-- Protección de los datos mediante restricciones ( roles )
-
----
-
-## 3. Requisitos de Negocio
-
-### Gabriel
-- Facilitar el seguimiento y creación de facturas de nuestros clientes.
-- Controlar la información a la que tiene acceso cada usuario.
-
-### Hugo
-- Facturar en pocos clics, incluso desde el teléfono móvil.
-- Capacidad de emitir factura puntual o recurrente, para clientes nuevos o existentes.
-- Recordar los pagos pendientes.
-- Confirmar al cliente las facturas cobradas.
-
-### Rubén
-- Los pagos dependen de la facturación del cliente y son de carácter mensual.
-
-## Jose
-- El sistema debe ser escalable para poder soportar el crecimiento y un amplio volumen de usuarios
-- Gestionar impagos  y dar de baja a clientes con deudas pendiente 
-
----
-
-## 4. Requisitos de Usuario y Resumen General
-
-- Que el usuario pueda registrarse y gestionar facturas.
-- **Visión General:** Gestión rápida de facturas donde los clientes pueden chequearlas. Diseño minimalista e íntegro. Uso de roles, facturas recurrentes; los clientes se dan de baja sin impagos y pueden cambiar de plan.
-
-### Notas adicionales (Hugo)
-
-- **Flujo principal:** Registro del cliente -> Facturación -> Seguimiento de los cobros.
-- **Dashboard:** Con información general, solo visible para el administrador.
-- **Validación:** Verificar que el email pertenezca a la empresa (`<nombre>@turbine.<dominio>`).
-- **Filtrado:** Añadir filtrado por empresa, temática, tipo de factura, estado y fecha.
-- **Diseño:** Respetar la imagen corporativa de la empresa.
-- **Plataforma:** Aplicación web adaptada a todos los dispositivos (Responsive).
-- **Plazos:** Plazo de pago establecido en 5 días.
-- **Permisos:** El rol "lector" puede hacer lo mismo que el administrador, pero solo en aquello a lo que se le dé permiso expreso.
-- **Retención:** Mientras haya impagos, el cliente no se puede dar de baja.
+1. Rendimiento y Eficiencia
+Velocidad de facturación: El proceso completo de generación, guardado y envío de una factura debe realizarse en menos de 1 minuto.
+Eficiencia del sistema: El procesamiento de datos y la carga de pantallas deben estar optimizados para evitar demoras, priorizando la agilidad en la gestión diaria.
+2. Usabilidad y Accesibilidad
+Diseño intuitivo: La interfaz debe ser lo suficientemente sencilla y fácil de usar como para permitir la creación de una ficha de cliente o factura de forma rápida y sin necesidad de formación compleja.
+Compatibilidad multidispositivo: La aplicación debe ser 100% responsiva y accesible desde cualquier dispositivo (ordenadores, tablets y móviles).
+3. Escalabilidad y Concurrencia
+Capacidad de crecimiento: La arquitectura del sistema debe estar preparada para escalar a miles de clientes y facturas sin perder rendimiento.
+Soporte de concurrencia: El sistema debe soportar el inicio de sesión simultáneo de todos los usuarios, administradores y el superadministrador sin caídas ni ralentizaciones.
+4. Seguridad, Privacidad y Arquitectura
+Privacidad por diseño: El sistema debe garantizar la protección y confidencialidad de los datos almacenados, cumpliendo con las normativas vigentes (como RGPD para el borrado lógico).
+Autenticación simplificada: No se requerirá doble factor de autorización (2FA) para el acceso, priorizando una entrada rápida al sistema.
+Independencia tecnológica: La aplicación es completamente independiente y aislada del sistema Brain, operando en servidores o bases de datos separadas.
+Eficiencia en modelos de IA: Las tareas de Inteligencia Artificial (como la predicción de impagos o la lectura de extractos bancarios) deben ejecutarse en segundo plano (background) para no penalizar el rendimiento ni la velocidad de la interfaz de usuario. 
