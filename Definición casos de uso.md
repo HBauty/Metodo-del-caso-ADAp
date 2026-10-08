@@ -16,9 +16,12 @@ Consultar facturas ( cliente en modo lector)
 
 Editar facturas (administrador)
 
+filtrar facturas ¿? 
+
 Darse de baja (tanto administrador que expulsa usuario como cliente que se quiere ir ) 
 
 Asignar / crear rol ( SuperAdmin ) 
+
 
 
 
