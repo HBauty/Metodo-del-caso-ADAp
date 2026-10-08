@@ -32,9 +32,11 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 ### Tareas: 
--[ ] Definir casos de uso (Rubén , Jose ).
--[ ] Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
--[ ] Empezar diagrama de casos de uso ( Hugo y Aquiles .
+- Definir casos de uso (Rubén , Jose).
+  
+- Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
+  
+- Empezar diagrama de casos de uso ( Hugo y Aquiles .
 
 ### Tareas completadaa:
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
