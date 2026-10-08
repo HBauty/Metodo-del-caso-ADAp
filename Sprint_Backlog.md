@@ -17,7 +17,7 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 ### Tareas:
 - [ ] Organizar equipo, creación de discord, github, trello y otras herramientas. *(General)*
 - [ ] Revisar transcripción de la charla en busca de posibles nuevos requisitos. *(Rosales y Ángel)*
-- [ ] Definir los requisitos funcionales y no funcionales. *(Gabriel, y alguien más)*
+- [ ] Definir los requisitos funcionales y no funcionales. *(Gabriel)*
 - [ ] Definir los casos de uso. *(Hugo)*
 - [ ] Crear diagrama de uso en plantUml.
 
@@ -27,16 +27,16 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 
 ---
 
-# Sesión 8/10 
+# Sesión 2/10 
 
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 ### Tareas: 
-- Definir casos de uso (Rubén , Jose).
+- [ ]Definir casos de uso (Rubén , Jose).
   
-- Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
+- [ ]Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
   
-- Empezar diagrama de casos de uso ( Hugo y Aquiles .
+- [ ]Empezar diagrama de casos de uso ( Hugo y Aquiles .
 
 ### Tareas completadaa:
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
