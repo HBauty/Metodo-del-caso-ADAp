@@ -27,7 +27,7 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 
 ---
 
-# Sesión 8/10 
+# Sesión 2/10 
 
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
