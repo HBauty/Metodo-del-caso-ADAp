@@ -31,7 +31,6 @@ Módulo de informes: Generación de reportes periódicos y estadísticos sobre e
 
 
 Requisitos no Funcionales Generalizados:
-
 1. Rendimiento y Eficiencia
 Velocidad de facturación: El proceso completo de generación, guardado y envío de una factura debe realizarse en menos de 1 minuto.
 Eficiencia del sistema: El procesamiento de datos y la carga de pantallas deben estar optimizados para evitar demoras, priorizando la agilidad en la gestión diaria.
@@ -46,3 +45,33 @@ Privacidad por diseño: El sistema debe garantizar la protección y confidencial
 Autenticación simplificada: No se requerirá doble factor de autorización (2FA) para el acceso, priorizando una entrada rápida al sistema.
 Independencia tecnológica: La aplicación es completamente independiente y aislada del sistema Brain, operando en servidores o bases de datos separadas.
 Eficiencia en modelos de IA: Las tareas de Inteligencia Artificial (como la predicción de impagos o la lectura de extractos bancarios) deben ejecutarse en segundo plano (background) para no penalizar el rendimiento ni la velocidad de la interfaz de usuario. 
+
+
+
+Requisitos de negocio
+Necesidades, objetivos y reglas de Turbine que motivan y delimitan el desarrollo del sistema.
+
+RN1. Reducir el trabajo administrativo manual automatizando la creación de facturas, el seguimiento de pagos y la comunicación de incidencias.
+RN2. Centralizar el control de clientes, facturación y cobros para conocer lo facturado, cobrado y pendiente y facilitar la supervisión financiera.
+RN3. Delegar la gestión de clientes entre empleados, manteniendo permisos por cliente, supervisión global y avisos al responsable correspondiente.
+RN4. Facilitar la gestión diaria en pocos clics, con poco aprendizaje y desde cualquier lugar, incluido el teléfono móvil.
+RN5. Sostener el crecimiento hasta miles de clientes y conservar su histórico de facturas y cobros.
+RN6. Cobrar suscripciones mensuales por tramos de facturación anual del cliente, sin permanencia anual ni pagos fraccionados, con precio ordinario estable durante el año y revisión anual, además de servicios puntuales con importe propio.
+RN7. Proteger los datos personales y fiscales y mantener facturas válidas, coherentes y conservadas conforme a la categoría de información y finalidad aplicables.
+RN8. Disponer de una aplicación administrativa interna independiente de Brain, con una solución técnica asequible y sin imponer una tecnología concreta.
+Requisitos de usuario
+Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus clientes asignados, el administrador sobre todos y el superadministrador añade configuración avanzada y acceso a todos los administradores y lectores.
+
+RU1. El personal interno necesita iniciar sesión con correo corporativo y contraseña y acceder únicamente a los clientes autorizados para crearlos, consultarlos, modificarlos y darlos de baja lógicamente. Además poder importar sus datos desde CSV.
+RU2. El administrador necesita registrar empleados y asignarles clientes y permisos; el superadministrador necesita gestionar los privilegios administrativos y acceder a todos los administradores y lectores.
+RU3. El personal autorizado necesita crear y modificar facturas puntuales o configurar suscripciones mensuales dentro de las resctricciones acordadas. Además enviar sus PDF, consultar y descargar el histórico del cliente.
+RU4. El personal autorizado necesita modificar facturas dentro de las restricciones de edición acordadas, enviar sus PDF y consultar y descargar el histórico del cliente.
+RU5. El lector asignado necesita conocer qué facturas están pagadas, pendientes o vencidas, revisar cobros y recibir avisos de pago e impago de sus clientes.
+RU6. El cliente externo necesita recibir facturas y recordatorios amigables, disponer del correo y teléfono de soporte, mediante comunicaciones externas y sin acceder a la aplicación.
+RU7. El personal autorizado necesita registrar la comunicación de baja, consultar, notificar deudas y completar la baja administrativa tras su liquidación.
+RU8. El administrador y el superadministrador necesitan consultar un panel global de facturado, cobrado y pendiente por períodos trimestrales y anuales.
+RU9. El superadministrador necesita poder crear nuevos administradores, modificar la plantilla y tener acceso para modificar las facturas.
+RU10. El lector necesita visualizar las próximas facturas en un calendario, limitado a sus clientes asignados o global según su rol.
+RU11. El equipo de Turbine necesita realizar sus tareas desde móvil, tableta u ordenador y disponer de documentación de uso y configuración.
+
+
