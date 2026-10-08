@@ -2,7 +2,7 @@
 
 (documento "sucio" previa a la descripción formal de los casos de uso)
 
- Registrarse (en el siasistema)
+ Registrarse (en el sistema)
 
  Acceder a los datos del cliente
 
