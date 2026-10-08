@@ -10,7 +10,9 @@
 
 ---
 
-## Sesión 1/10
+## Sesión 1/10  
+
+ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 
 ### Tareas:
 - [ ] Organizar equipo, creación de discord, github, trello y otras herramientas. *(General)*
@@ -22,3 +24,15 @@
 ### Tareas completadas:
 - [x] Se ha organizado el equipo, con la consecuente creación de las herramientas necesarias para facilitar la interacción entre todos.
 - [x] Se han asignado los roles a cada miembro del equipo.
+
+---
+
+###Sesión 8/10 
+
+ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
+
+### Tareas: 
+
+### Tareas completadaa:
+- [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
+
