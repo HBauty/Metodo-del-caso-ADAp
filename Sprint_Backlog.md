@@ -9,11 +9,14 @@
 * **Ángel Sergio Sánchez Marín** → Product owner
 
 ---
-
-## Sesión 1/10  
+## SPRINT 1
+- Reunión 1 (Sprint planning)
+  Esta reunión tuvo lugar el 1 de octubre. En esta, acordamos hacer un sprint de dos semanas, y un último sprint de una semana. Además, nos hemos organizado, dividido los roles y establecido las tareas como se puede ver reflejado. Este sprint terminará el 14 de octubre, donde tendrá lugar la sprint review y sprint retrospective.
+  
+# Sesión 1/10  
 
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
-
+Se ha llevado a cabo la reunión del sprint planning y se han establecido las siguientes tareas.
 ### Tareas:
 - [ ] Organizar equipo, creación de discord, github, trello y otras herramientas. *(General)*
 - [ ] Revisar transcripción de la charla en busca de posibles nuevos requisitos. *(Rosales y Ángel)*
@@ -28,7 +31,7 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 ---
 
 # Sesión 2/10 
-
+Se ha llevado a cabo una reunión de control, donde hemos analizado la situación de cada integrante, además de hacer una reorganización del equipo.
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 ### Tareas: 
