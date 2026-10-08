@@ -27,7 +27,7 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
 - RU6. El cliente externo necesita recibir facturas y recordatorios amigables, disponer del correo y teléfono de soporte, mediante comunicaciones externas y sin acceder a la aplicación.
 - RU7. El personal autorizado necesita registrar la comunicación de baja, consultar, notificar deudas y completar la baja administrativa tras su liquidación.
 - RU8. El administrador y el superadministrador necesitan consultar un panel global de facturado, cobrado y pendiente por períodos trimestrales y anuales.
-- RU9. El superadministrador necesita poder crear nuevos administradores y asignarles lectores, modificar la plantilla y tener acceso para modificar las facturas.
+- RU9. El superadministrador necesita poder crear nuevos administradores, modificar la plantilla y tener acceso para modificar las facturas.
 - RU10. El lector necesita visualizar las próximas facturas en un calendario, limitado a sus clientes asignados o global según su rol.
 - RU11. El equipo de Turbine necesita realizar sus tareas desde móvil, tableta u ordenador y disponer de documentación de uso y configuración.
 
@@ -35,10 +35,12 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
 
 ### Requisitos Funcionales
 
-- FR1. Autenticar empleados con correo corporativo de Turbine y contraseña, verificar su pertenencia a la empresa y rechazar correos personales o ajenos; dominio concreto por confirmar.
-- FR2. Gestionar tres roles —lector operativo, administrador y superadministrador— y permitir al administrador registrar empleados y asignarles clientes y permisos.
-- FR3. Limitar el CRUD y las descargas del lector a sus clientes asignados, dar acceso global al administrador y permitir al superadministrador configurar el sistema, acceder a todos los administradores y lectores y otorgar privilegios administrativos.
-- FR4. Crear, consultar y editar empresas cliente y contactos, almacenando como mínimo nombre de empresa, NIF, dirección, nombre del contacto y datos de contacto; permitir el borrado lógico cuando corresponda.
+- FR1. Autenticar empleados con correo corporativo de Turbine y contraseña, verificar su pertenencia a la empresa y rechazar correos personales o ajenos.
+- FR2. Gestionar tres roles
+    -  Lector: Se le permite crear, consultar, editar y borrar lógicamente los clientes asignados. Almacenando como mínimo nombre de empresa, NIF, dirección, nombre del contacto y datos de contacto.
+    - Administrador: Debe poder registrar lectores, asignarles clientes y permisos.Tiene acceso a todas las funciones del lector y a la información de todos los lectores que haya registrado.
+    - Superadministrador: Tiene permiso para crear administradores, acceso global a toda la información, además de poder modificar plantillas, facturas y configuración del sistema.
+
 - FR5. Buscar empresas y contactos por nombre, ubicación o sector y filtrar facturas por cliente, fecha, tipo puntual o recurrente y estado pagado, pendiente o vencido, respetando los permisos.
 - FR6. Crear facturas puntuales para clientes nuevos o existentes y configurar facturación recurrente mensual, generando una factura nueva por período sin intervención manual ni planes de pago fraccionado.
 - FR7. Generar la primera cuota en la fecha de alta por el resto del mes y las siguientes el día 1; fórmula de prorrateo, redondeo e impuestos por concretar.
