@@ -82,6 +82,47 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
 
 - **FR17. Redacción automatizada de reclamaciones:**Generar correos electrónicos de recordatorio de pago con un tono adaptado (amistoso, formal, urgente) según los días de retraso y el perfil del cliente.
 
+
+
+#### 5. Relación Comercial y Suscripciones
+
+- **FR18. Modelado del Acuerdo Comercial:** El sistema debe disociar la entidad "Factura" de la "Relación Comercial". Permitirá registrar una ficha de suscripción que guarde: fecha de inicio, plan/tarifa acordada, comercial responsable, condiciones de pago particulares y un campo para adjuntar el documento firmado externamente.
+  
+- **FR19. Contactos Múltiples por Empresa:** Permitir asociar más de una persona de contacto a un mismo cliente corporativo, tipificando sus roles internos (ej. Contacto de contratación, Contacto de administración/facturación, Contacto de cobros/impagos). Un contacto podrá marcarse como "Inactivo" si deja la empresa sin alterar el histórico de envíos pasados.
+  
+- **FR20. Pausa Temporal de Suscripción:** Permitir pausar temporalmente una suscripción activa. Al pausar, se debe exigir obligatoriamente: motivo de la pausa, fecha de inicio y fecha prevista de reactivación. El sistema bloqueará la generación automática de recurrentes durante ese periodo pero mantendrá vivas las alertas de deudas previas.
+
+#### 6. Tarifas, Excepciones y Workflow de Aprobación
+
+- **FR21. Gestión Paramétrica de Tarifas:** Las tablas de rangos de facturación anual y sus precios correspondientes deben ser gestionadas desde la configuración por el Superadministrador, prohibiendo su inserción directa en código (hardcoding). Cualquier cambio de tarifa no afectará retroactivamente a facturas ya emitidas.
+  
+- **FR22. Campaña de Revisión Anual de Rangos:** El sistema detectará automáticamente qué clientes cumplen su ciclo de revisión, recopilará la facturación real y propondrá el nuevo rango. El cambio de precio requerirá validación humana obligatoria, registrando quién aprobó, cuándo, precio anterior y nuevo.
+  
+- **FR23. Workflow de Aprobación de Excepciones Financieras:** El sistema retendrá en estado "Borrador/Pendiente de aprobación" y bloqueará el envío automático de cualquier factura puntual de importe inusual, modificaciones manuales de importes, fechas de vencimiento fuera de política o la aplicación de descuentos extraordinarios. Requerirá aprobación de un Administrador (o Superadministrador si supera un umbral configurable) justificando la resolución.
+
+#### 7. Ciclo de Vida de Factura y Gestión de Errores
+
+- **FR24. Ampliación de Estados de Facturación:** El modelo de comportamiento debe soportar el ciclo de vida completo de la factura: Borrador, Pendiente de Aprobación, Aprobada, Emitida, Enviada, Vencida, Pagada, Parcialmente Conciliada, En Disputa, Anulada y Rectificada.
+  
+- **FR25. Facturas Rectificativas (Notas de Crédito):** Queda estrictamente prohibido editar o borrar facturas emitidas. El sistema implementará un flujo para generar facturas rectificativas vinculadas a la original, recalculando de forma transparente el saldo pendiente del cliente.
+  
+- **FR26. Control de Errores de Entrega y Rebotes:** Si el proveedor simulado de correo notifica un fallo de entrega (rebote), el sistema no marcará la factura como notificada. Registrará una incidencia automática, alertará al responsable interno y habilitará la opción de corregir el contacto y reintentar.
+  
+- **FR27. Factura en Disputa:** Permitir que un responsable detenga manualmente los recordatorios automáticos de una factura concreta pasándola al estado "En disputa" o "Seguimiento pausado", especificando motivo y fecha máxima de revisión.
+
+#### 8. Conciliación, Importación y Colaboración Interna
+
+- **FR28. Gestión de Discrepancias en Pagos:** Si un evento de pago externo (Stripe, Revolut o banco) no coincide exactamente con el total de la factura (pago de más o de menos), el sistema la marcará como "Parcialmente Conciliada" o "Diferencia pendiente", impidiendo que se auto-liquide sin supervisión humana.
+  
+- **FR29. Importación Avanzada de Clientes e Histórico:**
+	• Clientes: Previsualizar datos antes de confirmar el CSV, permitiendo mapear columnas y gestionar filas corruptas o NIF duplicados.
+	• Histórico: Permitir importar facturas antiguas marcándolas como "Migradas", sin consumir numeración activa ni disparar correos al cliente.
+
+- **FR30. Módulo de Incidencias Administrativas y Comentarios:** Espacio de seguimiento interno donde los empleados pueden abrir incidencias unidas a un cliente o factura (ej: "NIF incorrecto", "Impago recurrente"). Permitirá añadir comentarios internos con menciones que disparen notificaciones a otros usuarios del sistema.
+
+
+
+
 ### Requisitos no Funcionales
 
 #### 1. Rendimiento y Eficiencia
@@ -127,9 +168,39 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
   - **Métrica:** Cero accesos o exposiciones de datos personales y fiscales a usuarios no autorizados en los casos de prueba y cumplimiento del 100 % de los controles aplicables de la lista de revisión normativa, incluida la conservación, el borrado lógico y la eliminación definitiva que correspondan; lista validada por el responsable competente.
   - **Método de verificación:** Ejecutar pruebas de acceso no autorizado y de separación de permisos sobre pantallas, API y documentos; inspeccionar código, configuración, registros y tratamiento de datos; contrastar los resultados con la lista normativa validada, sin asumir que el borrado lógico por sí solo acredita el cumplimiento.
 
-- **NFR8. Independencia tecnológica:** La aplicación es completamente independiente y aislada del sistema Brain, operando en servidores o bases de datos separadas.
+- **NFR8. Independencia tecnológica:**
+  - **Descripción:** La aplicación es completamente independiente y aislada del sistema Brain, operando en servidores o bases de datos separadas.
+  - **Métrica:** Cero dependencias funcionales de Brain para ejecutar las operaciones de facturación y un servidor o una base de datos separados de los utilizados por Brain; el 100 % de los flujos esenciales funciona con Brain apagado o inaccesible.  
+  - **Método de verificación:** Inspeccionar la arquitectura, los destinos de conexión y la configuración de despliegue y bases de datos; bloquear el acceso a Brain y ejecutar los flujos esenciales, verificando que no realizan consultas ni llamadas necesarias a ese sistema.  
 
 - **NFR9. Consistencia y fiabilidad.**
   - **Descripción:** mantener el mismo PDF en almacenamiento, envío y descarga, dirigir los avisos al destinatario correcto y prevenir emisiones o avisos duplicados involuntarios.
   - **Métrica:** Igualdad del hash SHA-256 del PDF almacenado, enviado y descargado en el 100 % de las facturas probadas; destinatario correcto en el 100 % de los avisos y cero duplicados involuntarios de una misma emisión o aviso programado, incluso ante reintentos.
   - **Método de verificación:** Ejecutar pruebas de integración con captura de comunicaciones, comparar los hashes de los PDF y los destinatarios esperados e introducir reintentos, fallos y ejecuciones simultáneas para comprobar que cada emisión o aviso se produce una sola vez; distinguir los recordatorios legítimos de días diferentes.
+ 
+- **NFR10. Pistas de Auditoría Inmutables (Logs de Negocio).**
+	- **Descripción:** Todo cambio crítico (altas, modificaciones fiscales, aprobaciones de descuentos, cambios de responsable, conciliaciones manuales y alteraciones de configuración) debe quedar registrado en un log de auditoría.
+  - **Métrica:** El 100% de las acciones críticas debe guardar: ID de usuario, timestamp, acción, valor anterior y valor nuevo. Este registro no será editable ni borrable por ningún rol, incluido el Superadministrador.
+	- **Método de verificación:** Realizar modificaciones de datos desde diferentes roles e inspeccionar directamente la base de datos de auditoría para verificar la inmutabilidad y completitud de las entradas.
+
+- **NFR11. Cifrado y Gestión de Secretos.**
+	- **Descripción:** Los documentos y credenciales del sistema deben estar protegidos frente a accesos externos y fugas en repositorios.
+	- **Métrica:** 0 URLs de facturas o adjuntos adivinables públicamente (deben requerir token temporal expirable). 0 claves API o secretos del Stripe simulado guardados en texto plano en el repositorio de código.
+	- **Método de verificación:** Auditoría de código de caja blanca y pruebas de pentesting web intentando descargar PDFs de facturas sin sesión activa o mediante alteración de ID en la URL (IDOR).
+   
+- **NFR12. Tolerancia a Fallos y Consistencia en Procesos Concurrentes.**
+	- **Descripción:** El sistema debe evitar la sobreescritura de datos cuando dos usuarios modifican la misma ficha a la vez, y garantizar la consistencia si el servidor cae durante la facturación masiva.
+	- **Métrica:** 0 registros machacados por concurrencia mediante control de concurrencia optimista/pesimista. Reanudación del 100% de las tareas del día 1 tras una caída repentina, garantizando 0 facturas duplicadas.
+	- **Método de verificación:** Simular dos peticiones de guardado simultáneas sobre el mismo cliente con microsegundos de diferencia. Simular un apagado del servidor a mitad de la cola de facturación del día 1, encenderlo y comprobar que termina los pendientes sin repetir los ya procesados.
+
+#### 5. Internacionalización y Precisión
+
+- **NFR13. Internacionalización de Comunicaciones (i18n).**
+	- **Descripción:** Aunque la interfaz interna esté en español, el motor de plantillas debe soportar múltiples idiomas para el cliente final.
+	- **Métrica:** Soporte nativo de al menos 2 idiomas (Español e Inglés) seleccionables en la ficha del cliente para sus facturas y correos.
+	- **Método de verificación:** Generar facturas para clientes configurados en inglés y verificar que las etiquetas del PDF y el correo electrónico se emiten correctamente en ese idioma.
+   
+- **NFR14. Precisión Matemática de Importes Monetarios.**
+	- **Descripción:** Evitar pérdidas de céntimos causadas por redondeos incorrectos o uso de tipos de datos de coma flotante.
+	- **Métrica:** Desviación monetaria = 0.00 en todas las sumas del Dashboard e informes respecto al sumatorio real de las líneas de factura guardadas. Uso obligatorio de tipos de datos numéricos exactos (ej. Decimal o enteros para céntimos) en lugar de floats/doubles.
+	- **Método de verificación:** Ejecutar pruebas unitarias parametrizadas inyectando líneas de factura con múltiples decimales e IVA, comprobando que el total del PDF coincide al céntimo con el almacenamiento.
