@@ -18,7 +18,7 @@
 
  Modificar factura (admin) 
 
- enviar facturas 
+ enviar facturas / factura rectificativa 
 
  actualizar rango de facturación 
 
