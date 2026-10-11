@@ -16,6 +16,8 @@
  
  Generar una factura
 
+ Modificar factura (admin) 
+
  enviar facturas 
 
  actualizar rango de facturación 
