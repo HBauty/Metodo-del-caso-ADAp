@@ -34,7 +34,7 @@ Consultar facturas ( cliente en modo lector / Empleado )  --> include generar pd
 
 Editar facturas (administrador)
 
-filtrar facturas ¿? 
+filtrar facturas/ fichas de clientes 
 
 Tramitar baja de cliente ( cliente / administrador) 
 
