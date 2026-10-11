@@ -44,6 +44,11 @@ Gestionar clientes
 
 Gestionar incidencias 
 
+Consultar / modificar calendario de facturación  ( lector / admin) 
+
+Consultar / modificar panel global de facturacion
+
+
 
 
 
