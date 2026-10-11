@@ -43,4 +43,5 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 ### Tareas completadaa:
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
+- [x] Establecer todos los posibles casos de uso (Jose).
 
