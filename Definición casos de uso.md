@@ -28,6 +28,8 @@
  
  Notificar (impago / avisos etc.) 
 
+ Generar respaldo  ( se le aplica a todo tipo de facturas de cobros / notificaciones)  a modo de comprobante
+
 Consultar facturas ( cliente en modo lector / Empleado )  --> include generar pdf 
 
 Editar facturas (administrador)
