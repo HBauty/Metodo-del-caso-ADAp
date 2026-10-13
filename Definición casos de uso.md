@@ -4,7 +4,7 @@
 
  Log in 
 
- Acceder a los datos del cliente
+ Acceder a los datos del cliente (plantilla de cliente)
 
  Registrar ficha de suscripción
 
