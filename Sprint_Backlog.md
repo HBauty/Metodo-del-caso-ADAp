@@ -78,7 +78,7 @@ Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, ad
 # Sesión 14/10
 
 Comienzo del nuevo sprint. En esta sesión, nos hemos reunido para llevar a cabo el sprint planning (completar a lo largo de la sesión).
-ASISTENCIA:
+ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales , Ángel
 
 ### Sprint planning
 
