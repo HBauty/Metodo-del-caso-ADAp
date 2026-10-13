@@ -85,5 +85,6 @@ ASISTENCIA:
 - [ ] Revisar y refinar casos de uso
 - [ ] Revisar y refinar diagramas de casos de uso
 - [ ] Crear y revisar artefactos necesarios para la primera entrega
+- [ ] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables en la siguiente sesión. (Ángel)
 
 ### Tareas completadas:
