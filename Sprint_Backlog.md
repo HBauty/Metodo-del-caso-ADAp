@@ -43,7 +43,7 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
   
 - [ ] Empezar diagrama de casos de uso (Hugo y Aquiles) .
 
-- [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Todos) . Añadido el 13/10, tarea para el siguiente sprint .
+- [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Todos) .
 
 ### Tareas completadaa:
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
