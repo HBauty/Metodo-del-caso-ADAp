@@ -37,11 +37,13 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 ### Tareas: 
 - [ ] Definir casos de uso (Rubén , Jose).
   
-- [x] Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
+- [ ] Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
   
 - [ ] Empezar diagrama de casos de uso (Hugo y Aquiles) .
+
+- [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Todos) . Añadido el 13/10, tarea para el siguiente sprint .
 
 ### Tareas completadaa:
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
 - [x] Establecer todos los posibles casos de uso (Jose).
-
+- [x] Empezar diagrama de casos de uso (Hugo y Aquiles). Hecho el 12/10
