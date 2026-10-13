@@ -10,13 +10,14 @@
 
 ---
 ## SPRINT 1
-- Reunión 1 (Sprint planning)
-  Esta reunión tuvo lugar el 1 de octubre. En esta, acordamos hacer un sprint de dos semanas, y un último sprint de una semana. Además, nos hemos organizado, dividido los roles y establecido las tareas como se puede ver reflejado. Este sprint terminará el 14 de octubre, donde tendrá lugar la sprint review y sprint retrospective.
-  
 # Sesión 1/10  
 
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Angel.
 Se ha llevado a cabo la reunión del sprint planning y se han establecido las siguientes tareas.
+
+### Sprint planning
+Acordamos hacer un sprint de dos semanas, y un último sprint de una semana. Además, nos hemos organizado, dividido los roles y establecido las tareas como se puede ver reflejado. Este sprint terminará el 14 de octubre, donde tendrá lugar la sprint review y sprint retrospective, y además, comenzará el segundo sprint.
+
 ### Tareas:
 - [ ] Organizar equipo, creación de discord, github, trello y otras herramientas. *(General)*
 - [ ] Revisar transcripción de la charla en busca de posibles nuevos requisitos. *(Rosales y Ángel)*
@@ -30,7 +31,8 @@ Se ha llevado a cabo la reunión del sprint planning y se han establecido las si
 
 ---
 
-# Sesión 8/10 
+# Sesión 8/10
+
 Se ha llevado a cabo una reunión de control, donde hemos analizado la situación de cada integrante, además de hacer una reorganización del equipo.
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
@@ -47,3 +49,26 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
 - [x] Establecer todos los posibles casos de uso (Jose).
 - [x] Empezar diagrama de casos de uso (Hugo y Aquiles). Hecho el 12/10
+
+---
+
+# Sesión 14/10
+
+Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, además de planificar y comenzar el siguiente sprint.
+
+### Sprint review
+### Sprint retrospective
+
+## SPRINT 2
+# Sesión 14/10
+
+Comienzo del nuevo sprint. En esta sesión, nos hemos reunido para llevar a cabo el sprint planning (completar a lo largo de la sesión).
+ASISTENCIA:
+
+### Sprint planning
+
+### Tareas: 
+- [ ] Revisar y refinar casos de uso
+- [ ] Revisar y refinar diagramas de casos de uso
+
+### Tareas completadas:
