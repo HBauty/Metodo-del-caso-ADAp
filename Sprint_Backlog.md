@@ -70,5 +70,6 @@ ASISTENCIA:
 ### Tareas: 
 - [ ] Revisar y refinar casos de uso
 - [ ] Revisar y refinar diagramas de casos de uso
+- [ ] Crear y revisar artefactos necesarios para la primera entrega
 
 ### Tareas completadas:
