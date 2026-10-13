@@ -52,14 +52,28 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 ---
 
-# Sesión 14/10
+# Sesión 13/10
 
 Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, además de planificar y comenzar el siguiente sprint.
+### ### Tareas:
 
-### Sprint review
-### Sprint retrospective
+- [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Hugo y aquiles) .
+- [ ] Crear la presentación para el día 20 (Todos)
+- [ ] Añadir los nuevos requisitos (Rosales y Gabri)
+- [ ] Formalizar los casos de uso (Jose, Ángel, Rubén)
+
+### Tareas completadaa:
+- [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
+- [x] Establecer todos los posibles casos de uso (Jose).
+- [x] Empezar diagrama de casos de uso (Hugo y Aquiles). Hecho el 12/10
+- [x] Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
+- [x] Definir casos de uso (Rubén , Jose).
+- [x] Empezar diagrama de casos de uso (Hugo y Aquiles) .
+
 
 ## SPRINT 2
+### Sprint review
+### Sprint retrospective
 # Sesión 14/10
 
 Comienzo del nuevo sprint. En esta sesión, nos hemos reunido para llevar a cabo el sprint planning (completar a lo largo de la sesión).
