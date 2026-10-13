@@ -72,7 +72,7 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
 
 - **FR12. Histórico de pagados:** Registro del resultado de los envíos de comunicaciones, confirmación automática de cobro al cliente y conservación del histórico tras la baja.
 
-- **FR13. Recordatorios:**Enviar recordatorios amigables los días 3 y 5 desde la emisión y después cada dos o tres días, incluso tras comunicar una baja, deteniéndolos únicamente al detectar o confirmar el pago de esa factura.
+- **FR13. Recordatorios:** Enviar recordatorios amigables los días 3 y 5 desde la emisión y después cada dos o tres días, incluso tras comunicar una baja, deteniéndolos únicamente al detectar o confirmar el pago de esa factura.
 
 - **FR14. Módulo de informes:** Mostrar un panel global exclusivo para administrador y superadministrador con indicadores de facturado, cobrado y pendiente agrupados por trimestre y año.
 
@@ -80,7 +80,7 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
 
 - **FR16. Calendario:** Mostrar un calendario visual de la programación de facturas, con visión de clientes asignados para el lector y global para administrador y superadministrador.
 
-- **FR17. Redacción automatizada de reclamaciones:**Generar correos electrónicos de recordatorio de pago con un tono adaptado (amistoso, formal, urgente) según los días de retraso y el perfil del cliente.
+- **FR17. Redacción automatizada de reclamaciones:** Generar correos electrónicos de recordatorio de pago con un tono adaptado (amistoso, formal, urgente) según los días de retraso y el perfil del cliente.
 
 
 
@@ -151,7 +151,7 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
 
 #### 3. Escalabilidad y Concurrencia
 
-- **NFR5. Capacidad de .**
+- **NFR5. Capacidad de crecimiento.**
   - **Descripción:** La arquitectura del sistema debe estar preparada para escalar a miles de clientes y facturas sin perder rendimiento.
   - **Métrica:** Volumen de referencia propuesto para aprobación del equipo: 2.000 clientes y 15.000 facturas; con esa carga de datos, las tareas deben seguir cumpliendo los límites de NFR1 y NFR2, sin errores de procesamiento ni pérdida de información. ; con esa carga de datos, las tareas deben seguir cumpliendo los límites de NFR1 y NFR2, sin errores de procesamiento ni pérdida de información.
   - **Método de verificación:** Llenar el sistema con datos sintéticos hasta el volumen acordado y repetir las pruebas de facturación, búsquedas, filtros e histórico en el mismo entorno; comparar los resultados con una carga de datos menor y comprobar tiempos, errores e integridad.
