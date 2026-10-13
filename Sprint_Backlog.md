@@ -30,7 +30,7 @@ Se ha llevado a cabo la reunión del sprint planning y se han establecido las si
 
 ---
 
-# Sesión 2/10 
+# Sesión 8/10 
 Se ha llevado a cabo una reunión de control, donde hemos analizado la situación de cada integrante, además de hacer una reorganización del equipo.
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
