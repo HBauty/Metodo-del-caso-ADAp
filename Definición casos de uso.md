@@ -2,13 +2,20 @@
 
 (documento "sucio" previa a la descripción formal de los casos de uso)
 
- Log in 
+ Log in / autenticarse 
 
- Acceder a los datos del cliente (plantilla de cliente)
-
- Registrar ficha de suscripción
+ Asignar roles y dar permisos( SuperAdmin ) 
 
  Pausar suscripción
+
+ Dar de baja 
+
+ Notificar al usuario o al administrador (impago / avisos etc.) 
+
+ Acceder / modificar  a la bases de datos ( admin ) -> en esta se podrán filtrar los datos y en ella se   encuentran todo lo relacionado con la ficha del cliente el historial de facturas etc.
+ 
+
+ Registrar ficha de suscripción
  
  Cobrar ( de forma automatica )
 
@@ -25,8 +32,6 @@
  validar cambio de rango anual ¿? 
 
  Aprobar excepciones financieras 
- 
- Notificar (impago / avisos etc.) 
 
  Generar respaldo  ( se le aplica a todo tipo de facturas de cobros / notificaciones)  a modo de comprobante
 
@@ -38,15 +43,13 @@ filtrar facturas/ fichas de clientes
 
 Tramitar baja de cliente ( cliente / administrador) 
 
-Asignar / crear rol ( SuperAdmin ) 
-
 Gestionar clientes 
 
 Gestionar incidencias 
 
-Consultar / modificar calendario de facturación  ( lector / admin) 
 
-Consultar / modificar panel global de facturacion
+
+
 
 
 
