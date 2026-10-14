@@ -87,5 +87,6 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales , Ángel
 - [ ] Revisar y refinar diagramas de casos de uso
 - [ ] Crear y revisar artefactos necesarios para la primera entrega
 - [ ] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables de requisitos en la siguiente sesión. (Ángel)
+- [ ] Crear documento común para estudiar la exposición (Hugo)
 
 ### Tareas completadas:
