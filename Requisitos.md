@@ -1,131 +1,81 @@
 # Requisitos
 
-*Documento de Requisitos del Sistema*
+## Requisitos Funcionales Generalizados:
 
-Base consolidada para revisión del equipo, elaborada a partir de la transcripción y los documentos de requisitos; las mejoras opcionales y las propuestas del equipo se identifican expresamente.
+### 1. Gestión de Accesos, Usuarios y Roles
 
-## Requisitos de negocio
-
-Necesidades, objetivos y reglas de Turbine que motivan y delimitan el desarrollo del sistema.
-
-- **RN1.** Reducir el trabajo administrativo manual automatizando la creación de facturas, el seguimiento de pagos y la comunicación de incidencias.
-- **RN2.** Centralizar el control de clientes, facturación y cobros para conocer lo facturado, cobrado y pendiente y facilitar la supervisión financiera.
-- **RN3.** Delegar la gestión de clientes entre empleados, manteniendo permisos por cliente, supervisión global y avisos al responsable correspondiente.
-- **RN4.** Facilitar la gestión diaria en pocos clics, con poco aprendizaje y desde cualquier lugar, incluido el teléfono móvil.
-- **RN5.** Sostener el crecimiento hasta miles de clientes y conservar su histórico de facturas y cobros.
-- **RN6.** Cobrar suscripciones mensuales por tramos de facturación anual del cliente, sin permanencia anual ni pagos fraccionados, con precio ordinario estable durante el año y revisión anual, además de servicios puntuales con importe propio.
-- **RN7.** Proteger los datos personales y fiscales y mantener facturas válidas, coherentes y conservadas conforme a la categoría de información y finalidad aplicables.
-- **RN8.** Disponer de una aplicación administrativa interna independiente de Brain, con una solución técnica asequible y sin imponer una tecnología concreta.
-
-## Requisitos de usuario
-
-Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus clientes asignados, el administrador sobre todos y el superadministrador añade configuración avanzada y acceso a todos los administradores y lectores.
-
-- **RU1.** El personal interno necesita iniciar sesión con correo corporativo y contraseña y acceder únicamente a los clientes autorizados para crearlos, consultarlos, modificarlos y darlos de baja lógicamente. Además poder importar sus datos desde CSV.
-- **RU2.** El administrador necesita registrar empleados y asignarles clientes y permisos; el superadministrador necesita gestionar los privilegios administrativos y acceder a todos los administradores y lectores.
-- **RU3.** El personal autorizado necesita crear y modificar facturas puntuales o configurar suscripciones mensuales dentro de las resctricciones acordadas. Además enviar sus PDF, consultar y descargar el histórico del cliente.
-- **RU4.** El personal autorizado necesita modificar facturas dentro de las restricciones de edición acordadas, enviar sus PDF y consultar y descargar el histórico del cliente.
-- **RU5.** El lector asignado necesita conocer qué facturas están pagadas, pendientes o vencidas, revisar cobros y recibir avisos de pago e impago de sus clientes.
-- **RU6.** El cliente externo necesita recibir facturas y recordatorios amigables, disponer del correo y teléfono de soporte, mediante comunicaciones externas y sin acceder a la aplicación.
-- **RU7.** El personal autorizado necesita registrar la comunicación de baja, consultar, notificar deudas y completar la baja administrativa tras su liquidación.
-- **RU8.** El administrador y el superadministrador necesitan consultar un panel global de facturado, cobrado y pendiente por períodos trimestrales y anuales.
-- **RU9.** El superadministrador necesita poder crear nuevos administradores, modificar la plantilla y tener acceso para modificar las facturas.
-- **RU10.** El lector necesita visualizar las próximas facturas en un calendario, limitado a sus clientes asignados o global según su rol.
-- **RU11.** El equipo de Turbine necesita realizar sus tareas desde móvil, tableta u ordenador y disponer de documentación de uso y configuración.
-
-## Requisitos del sistema
-
-### Requisitos funcionales
-
-#### 1. Gestión de Accesos, Usuarios y Roles
-
-- **FR1. Acceso multi-rol:** Autenticación en el sistema mediante cuatro niveles de permisos: Superadministrador, Administrador, Usuario (lector).
+- **FR1. Acceso multi-rol:** Autenticación en el sistema mediante tres niveles de permisos: Superadministrador, Administrador, Usuario (lector).
 
 - **FR2. Gestionar tres roles**
-  - **Lector:** Se le permite crear, consultar, editar y borrar lógicamente las fichas de clientes asignados. Almacenando como mínimo nombre de empresa, NIF, dirección, nombre del contacto y datos de contacto.
-  - **Administrador:** Debe poder registrar lectores, asignarles clientes y permisos.Tiene acceso a todas las funciones del lector y a la información de todos los lectores que haya registrado.
+  - **Lector:** Se le permite crear (utilizando la plantilla), consultar, editar y borrar lógicamente las fichas de clientes asignados.
+  - **Administrador:** Debe poder registrar lectores, asignarles clientes y permisos.Tiene acceso a todas las funciones del lector y a la información de todos los lectores que haya registrado. Puede delegar temporalmente clientes de un usuario a otro.
   - **Superadministrador:** Tiene permiso para crear administradores, acceso global a toda la información, además de poder modificar plantillas, facturas y configuración del sistema.
 
 - **FR3. Uso exclusivo interno:** Acceso restringido únicamente a empleados con correos de la empresa. Los clientes finales no tienen acceso ni registro en la plataforma.
 
-#### 2. Gestión de Clientes y Bajas
+- **FR4. Desactivación de cuentas:** Permitir la desactivación de cuentas de usuarios internos que dejen la empresa, invalidando inmediatamente sus sesiones activas pero conservando de forma inmutable el rastro y el historial de todas las acciones que realizaron en el pasado.
 
-- **FR4. Flujo de baja con borrado lógico:** Al solicitar una baja, el sistema detiene inmediatamente la generación de facturas recurrentes, pero esta no se procesa mientras el cliente tenga facturas pendientes , posteriormente mantiene los datos del cliente bloqueados (borrado lógico) durante el tiempo máximo legal permitido.
+### 2. Gestión de Clientes y Bajas
 
-- **FR5. Liquidación de bajas:** Notificación automática por email de todos los impagos pendientes al tramitar la baja de un cliente.
+- **FR5. Flujo de baja con borrado lógico:** Al solicitar una baja, el sistema detiene inmediatamente la generación de facturas recurrentes, pero esta no se procesa mientras el cliente tenga facturas pendientes , posteriormente mantiene los datos del cliente bloqueados (borrado lógico) durante el tiempo máximo legal permitido.
 
-- **FR6. Filtrado:** Buscar empresas y contactos por nombre, ubicación o sector y filtrar facturas por cliente, fecha, tipo puntual o recurrente y estado pagado, pendiente o vencido, respetando los permisos.
+- **FR6. Pausa de suscripción:** Permitir pausar temporalmente una suscripción activa registrando obligatoriamente el motivo, la fecha de inicio y la fecha prevista de reactivación, bloqueando la generación de cuotas mensuales durante la pausa pero manteniendo vivas las deudas previas.
 
-#### 3. Facturación y Pagos
+- **FR7. Liquidación de bajas:** Notificación automática por email de todos los impagos pendientes al tramitar la baja de un cliente.
 
-- **FR7. Emisión automatizada:** Generación automática de facturas (puntuales o recurrentes mensuales), almacenamiento en el sistema y envío directo al cliente por correo electrónico. Generar y guardar un PDF estándar por factura, asociado al cliente, con datos fiscales, IVA, numeración correlativa e imagen corporativa además de conservar facturas pagadas.
+- **FR8. Reactivación y control de duplicados:** Permitir la reactivación de una ficha histórica si un cliente antiguo regresa, implementando un sistema de alerta por identificador fiscal (NIF). Cualquier fusión de duplicados será autorizada y auditada.
 
-- **FR8. Nuevos clientes:** Generar la primera cuota en la fecha de alta por el resto del mes y las siguientes el día 1.
+- **FR9. Filtrado:** Buscar empresas y contactos por nombre, ubicación o sector y filtrar facturas por cliente, fecha, tipo puntual o recurrente y estado pagado, pendiente o vencido, respetando los permisos.
 
-- **FR9. Creación manual:** Permiso para que los lectores creen facturas de forma manual.
+- **FR10. Plantilla de clientes:** La plantilla solo es modificable por el superadmin y debe contar con el nombre de empresa, nombre comercial, razón social, país, moneda, identificador fiscal internacional, NIF, dirección, datos de los contactos, fecha de contratación, tarifa acordada, condiciones de pago particulares y capacidad de asociar documentos contractuales firmados externamente.
 
-- **FR10. Política de pago único:** El sistema solo procesará y registrará pagos completos; no se admiten pagos fraccionados.
+- **FR11. Organización por etiquetas:** Habilitar un sistema de clasificación flexible mediante etiquetas manuales y administrables (ej. estratégico, beta, partner, riesgo de cobro) independientes de los estados financieros derivados del sistema.
 
-- **FR11. Conciliación Externa:** Consulta automática de fuentes externas. Las deudas no se cancelan en cascada (un pago posterior no liquida deudas anteriores).
+### 3. Facturación y Pagos
 
-#### 4. Notificaciones, Filtros e Informes
+- **FR12. Emisión automatizada:** Generación automática de facturas (puntuales o recurrentes mensuales), almacenamiento en el sistema y envío directo al cliente por correo electrónico. Generar y guardar un PDF estándar por factura, asociado al cliente, con datos fiscales, IVA, numeración correlativa e imagen corporativa además de conservar facturas pagadas.
 
-- **FR12. Histórico de pagados:** Registro del resultado de los envíos de comunicaciones, confirmación automática de cobro al cliente y conservación del histórico tras la baja.
+- **FR13. Vista previa y control de errores fiscales:** Disponer de una pantalla de vista previa del PDF antes de su emisión definitiva, bloqueando el proceso si faltan datos fiscales críticos del cliente. Bloquear la edición o eliminación de cualquier factura que ya haya sido emitida. Cualquier modificación o devolución posterior deberá realizarse mediante un flujo controlado que genere una Factura Rectificativa vinculada al documento original.
 
-- **FR13. Recordatorios:** Enviar recordatorios amigables los días 3 y 5 desde la emisión y después cada dos o tres días, incluso tras comunicar una baja, deteniéndolos únicamente al detectar o confirmar el pago de esa factura.
+- **FR14. Aviso de anomalía:** Emitir una alerta visual cuando el importe total de una factura redactada se desvíe desproporcionadamente del patrón histórico de consumo de ese cliente. También cuando un pago no coincida con el importe acordado,  el sistema asociará el movimiento pero mantendrá la factura en un estado de "Diferencia pendiente" a la espera de revisión por el lector.
 
-- **FR14. Módulo de informes:** Mostrar un panel global exclusivo para administrador y superadministrador con indicadores de facturado, cobrado y pendiente agrupados por trimestre y año.
+- **FR15. Nuevos clientes:** Generar la primera cuota en la fecha de alta por el resto del mes y las siguientes el día 1.
 
-- **FR15. Revisión de baja:** Exponer una API con acceso controlado para que el proceso externo de baja consulte las facturas pendientes de un cliente.
+- **FR16. Creación manual:** Permiso (concedido por los administradores) para que los lectores creen facturas de forma manual.
 
-- **FR16. Calendario:** Mostrar un calendario visual de la programación de facturas, con visión de clientes asignados para el lector y global para administrador y superadministrador.
+- **FR17. Conciliación Externa:** Consulta automática de fuentes externas. Las deudas no se cancelan en cascada (un pago posterior no liquida deudas anteriores).
 
-- **FR17. Redacción automatizada de reclamaciones:** Generar correos electrónicos de recordatorio de pago con un tono adaptado (amistoso, formal, urgente) según los días de retraso y el perfil del cliente.
+### 4. Notificaciones, Filtros e Informes
 
+- **FR18. Histórico de pagados:** Registro del resultado de los envíos de comunicaciones, confirmación automática de cobro al cliente y conservación del histórico tras la baja.
 
+- **FR19. Recordatorios:** Enviar recordatorios amigables los días 3 y 5 desde la emisión y después cada dos o tres días, incluso tras comunicar una baja, deteniéndose únicamente al detectar o confirmar el pago de esa factura.
 
-#### 5. Relación Comercial y Suscripciones
+- **FR20. Notificación fallida:** Si por correo se notifica un fallo de entrega, el sistema abrirá una incidencia automática asociada a la factura, no la marcará como notificada y alertará al responsable asignado para su corrección y reenvío.
 
-- **FR18. Modelado del Acuerdo Comercial:** El sistema debe disociar la entidad "Factura" de la "Relación Comercial". Permitirá registrar una ficha de suscripción que guarde: fecha de inicio, plan/tarifa acordada, comercial responsable, condiciones de pago particulares y un campo para adjuntar el documento firmado externamente.
-  
-- **FR19. Contactos Múltiples por Empresa:** Permitir asociar más de una persona de contacto a un mismo cliente corporativo, tipificando sus roles internos (ej. Contacto de contratación, Contacto de administración/facturación, Contacto de cobros/impagos). Un contacto podrá marcarse como "Inactivo" si deja la empresa sin alterar el histórico de envíos pasados.
-  
-- **FR20. Pausa Temporal de Suscripción:** Permitir pausar temporalmente una suscripción activa. Al pausar, se debe exigir obligatoriamente: motivo de la pausa, fecha de inicio y fecha prevista de reactivación. El sistema bloqueará la generación automática de recurrentes durante ese periodo pero mantendrá vivas las alertas de deudas previas.
+- **FR21. Gestión de facturas en disputa:** Permitir suspender temporalmente el envío de recordatorios automáticos de una factura concreta cambiándola al estado "Seguimiento pausado", exigiendo un motivo interno y una fecha límite de revisión administrativa.
 
-#### 6. Tarifas, Excepciones y Workflow de Aprobación
+- **FR22. Bandeja de entrada del lector:** Crear una pantalla de trabajo diario para los usuarios aparezca de forma priorizada sus tareas activas: aprobaciones pendientes, deudas que vencen pronto, incidencias de entrega de correos, revisiones anuales y pagos por conciliar. Añadir notas aclaratorias dentro de las fichas de clientes o facturas, además de menciones a otros usuarios para que reciban notificaciones.
 
-- **FR21. Gestión Paramétrica de Tarifas:** Las tablas de rangos de facturación anual y sus precios correspondientes deben ser gestionadas desde la configuración por el Superadministrador, prohibiendo su inserción directa en código (hardcoding). Cualquier cambio de tarifa no afectará retroactivamente a facturas ya emitidas.
-  
-- **FR22. Campaña de Revisión Anual de Rangos:** El sistema detectará automáticamente qué clientes cumplen su ciclo de revisión, recopilará la facturación real y propondrá el nuevo rango. El cambio de precio requerirá validación humana obligatoria, registrando quién aprobó, cuándo, precio anterior y nuevo.
-  
-- **FR23. Workflow de Aprobación de Excepciones Financieras:** El sistema retendrá en estado "Borrador/Pendiente de aprobación" y bloqueará el envío automático de cualquier factura puntual de importe inusual, modificaciones manuales de importes, fechas de vencimiento fuera de política o la aplicación de descuentos extraordinarios. Requerirá aprobación de un Administrador (o Superadministrador si supera un umbral configurable) justificando la resolución.
+- **FR23. Aprobación de administrador:** Retener en estado "Borrador" y requerir la aprobación digital de un Administrador para cualquier factura puntual con importes inusuales, modificaciones manuales de precios de suscripción, descuentos extraordinarios o alteraciones de vencimientos fuera de la política general.
 
-#### 7. Ciclo de Vida de Factura y Gestión de Errores
+- **FR24. Módulo de informes:** Mostrar un panel global exclusivo para administrador y superadministrador con indicadores de facturado, cobrado y pendiente agrupados por trimestre y año. Además se generarán alertas a inicio de año para listar los clientes que requieren una revisión de su rango de facturación anual. El sistema calculará la propuesta basada en una fuente simulada y el administrador decidirá su aplicación para futuros pagos.
 
-- **FR24. Ampliación de Estados de Facturación:** El modelo de comportamiento debe soportar el ciclo de vida completo de la factura: Borrador, Pendiente de Aprobación, Aprobada, Emitida, Enviada, Vencida, Pagada, Parcialmente Conciliada, En Disputa, Anulada y Rectificada.
-  
-- **FR25. Facturas Rectificativas (Notas de Crédito):** Queda estrictamente prohibido editar o borrar facturas emitidas. El sistema implementará un flujo para generar facturas rectificativas vinculadas a la original, recalculando de forma transparente el saldo pendiente del cliente.
-  
-- **FR26. Control de Errores de Entrega y Rebotes:** Si el proveedor simulado de correo notifica un fallo de entrega (rebote), el sistema no marcará la factura como notificada. Registrará una incidencia automática, alertará al responsable interno y habilitará la opción de corregir el contacto y reintentar.
-  
-- **FR27. Factura en Disputa:** Permitir que un responsable detenga manualmente los recordatorios automáticos de una factura concreta pasándola al estado "En disputa" o "Seguimiento pausado", especificando motivo y fecha máxima de revisión.
+- **FR25. Revisión de baja:** Exponer una API con acceso controlado para que el proceso externo de baja consulte las facturas pendientes de un cliente.
 
-#### 8. Conciliación, Importación y Colaboración Interna
+- **FR26. Calendario:** Mostrar un calendario visual de la programación de facturas, con visión de clientes asignados para el lector y global para administrador y superadministrador.
 
-- **FR28. Gestión de Discrepancias en Pagos:** Si un evento de pago externo (Stripe, Revolut o banco) no coincide exactamente con el total de la factura (pago de más o de menos), el sistema la marcará como "Parcialmente Conciliada" o "Diferencia pendiente", impidiendo que se auto-liquide sin supervisión humana.
-  
-- **FR29. Importación Avanzada de Clientes e Histórico:**
-	• Clientes: Previsualizar datos antes de confirmar el CSV, permitiendo mapear columnas y gestionar filas corruptas o NIF duplicados.
-	• Histórico: Permitir importar facturas antiguas marcándolas como "Migradas", sin consumir numeración activa ni disparar correos al cliente.
+- **FR27. Redacción automatizada de reclamaciones:** Generar correos electrónicos de recordatorio de pago con un tono adaptado (amistoso, formal, urgente) según los días de retraso y el perfil del cliente.
 
-- **FR30. Módulo de Incidencias Administrativas y Comentarios:** Espacio de seguimiento interno donde los empleados pueden abrir incidencias unidas a un cliente o factura (ej: "NIF incorrecto", "Impago recurrente"). Permitirá añadir comentarios internos con menciones que disparen notificaciones a otros usuarios del sistema.
+### AMPLIACIONES OPCIONALES (Dependen de su dificultad de implementar en casos de uso)
 
+- **FR28. [Ampliación] Importación y exportación avanzada:** Permitir la importación masiva de clientes mediante archivos CSV ,que incluya una pantalla de previsualización para el mapeo de columnas y el filtrado de archivos corruptos, y facturas antiguas. Permitir la generación y descarga trimestral o mensual de un paquete ZIP estructurado con los listados CSV y PDFs de las facturas emitidas y rectificativas del periodo
 
+- **FR29. [Ampliación] Monitorización y salud del sistema:** Disponer de una pantalla de administración técnica corta que muestre el estado de la última ejecución recurrente masiva, la cola de correos pendientes, errores de integración recientes y el resultado del último backup.
 
+## Requisitos no Funcionales Generalizados:
 
-### Requisitos no Funcionales
-
-#### 1. Rendimiento y Eficiencia
+### 1. Rendimiento y Eficiencia
 
 - **NFR1. Velocidad de facturación.**
   - **Descripción:** El proceso completo de generación, guardado y envío de una factura debe realizarse en menos de 1 minuto.
@@ -137,70 +87,73 @@ Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus
   - **Métrica:** El percentil 95 del tiempo hasta que una pantalla sea utilizable ≤ 2 segundos y de las operaciones habituales de consulta o modificación ≤ 3 segundos.
   - **Método de verificación:** Medir los tiempos de navegación y operaciones habituales con herramientas del navegador y pruebas de carga mediante k6 o JMeter; calcular el percentil 95 y contrastarlo con los umbrales en el entorno acordado.
 
-#### 2. Usabilidad y Accesibilidad
+- **NFR3. Procesamiento asíncrono en segundo plano.**
+  - **Descripción:** Las tareas masivas de generación de facturas recurrentes o procesamiento de informes de gran volumen programadas para el día 1 de cada mes deben ejecutarse de forma asíncrona mediante colas de trabajo en segundo plano para no congelar la interfaz de usuario web.
+  - **Métrica:** 0% de impacto en la navegación web (carga ≤ 2 segundos) y 0 caídas del lote masivo, garantizando que el 100% de los errores individuales queden aislados y registrados en el log sin detener el resto del proceso.
+  - **Método de validación:** Disparar la generación masiva del Día 1 con un lote que incluyan facturas con datos rotos deliberadamente y verificar con herramientas de carga que las pantallas web responden con fluidez, las facturas válidas se emiten con éxito y las erróneas quedan correctamente identificadas en el registro de salud.
 
-- **NFR3. Diseño intuitivo.**
-  - **Descripción:** La interfaz debe ser lo suficientemente sencilla y fácil de usar como para permitir la creación de una ficha de cliente o factura de forma rápida y sin necesidad de formación compleja.
-  - **Métrica:** Al menos el 90 % de las tareas de crear un cliente y crear una factura se completan correctamente y en poco tiempo, por usuarios nuevos tras una introducción de como máximo cinco minutos.
-  - **Método de verificación:** Realizar una prueba de usabilidad con usuarios representativos sin experiencia previa, proporcionar la misma introducción y registrar tareas completadas, solicitudes de ayuda, errores y tiempos de ejecución.
+### 2. Usabilidad y Accesibilidad
 
-- **NFR4. Compatibilidad multidispositivo.**
+- **NFR4. Diseño intuitivo e idiomas.**
+  - **Descripción:** La interfaz debe ser lo suficientemente fácil de usar como para permitir la creación de una ficha de cliente o factura de forma rápida y sin necesidad de formación compleja. Debe estar integrada perfectamente en inglés y español.
+  - **Métrica:** Al menos el 90 % de las tareas de crear un cliente y crear una factura se completan correctamente y en poco tiempo, por usuarios nuevos tanto en español como en inglés tras una introducción de como máximo cinco minutos.
+  - **Método de verificación:** Realizar una prueba de usabilidad con usuarios de distintos idiomas representativos sin experiencia previa, proporcionar la misma introducción y registrar tareas completadas, solicitudes de ayuda, errores y tiempos de ejecución.
+
+- **NFR5. Compatibilidad multidispositivo .**
   - **Descripción:** La aplicación debe ser accesible desde cualquier dispositivo (ordenadores, tablets y  móviles).
   - **Métrica:** El 100 % de los flujos esenciales de acceso, gestión de clientes y generación, envío y consulta de facturas funciona en ordenadores, tablets y móviles, sin controles inaccesibles ni contenido esencial oculto; matriz de sistemas, navegadores y tamaños de pantalla por acordar.
   - **Método de verificación:** Ejecutar los mismos flujos en dispositivos reales y emuladores de las tres categorías, utilizando distintos tamaños y orientaciones, y comprobar visualmente la interfaz y funcionalmente sus controles en cada combinación de la matriz.
 
-#### 3. Escalabilidad y Concurrencia
+### 3. Escalabilidad y Concurrencia
 
-- **NFR5. Capacidad de crecimiento.**
+- **NFR6. Capacidad de crecimiento.**
   - **Descripción:** La arquitectura del sistema debe estar preparada para escalar a miles de clientes y facturas sin perder rendimiento.
-  - **Métrica:** Volumen de referencia propuesto para aprobación del equipo: 2.000 clientes y 15.000 facturas; con esa carga de datos, las tareas deben seguir cumpliendo los límites de NFR1 y NFR2, sin errores de procesamiento ni pérdida de información. ; con esa carga de datos, las tareas deben seguir cumpliendo los límites de NFR1 y NFR2, sin errores de procesamiento ni pérdida de información.
+  - **Métrica:** Volumen de referencia propuesto para aprobación del equipo: 2.000 clientes y 15.000 facturas; con esa carga de datos, las tareas deben seguir cumpliendo los límites de NFR1 y NFR2, sin errores de procesamiento ni pérdida de información. Con esa carga de datos, las tareas deben seguir cumpliendo los límites de NFR1 y NFR2, sin errores de procesamiento ni pérdida de información.
   - **Método de verificación:** Llenar el sistema con datos sintéticos hasta el volumen acordado y repetir las pruebas de facturación, búsquedas, filtros e histórico en el mismo entorno; comparar los resultados con una carga de datos menor y comprobar tiempos, errores e integridad.
 
-- **NFR6. Soporte de concurrencia.**
+- **NFR7. Soporte de concurrencia.**
   - **Descripción:** El sistema debe soportar el inicio de sesión simultáneo de todos los usuarios, administradores y el superadministrador sin caídas ni ralentizaciones.
   - **Métrica:** El 100 % de los inicios de sesión con credenciales válidas se completa correctamente, con cero caídas o errores del servidor, cuando acceden simultáneamente N cuentas, siendo N el total de cuentas internas activas; límite propuesto de tiempo de autenticación: percentil 95 ≤ 2 segundos.
   - **Método de verificación:** Lanzar una prueba de acceso simultáneo con k6 o JMeter usando cuentas distintas de todos los roles, verificar la sesión y el rol resultante de cada cuenta y registrar tiempos, errores y disponibilidad del servidor.
 
-#### 4. Seguridad, Privacidad y Arquitectura
+- **NFR8. Control de colisiones concurrentes y bloqueo.**
+  - **Descripción:** Para evitar que la edición simultánea de una misma factura o cliente por dos empleados destruya información, el backend implementará un mecanismo de control de concurrencia, rechazando el segundo guardado e informando al usuario del conflicto.
+  - **Métrica:** Procesos de edición correctos a pesar de la interacción de varios usuarios a la vez mostrando una alerta clara sobre el conflicto al usuario bloqueado.
+  - **Método de verificación:** Simular con una herramienta de automatización el guardado concurrente de la misma factura por dos usuarios con milisegundos de diferencia, comprobando que el primer cambio se almacena con éxito y el segundo es rechazado de forma segura notificando la colisión.
 
-- **NFR7. Privacidad por diseño.**
+- **NFR9. Precisión Matemática Financiera.**
+  - **Descripción:** Garantizar que los cálculos y totales del sistema sean exactos y deterministas, prohibiendo estrictamente el uso de tipos de coma (double o float) para el dinero. Se emplearán tipos numéricos de precisión fija (Decimal).
+  - **Métrica:** Desviación monetaria exactamente igual a 0.00 euros en el 100% de los cálculos del sistema, garantizando que la suma de las líneas de detalle coincida de forma precisa con el total del PDF, el almacenamiento y los paneles financieros agregados.
+  - **Método de verificación:** Ejecutar pruebas unitarias automatizadas inyectando líneas de factura con múltiples decimales e IVA combinados, verificar en el código y en el esquema de la base de datos que se usan tipos de precisión fija (Decimal / enteros), y comprobar que las agregaciones del dashboard no sufren pérdidas de céntimos.
+
+### 4. Seguridad, Privacidad y Arquitectura
+
+- **NFR10. Privacidad por diseño.**
   - **Descripción:** El sistema debe garantizar la protección y confidencialidad de los datos almacenados, cumpliendo con las normativas vigentes (como RGPD para el borrado lógico).
   - **Métrica:** Cero accesos o exposiciones de datos personales y fiscales a usuarios no autorizados en los casos de prueba y cumplimiento del 100 % de los controles aplicables de la lista de revisión normativa, incluida la conservación, el borrado lógico y la eliminación definitiva que correspondan; lista validada por el responsable competente.
   - **Método de verificación:** Ejecutar pruebas de acceso no autorizado y de separación de permisos sobre pantallas, API y documentos; inspeccionar código, configuración, registros y tratamiento de datos; contrastar los resultados con la lista normativa validada, sin asumir que el borrado lógico por sí solo acredita el cumplimiento.
 
-- **NFR8. Independencia tecnológica:**
-  - **Descripción:** La aplicación es completamente independiente y aislada del sistema Brain, operando en servidores o bases de datos separadas.
-  - **Métrica:** Cero dependencias funcionales de Brain para ejecutar las operaciones de facturación y un servidor o una base de datos separados de los utilizados por Brain; el 100 % de los flujos esenciales funciona con Brain apagado o inaccesible.  
-  - **Método de verificación:** Inspeccionar la arquitectura, los destinos de conexión y la configuración de despliegue y bases de datos; bloquear el acceso a Brain y ejecutar los flujos esenciales, verificando que no realizan consultas ni llamadas necesarias a ese sistema.  
+- **NFR11. Independencia tecnológica.**
+  - **Descripción:** El software operará con plena autonomía respecto a la plataforma Brain, desplegándose sobre bases de datos e infraestructura de servidores totalmente desvinculadas.
+  - **Métrica:** Ausencia total (0%) de acoplamiento operativo con Brain para la facturación, manteniendo un entorno persistente separado y garantizando que el 100 % de los procesos clave se ejecuten sin interrupciones aun con dicho sistema inactivo.
+  - **Método de verificación:** Auditar la topología de red, esquemas de datos y endpoints; simular una caída completa de Brain y ejecutar el flujo completo de emisión para constatar que no se efectúan peticiones ni dependencias críticas hacia esa infraestructura.
 
-- **NFR9. Consistencia y fiabilidad.**
+- **NFR13. Consistencia y fiabilidad.**
   - **Descripción:** mantener el mismo PDF en almacenamiento, envío y descarga, dirigir los avisos al destinatario correcto y prevenir emisiones o avisos duplicados involuntarios.
   - **Métrica:** Igualdad del hash SHA-256 del PDF almacenado, enviado y descargado en el 100 % de las facturas probadas; destinatario correcto en el 100 % de los avisos y cero duplicados involuntarios de una misma emisión o aviso programado, incluso ante reintentos.
   - **Método de verificación:** Ejecutar pruebas de integración con captura de comunicaciones, comparar los hashes de los PDF y los destinatarios esperados e introducir reintentos, fallos y ejecuciones simultáneas para comprobar que cada emisión o aviso se produce una sola vez; distinguir los recordatorios legítimos de días diferentes.
- 
-- **NFR10. Pistas de Auditoría Inmutables (Logs de Negocio).**
-	- **Descripción:** Todo cambio crítico (altas, modificaciones fiscales, aprobaciones de descuentos, cambios de responsable, conciliaciones manuales y alteraciones de configuración) debe quedar registrado en un log de auditoría.
-  - **Métrica:** El 100% de las acciones críticas debe guardar: ID de usuario, timestamp, acción, valor anterior y valor nuevo. Este registro no será editable ni borrable por ningún rol, incluido el Superadministrador.
-	- **Método de verificación:** Realizar modificaciones de datos desde diferentes roles e inspeccionar directamente la base de datos de auditoría para verificar la inmutabilidad y completitud de las entradas.
 
-- **NFR11. Cifrado y Gestión de Secretos.**
-	- **Descripción:** Los documentos y credenciales del sistema deben estar protegidos frente a accesos externos y fugas en repositorios.
-	- **Métrica:** 0 URLs de facturas o adjuntos adivinables públicamente (deben requerir token temporal expirable). 0 claves API o secretos del Stripe simulado guardados en texto plano en el repositorio de código.
-	- **Método de verificación:** Auditoría de código de caja blanca y pruebas de pentesting web intentando descargar PDFs de facturas sin sesión activa o mediante alteración de ID en la URL (IDOR).
-   
-- **NFR12. Tolerancia a Fallos y Consistencia en Procesos Concurrentes.**
-	- **Descripción:** El sistema debe evitar la sobreescritura de datos cuando dos usuarios modifican la misma ficha a la vez, y garantizar la consistencia si el servidor cae durante la facturación masiva.
-	- **Métrica:** 0 registros machacados por concurrencia mediante control de concurrencia optimista/pesimista. Reanudación del 100% de las tareas del día 1 tras una caída repentina, garantizando 0 facturas duplicadas.
-	- **Método de verificación:** Simular dos peticiones de guardado simultáneas sobre el mismo cliente con microsegundos de diferencia. Simular un apagado del servidor a mitad de la cola de facturación del día 1, encenderlo y comprobar que termina los pendientes sin repetir los ya procesados.
+- **NFR14. Inmutabilidad de la Auditoría Corporativa.**
+  - **Descripción:** Los registros de auditoría que guardan quién creó un cliente, modificó datos fiscales o aprobó descuentos se almacenarán en estructuras de "sólo inserción" . Ningún usuario, incluido el Superadministrador, podrá editar o eliminar este histórico.
+  - **Métrica:** Todos los eventos críticos registrados con marcas de tiempo e identificadores inmutables, y no hay registros de auditoría borrados o modificados por cualquier rol del sistema, incluido el Superadministrador.
+  - **Método de verificación:** Intentar forzar la edición o eliminación de un registro de auditoría mediante scripts directos a la base de datos o desde el panel de control con el rol de Superadministrador, verificando que el backend rechaza la operación de forma segura y bloquea cualquier intento de alteración histórica.
 
-#### 5. Internacionalización y Precisión
+- **NFR15. Protección de Secretos y Credenciales.**
+  - **Descripción:** Queda estrictamente prohibido almacenar claves API, contraseñas o secretos de la simulación de Stripe dentro del repositorio de código fuente. Se gestionarán obligatoriamente a través de variables de entorno seguras en el servidor.
+  - **Métrica:** Las credenciales, tokens de API o contraseñas guardadas de forma fija en el repositorio de código fuente, y los secretos administrados externamente a través del sistema de variables de entorno del servidor.
+  - **Método de verificación:** Ejecutar un script de análisis estático de código o una inspección visual completa del repositorio buscando patrones de texto confidenciales, y verificar que los archivos de configuración utilizan referencias del entorno para cargar los secretos en el despliegue.
 
-- **NFR13. Internacionalización de Comunicaciones (i18n).**
-	- **Descripción:** Aunque la interfaz interna esté en español, el motor de plantillas debe soportar múltiples idiomas para el cliente final.
-	- **Métrica:** Soporte nativo de al menos 2 idiomas (Español e Inglés) seleccionables en la ficha del cliente para sus facturas y correos.
-	- **Método de verificación:** Generar facturas para clientes configurados en inglés y verificar que las etiquetas del PDF y el correo electrónico se emiten correctamente en ese idioma.
-   
-- **NFR14. Precisión Matemática de Importes Monetarios.**
-	- **Descripción:** Evitar pérdidas de céntimos causadas por redondeos incorrectos o uso de tipos de datos de coma flotante.
-	- **Métrica:** Desviación monetaria = 0.00 en todas las sumas del Dashboard e informes respecto al sumatorio real de las líneas de factura guardadas. Uso obligatorio de tipos de datos numéricos exactos (ej. Decimal o enteros para céntimos) en lugar de floats/doubles.
-	- **Método de verificación:** Ejecutar pruebas unitarias parametrizadas inyectando líneas de factura con múltiples decimales e IVA, comprobando que el total del PDF coincide al céntimo con el almacenamiento.
+- **NFR16. Gestión de Backups Probados.**
+  - **Descripción:** Implementar copias de seguridad automáticas y periódicas de los datos y documentos almacenados. La política de la infraestructura exigirá realizar pruebas periódicas documentadas de restauración completa de los backups en entornos aislados para validar su integridad y éxito.
+  - **Métrica:** Todas las copias de seguridad automáticas generadas según el calendario previsto y la cantidad de errores críticos de integridad detectados durante el proceso obligatorio de restauración periódica en el entorno de pruebas.
+  - **Método de verificación:** Programar la ejecución automática del backup del sistema, extraer el archivo resultante y ejecutar un script de restauración completa sobre un entorno de base de datos aislado, comprobando mediante consultas de prueba que el 100% de los datos y documentos maestros históricos se recuperan sin corrupción ni pérdida de información.
