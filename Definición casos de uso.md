@@ -29,7 +29,7 @@
 
  actualizar rango de facturación 
 
- validar cambio de rango anual ¿? 
+
 
  Aprobar excepciones financieras 
 
