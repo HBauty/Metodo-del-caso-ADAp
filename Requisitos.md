@@ -24,9 +24,8 @@ Requisitos Funcionales Generalizados:
 * **FR7.Liquidación de bajas**: Notificación automática por email de todos los impagos pendientes al tramitar la baja de un cliente.  
   * **Dependencias**: FR5 (se activa al tramitar la baja); FR12 (requiere localizar las facturas pendientes); FR18 (requiere registrar el resultado de la comunicación).  
 * **FR8.Reactivación y control de duplicados:** Permitir la reactivación de una ficha histórica si un cliente antiguo regresa, implementando un sistema de alerta por identificador fiscal (NIF). Cualquier fusión de duplicados será autorizada y auditada.  
-  * **Dependencias**: FR9 (requiere la ficha y el identificador fiscal para detectar duplicados); NFR14 (la fusión debe quedar auditada).  
+  * **Dependencias**: FR9 (requiere la ficha y el identificador fiscal para detectar duplicados);  
 * **FR9.Plantilla de clientes:** La plantilla solo es modificable por el superadmin y debe contar obligatoriamente con el nombre de empresa, nombre comercial, razón social, país, moneda, identificador fiscal internacional o NIF en España, dirección, datos de los contactos, fecha de contratación, tarifa acordada, condiciones de pago particulares y capacidad de asociar documentos contractuales firmados externamente.  
-  * **Dependencias**: Ninguna.  
 * **FR10.Filtrado:** Buscar empresas clientes por sus datos guardados en la plantilla.  
   * **Dependencias**: FR9 (busca datos almacenados en la plantilla de clientes).  
 * **FR11.Organización por etiquetas**: Habilitar un sistema de clasificación flexible mediante etiquetas manuales y administrables (ej. estratégico, beta, partner, riesgo de cobro) independientes de los estados financieros derivados del sistema.  
