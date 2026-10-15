@@ -19,7 +19,6 @@ Leyenda de estado:	`[x]` Completada·
 			`[ ]` Pendiente. 
 
 ---
-
 ## Sprint 1
 
 ### Sesión 01/10
@@ -83,7 +82,6 @@ Algunos miembros del grupo equipo se han quedado esperando a que otros terminen 
 Se cree que este sprint ha sido demasiado largo, por lo que el siguiente, durará una semana, en vez de dos. Pese a esto, el trabajo ha sido fluido y la participación muy positiva por parte de todos los miembros.
 
 ---
-
 ## SPRINT 2
 
 ### Sesión 14/10
