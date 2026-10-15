@@ -56,13 +56,14 @@ Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, ad
 - [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Hugo y aquiles) .
 - [ ] Crear la presentación para el día 20 (Todos)
 - [ ] Añadir los nuevos requisitos (Rosales y Gabriel)
-- [ ] Formalizar los casos de uso (Jose, Ángel, Rubén)
+- [x] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables en la siguiente sesión. (Ángel)
+- [ ] Formalizar los casos de uso (Jose, Rubén)
 
 ### Tareas completadas:
 - [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
 - [x] Establecer todos los posibles casos de uso (Jose).
 - [x] Empezar diagrama de casos de uso (Hugo y Aquiles). Hecho el 12/10
-- [x] Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
+- [x] Dejar listos todos  los requisitos  (Gabriel , Rosales).
 - [x] Definir casos de uso (Rubén , Jose).
 - [x] Empezar diagrama de casos de uso (Hugo y Aquiles) .
 
