@@ -22,8 +22,6 @@ Leyenda de estado:	`[x]` Completada·
 
 ## Sprint 1
 
----
-
 ### Sesión 01/10
 
 ### Asistentes
@@ -88,10 +86,7 @@ Se cree que este sprint ha sido demasiado largo, por lo que el siguiente, durar�
 
 ## SPRINT 2
 
----
-
 ### Sesión 14/10
-
 
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
