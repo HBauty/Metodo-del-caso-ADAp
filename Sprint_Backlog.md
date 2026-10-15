@@ -26,6 +26,9 @@ Leyenda de estado:	`[x]` Completada·
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel y Ángel.
 
+### Duración
+1 h y 45 min
+
 ### Sprint planning
 
 Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubre, donde tendrá lugar la sprint review y sprint retrospective, y además, comenzará el segundo sprint.
@@ -48,6 +51,8 @@ Hugo, Aquiles, Rubén, Jose, Gabriel y Francisco.
 ###  Resumen de la sesión
 Se ha llevado a cabo una reunión de control, donde hemos analizado la situación de cada integrante, además de hacer una reorganización del equipo.
 
+### Duración
+1 h y 45 min
 
 ### Tareas:
 - [x] Definir casos de uso. *(Rubén y Jose)*
@@ -61,6 +66,9 @@ Se ha llevado a cabo una reunión de control, donde hemos analizado la situació
 
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel.
+
+### Duración
+1 h
 
 ###  Resumen de la sesión
 Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, además de planificar y comenzar el siguiente sprint.
@@ -89,6 +97,9 @@ Se cree que este sprint ha sido demasiado largo, por lo que el siguiente, durar�
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
 
+### Duración
+1 h y 45 min
+
 ### Sprint planning
 En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning que tendrá la duración de una semana.
 
@@ -99,6 +110,9 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 - [ ] Crear documento común para estudiar la exposición. *(Hugo)*
 
 ### Sesión 15/10
+
+### Duración
+3 h
 
 ### Asistentes
 Ángel
