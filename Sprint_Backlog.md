@@ -19,15 +19,11 @@ Se ha llevado a cabo la reunión del sprint planning y se han establecido las si
 Acordamos hacer un sprint de dos semanas, y un último sprint de una semana. Además, nos hemos organizado, dividido los roles y establecido las tareas como se puede ver reflejado. Este sprint terminará el 14 de octubre, donde tendrá lugar la sprint review y sprint retrospective, y además, comenzará el segundo sprint.
 
 ### Tareas:
-- [ ] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
-- [ ] Revisar transcripción de la charla en busca de posibles nuevos requisitos. *(Rosales y Ángel)*
-- [ ] Definir los requisitos funcionales y no funcionales. *(Gabriel)*
+- [x] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
+- [x] Revisar transcripción de la charla en busca de requisitos. *(Rosales y Ángel)*
+- [x] Definir los requisitos funcionales y no funcionales. *(Gabriel)*
 - [ ] Definir los casos de uso. *(Hugo)*
 - [ ] Crear diagrama de uso en PlantUML.
-
-### Tareas completadas:
-- [x] Se ha organizado el equipo, con la consecuente creación de las herramientas necesarias para facilitar la interacción entre todos.
-- [x] Se han asignado los roles a cada miembro del equipo.
 
 ---
 
@@ -37,15 +33,10 @@ Se ha llevado a cabo una reunión de control, donde hemos analizado la situació
 ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 ### Tareas: 
-- [ ] Definir casos de uso (Rubén , Jose).
-- [ ] Filtrar y dejar listos todos  los requisitos  (Gabriel , Rosales).
-- [ ] Empezar diagrama de casos de uso (Hugo y Aquiles) .
-- [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Todos) .
-
-### Tareas completadas:
-- [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
-- [x] Establecer todos los posibles casos de uso (Jose).
-- [x] Empezar diagrama de casos de uso (Hugo y Aquiles). Hecho el 12/10
+- [x] Definir casos de uso (Rubén , Jose).
+- [x] Definir los requisitos funcionales y no funcionales provisionales  (Gabriel , Rosales).
+- [x] Empezar diagrama de casos de uso (Hugo y Aquiles) .
+- [x] Establecer todos los posibles casos de uso (Jose)
 
 ---
 
@@ -53,19 +44,11 @@ ASISTENCIA: Hugo , Aquiles , Rubén , Jose , Gabriel , Rosales.
 
 Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, además de planificar y comenzar el siguiente sprint.
 ### Tareas:
-- [ ] Revisar casos de uso y refinar el diagrama de casos de uso (Hugo y aquiles) .
-- [ ] Crear la presentación para el día 20 (Todos)
-- [ ] Añadir los nuevos requisitos (Rosales y Gabriel)
+- [x] Revisar casos de uso y refinar el diagrama de casos de uso (Hugo y aquiles) .
+- [x] Añadir los nuevos requisitos y fusionar aquellos que presentaban contenido similar (Rosales y Gabriel)
 - [x] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables en la siguiente sesión. (Ángel)
-- [ ] Formalizar los casos de uso (Jose, Rubén)
-
-### Tareas completadas:
-- [x] Definir los requisitos funcionales y no funcionales. *(Equipo completo)*
-- [x] Establecer todos los posibles casos de uso (Jose).
-- [x] Empezar diagrama de casos de uso (Hugo y Aquiles). Hecho el 12/10
-- [x] Dejar listos todos  los requisitos  (Gabriel , Rosales).
-- [x] Definir casos de uso (Rubén , Jose).
-- [x] Empezar diagrama de casos de uso (Hugo y Aquiles) .
+- [x] Formalizar los casos de uso (Jose, Rubén)
+- [x] Empezar diagrama de casos de uso (Hugo y Aquiles) 
 
 ---
 
