@@ -1,233 +1,74 @@
-#Esbozos previos a la definición de los casos de uso
-
-#---------------------------------------------------------------
-
-#Diagrama 1: Cobrar una factura
 @startuml
+left to right direction
+
+actor "Lector" as lector
+actor "Administrador" as admin
+actor "Superadministrador" as superadmin
+
+actor "Usuario" as user
+
+superadmin --|> admin
+admin --|> user
+lector --|> user
+
+(CU-00\n Registrarse en el sistema) as CU00
+(CU-01\n Iniciar Sesión) as CU01
+(CU-02\n Asignar roles y permisos) as CU02
+(CU-03\n Pausar Suscripción) as CU03
+(CU-04\n Tramitar baja de cliente) as CU04
+(CU-05\n Notificar avisos e impagos) as CU05
+(CU-06\n Consultar y gestionar fichas de clientes e historial) as CU06
+(CU-07\n Registrar ficha de suscripción - Acuerdo Comercial) as CU07
+(CU-08\n Emitir orden de cobro / Envío de factura automática) as CU08
+(CU-09\n Verificar y conciliar cobros) as CU09
+(CU-10\n Generar factura manual - puntual) as CU10
+(CU-11\n Modificar Borrador de factura / Aprobar excepción) as CU11
+(CU-12\n Emitir y enviar una factura o factura rectificativa) as CU12
+(CU-13\n Actualizar la tarifa según los cobros anuales) as CU13
+(CU-14\n Aprobar una excepción financiera) as CU14
+(CU-15\n Generar un comprobante de una operación) as CU15
+(CU-16\n Consultar una factura y obtener su PDF) as CU16
+(CU-17\n Gestionar incidencias de entregta de correo) as CU17
+
+user -- CU00
+CU00 ..> CU01 : <<dependency>>
+
+CU01 <.. CU02 : <<include>>
+CU01 <.. CU06 : <<include>>
+CU01 <.. CU17 : <<include>>
+CU01 <.. CU13 : <<include>>
+CU01 <.. CU03 : <<include>>
+CU01 <.. CU07 : <<include>>
+CU01 <.. CU14 : <<include>>
+CU01 <.. CU04 : <<include>>
+CU01 <.. CU11 : <<include>>
+CU01 <.. CU16 : <<include>>
+
+admin -- CU06
+admin -- CU17
+admin -- CU13
+CU13 ..> CU07 : <<include>>
+admin -- CU02
+
+lector -- CU03
+lector -- CU11
+lector -- CU04
+lector -- CU16
+
+lector -- CU07
+CU07 ..> CU08 : <<extends>>
+CU08 ..> CU09 : <<include>>
+CU08 ..> CU12 : <<include>>
+CU12 ..> CU15 : <<include>>
+
+lector -- CU14
+CU14 ..> CU10 : <<include>>
+CU10 <.. CU11 : <<dependency>>
+CU10 ..> CU12 : <<include>>
+
+CU04 ..> CU05 : <<extends>>
+
+CU16 ..> CU07 : <<dependency>>
 
-:Super Administrador: as superadmin
-:Administrador: as admin
-:Cliente: as client
-superadmin <|-- admin
-
-(Autenticación) as login 
-(Gestionar Cliente) as gestionarCliente
-
-
-gestionarCliente ..> login : <<include>>
-admin -- gestionarCliente
-gestionarCliente -- client
-
-
-(Dar de Alta) as registerClient
-admin -- registerClient
-registerClient ..> login : <<include>>
-registerClient -- client
-
-
-(Solicitar Cobro) as cobrar
-:Sistema de Pago: as sistemaDePago
-sistemaDePago -- cobrar
-(Generar Factura) as generarFactura
-cobrar ..> generarFactura
-cobrar ..> login : <<include>>
-(Enviar Factura) as enviarFactura
-generarFactura ..> enviarFactura
-generarFactura ..> (Generar Respaldo)
-enviarFactura -- client
-
-
-(Modificar Factura) as modFactura
-admin -- modFactura
-modFactura ..> login : <<include>>
-@enduml
-
-#---------------------------------------------------------------
-
-#Diagrama 2: Pagar una factura
-@startuml
-
-:Super Administrador: as superadmin
-:Administrador: as admin
-:Cliente: as client
-superadmin <|-- admin
-
-(Autenticación) as login 
-(Gestionar Cliente) as gestionarCliente
-
-
-gestionarCliente ..> login : <<include>>
-admin -- gestionarCliente
-gestionarCliente -- client
-
-
-(Dar de Alta) as registerClient
-admin -- registerClient
-registerClient ..> login : <<include>>
-registerClient -- client
-
-
-
-(Emitir Pago) as pagar
-:Sistema de Pago: as sistemaDePago
-(Generar Factura) as generarFactura
-client ..> pagar
-pagar ..> generarFactura
-pagar ..> login : <<include>>
-(Enviar Factura) as enviarFactura
-generarFactura ..> enviarFactura
-enviarFactura -- sistemaDePago
-
-@enduml
-
-#---------------------------------------------------------------
-
-#Diagrama 3: Notificar Impago / Dar de baja
-
-@startuml
-
-:Super Administrador: as superadmin
-:Administrador: as admin
-:Cliente: as client
-superadmin <|-- admin
-
-(Autenticación) as login 
-(Gestionar Cliente) as gestionarCliente
-
-
-gestionarCliente ..> login : <<include>>
-admin -- gestionarCliente
-gestionarCliente -- client
-
-
-(Dar de Alta) as registerClient
-admin -- registerClient
-registerClient ..> login : <<include>>
-registerClient -- client
-
-
-(Comprobar impagos) as comprobarImpagos
-(Notificar impagos) as notificarImpagos
-(Solicitar darse de baja) as borrarCuenta
-borrarCuenta ..> login : <<include>>
-client -- borrarCuenta
-borrarCuenta ..> comprobarImpagos : <<dependency>>
-comprobarImpagos ..> notificarImpagos : <<include>>
-notificarImpagos -- client
-
-@enduml
-
-#---------------------------------------------------------------
-
-#Diagrama 4: Consultar una factura
-@startuml
-
-:Super Administrador: as superadmin
-:Administrador: as admin
-:Cliente: as client
-superadmin <|-- admin
-
-(Autenticación) as login 
-(Gestionar Cliente) as gestionarCliente
-
-
-gestionarCliente ..> login : <<include>>
-admin -- gestionarCliente
-gestionarCliente -- client
-
-
-(Dar de Alta) as registerClient
-admin -- registerClient
-registerClient ..> login : <<include>>
-registerClient -- client
-
-
-(Consultar una Factura) as consultar
-consultar ..> login : <<include>>
-client -- consultar
-consultar ..> (Generar una Factura) : <<include>>
-
-
-(Filtrar Facturas) as filtrar
-admin -- filtrar
-filtrar ..> login : <<include>>
-filtrar ..> (Generar una Factura) : <<include>>
-@enduml
-
-#---------------------------------------------------------------
-
-#Diagrama 5: Editar Factura
-
-@startuml
-
-:Super Administrador: as superadmin
-:Administrador: as admin
-:Cliente: as client
-superadmin <|-- admin
-
-(Autenticación) as login 
-(Gestionar Cliente) as gestionarCliente
-
-
-gestionarCliente ..> login : <<include>>
-admin -- gestionarCliente
-gestionarCliente -- client
-
-
-(Dar de Alta) as registerClient
-admin -- registerClient
-registerClient ..> login : <<include>>
-registerClient -- client
-
-
-(Editar una Factura) as edit
-edit ..> login : <<include>>
-admin -- edit
-edit ..> (Generar una Factura) : <<include>>
-
-@enduml
-
-#---------------------------------------------------------------
-
-#Diagrama 6: Gestionar Excepciones
-@startuml
-
-:Super Administrador: as superadmin
-:Administrador: as admin
-:Cliente: as client
-superadmin <|-- admin
-
-(Autenticación) as login 
-(Gestionar Cliente) as gestionarCliente
-
-
-gestionarCliente ..> login : <<include>>
-admin -- gestionarCliente
-gestionarCliente -- client
-
-
-(Dar de Alta) as registerClient
-admin -- registerClient
-registerClient ..> login : <<include>>
-registerClient -- client
-
-
-(Solicitar excepción financiera) as solicitarExcepcion
-solicitarExcepcion ..> login : <<include>>
-client -- solicitarExcepcion
-(Gestionar Excepción) as gestionarExcepcion
-gestionarExcepcion --> login : <<include>>
-admin -- gestionarExcepcion
-solicitarExcepcion ..> gestionarExcepcion : <<dependency>
-(Aplicar Excepción) as aplicarExcepcion
-gestionarExcepcion ..> aplicarExcepcion
-(Generar Factura Excepcional) as generarFacturaExcepcional
-aplicarExcepcion ..> generarFacturaExcepcional
-(Aprobar Excepción) as aprobarExcepcion
-generarFacturaExcepcional ..> aprobarExcepcion : <<dependency>>
-admin -- aprobarExcepcion
-(Enviar Factura) as enviarFactura
-aprobarExcepcion ..> enviarFactura
-enviarFactura -- client
 
 @enduml
