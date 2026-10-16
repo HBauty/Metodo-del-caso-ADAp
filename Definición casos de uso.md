@@ -42,9 +42,11 @@ filtrar facturas/ fichas de clientes
 
 Tramitar baja de cliente ( cliente / administrador) 
 
-Gestionar clientes 
+Gestionar clientes / incidencias 
 
-Gestionar incidencias 
+aprobar factura
+
+
 
 
 
