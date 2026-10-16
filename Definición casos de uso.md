@@ -27,9 +27,8 @@
 
  enviar facturas / factura rectificativa 
 
- actualizar rango de facturación 
 
-
+Añadir una etiqueta 
 
  Aprobar excepciones financieras 
 
@@ -46,6 +45,8 @@ Tramitar baja de cliente ( cliente / administrador)
 Gestionar clientes 
 
 Gestionar incidencias 
+
+
 
 
 
