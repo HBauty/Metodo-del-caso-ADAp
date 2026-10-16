@@ -16,7 +16,7 @@ Autenticación en el sistema mediante tres niveles de permisos: Superadministrad
 
 > **Dependencias:** FR1 (la asignación de permisos se aplica a usuarios autenticados).
 
-#### FR3.Uso exclusivo interno
+#### FR3. Uso exclusivo interno
 
 Acceso restringido únicamente a empleados con correos de la empresa. Los clientes finales no tienen acceso ni registro en la plataforma.
 
