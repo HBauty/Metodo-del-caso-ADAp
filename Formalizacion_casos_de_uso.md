@@ -1,6 +1,6 @@
-  ## CU-00: Registrarse en el sistema (Alta de empleado)
+## CU-00: Registrarse en el sistema (Alta de empleado)
 
-**Actor principal:** Empleado de Turbine.
+**Actor principal:** Usuario.
 
 **Descripción:** Un nuevo empleado interno genera su perfil de usuario mediante la dirección corporativa para utilizar las funciones de la plataforma.
 
@@ -24,7 +24,7 @@ Extensiones:
 
 ## CU-01: Iniciar sesión (Log-in)
 
-**Actor principal:** Empleado de Turbine (Superadministrador, Administrador o Lector).
+**Actor principal:** Usuario.
 
 **Descripción:** El empleado se autentica mediante correo corporativo y contraseña para acceder a las funciones e información permitidas por su rol.
 
@@ -93,7 +93,7 @@ Extensiones:
 
 ## CU-04: Tramitar baja de cliente
 
-**Actor principal:** Administrador / Lector asignado.
+**Actor principal:** Lector asignado.
 
 **Descripción:** El usuario registra la solicitud de baja de un cliente, deteniendo su suscripción y aplicando el borrado lógico tras liquidar deudas.
 
@@ -114,11 +114,11 @@ Extensiones:
 
 ---
 
-CU-05: Notificar avisos e impagos (Cliente y Personal Interno)
+## CU-05: Notificar avisos e impagos 
 
-**Actor principal:** Función automatizada del sistema ( es provocada por otras acciones)
+**Actor principal:** Lector asignado
 
-**Descripción:** El sistema envía recordatorios de pago a los clientes y alertas de seguimiento al empleado responsable.
+**Descripción:** El sistema envía recordatorios de pago o avisos a los clientes.
 
 **Precondiciones:** Existen facturas emitidas pendientes de pago o vencidas en el sistema.
 
@@ -138,7 +138,7 @@ CU-05: Notificar avisos e impagos (Cliente y Personal Interno)
 
 ---
 
-CU-06: Consultar y gestionar fichas de clientes e historial
+## CU-06: Consultar y gestionar fichas de clientes e historial
 
 **Actor principal:** Administrador / Lector asignado.
 
@@ -186,9 +186,7 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ## CU-08: Emitir orden de cobro / Envío de factura automática
 
-> (Nota: Según los requisitos, el sistema no es una pasarela de pago que debita tarjetas directamente, sino que automatiza la emisión y reclamación del cobro el día correspondiente).
-
-**Actor principal:** Función automatizada del sistema ( es provocada por otras acciones)
+**Actor principal:** Lector asignado
 
 **Descripción:** El sistema ejecuta el ciclo de facturación programado (día 1 de cada mes o día de alta) generando y enviando el documento de cobro al cliente.
 
@@ -211,7 +209,7 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ## CU-09: Verificar y conciliar cobros
 
-**Actor principal:** Administrador.
+**Actor principal:** Administrador / Lector asignado.
 
 **Descripción:** El sistema consulta fuentes externas para confirmar pagos y liquidar facturas pendientes.
 
@@ -277,27 +275,15 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 - **1a.** Intento de editar una factura ya emitida: El sistema bloquea la acción e indica que debe generarse una factura rectificativa (CU-12).
 
-
-### --------Nuevos---------
-
 ## CU-012. Emitir y enviar una factura o factura rectificativa
 
-**ID / Código:** CU-012  
-**Nombre:** Emitir y enviar una factura o factura rectificativa  
-**Descripción:** Generar una factura, guardar su PDF y enviarla al cliente. Incluye facturas puntuales, recurrentes y rectificativas.  
 **Actor principal:** Administrador o Lector con permiso para facturar.  
-**Ámbito:** Sistema de facturación.  
-**Nivel:** Objetivo de usuario.
 
-**Interesados e intereses:** La empresa necesita facturas correctas y registradas; el cliente debe recibirlas.
+**Descripción:** Generar una factura, guardar su PDF y enviarla al cliente. Incluye facturas puntuales, recurrentes y rectificativas.  
 
 **Precondiciones:** El usuario está autenticado y autorizado; existe la ficha del cliente. Si es una rectificativa, debe existir la factura original.
 
-**Disparador:** Un usuario solicita emitir una factura o se activa la facturación recurrente programada.
-
 **Garantía de éxito:** La factura y su PDF quedan guardados y asociados al cliente; se realiza el envío y se registra su resultado.
-
-**Garantía mínima:** No se emiten facturas con datos fiscales incompletos ni con aprobaciones obligatorias pendientes. Un fallo de correo no se registra como entrega correcta.
 
 ### Escenario principal de éxito
 
@@ -321,14 +307,9 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ## CU-013. Actualizar la tarifa según los cobros anuales
 
-**ID / Código:** CU-013  
-**Nombre:** Actualizar la tarifa según los cobros anuales  
-**Descripción:** Revisar anualmente la tarifa de una empresa cliente según el dinero que ha cobrado, de acuerdo con su plan. El sistema propone una tarifa y el administrador decide si aplicarla.  
 **Actor principal:** Administrador.  
-**Ámbito:** Gestión comercial y facturación.  
-**Nivel:** Objetivo de usuario.
 
-**Interesados e intereses:** La empresa gestora quiere aplicar las tarifas de su plan; la empresa cliente, tener la tarifa que corresponda.
+**Descripción:** Revisar anualmente la tarifa de una empresa cliente según el dinero que ha cobrado, de acuerdo con su plan. El sistema propone una tarifa y el administrador decide si aplicarla.  
 
 **Precondiciones:** El administrador está autenticado; el cliente tiene fecha de alta y una tarifa registrada.
 
@@ -355,7 +336,6 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ## CU-014. Aprobar una excepción financiera
 
-**ID / Código:** CU-014  
 **Nombre:** Aprobar una excepción financiera  
 **Descripción:** Autorizar operaciones excepcionales, como importes inusuales, descuentos extraordinarios, cambios manuales de precio o vencimientos fuera de la política habitual.  
 **Actor principal:** Administrador.  
@@ -388,9 +368,8 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ---
 
-## CU-015. Generar un comprobante de una operación(Revisar)
-
-**ID / Código:** CU-015  
+## CU-015. Generar un comprobante de una operación
+ 
 **Nombre:** Generar un comprobante de una operación  
 **Descripción:** Crear manualmente un documento PDF que refleje los datos registrados de una factura, un cobro o una notificación, cuando la empresa cliente solicite un comprobante. Es un documento distinto de la factura original.  
 **Actor principal:** Administrador.  
@@ -426,7 +405,6 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ## CU-016. Consultar una factura y obtener su PDF
 
-**ID / Código:** CU-016  
 **Nombre:** Consultar una factura y obtener su PDF  
 **Descripción:** Consultar una factura existente y obtener el PDF que tiene guardado.  
 **Actor principal:** Lector.  
@@ -458,161 +436,10 @@ CU-06: Consultar y gestionar fichas de clientes e historial
 
 ---
 
-## CU-017. Editar una factura en borrador
+## CU-017. Gestionar incidencias de entrega de correo
 
-**ID / Código:** CU-017  
-**Nombre:** Editar una factura en borrador  
-**Descripción:** Modificar una factura que todavía no se ha emitido.  
-**Actor principal:** Administrador.  
-**Ámbito:** Sistema de facturación.  
-**Nivel:** Objetivo de usuario.
-
-**Interesados e intereses:** El administrador corrige la factura; la empresa garantiza que las facturas emitidas no cambien.
-
-**Precondiciones:** El administrador está autenticado y la factura está en borrador.
-
-**Disparador:** El administrador solicita modificar una factura.
-
-**Garantía de éxito:** Los cambios válidos quedan guardados sin emitir la factura.
-
-**Garantía mínima:** No se alteran facturas emitidas ni se sobrescriben cambios de otro usuario.
-
-### Escenario principal de éxito
-
-1. El administrador selecciona una factura en borrador.
-2. El sistema verifica su estado y los permisos de edición.
-3. El administrador modifica los datos necesarios.
-4. El sistema valida los cambios y comprueba si requieren aprobación.
-5. El administrador guarda la factura.
-6. El sistema comprueba que no existe un conflicto de edición y confirma el guardado.
-
-### Extensiones / Flujos alternativos
-
-- **2a. Factura ya emitida:** No se puede editar; la corrección se realiza con una rectificativa mediante CU-012.
-- **4a. Cambios excepcionales:** Se requiere aprobación mediante CU-014 antes de aplicar la operación.
-- **4b. Datos incorrectos:** El sistema informa de los errores y no los guarda.
-- **6a. Edición simultánea:** El sistema rechaza el segundo guardado incompatible.
-
----
-
-## CU-018. Filtrar facturas y fichas de clientes
-
-**ID / Código:** CU-018  
-**Nombre:** Filtrar facturas y fichas de clientes  
-**Descripción:** Buscar clientes y facturas por los datos de la empresa, su actividad o temática y su localización, por ejemplo ciudad, provincia o código postal.  
-**Actor principal:** Administrador o Lector.  
-**Ámbito:** Gestión de clientes y facturación.  
-**Nivel:** Objetivo de usuario.
-
-**Interesados e intereses:** Los usuarios necesitan localizar información con rapidez; la empresa debe respetar los permisos de acceso.
-
-**Precondiciones:** El usuario está autenticado y tiene permiso para consultar los registros.
-
-**Disparador:** El usuario necesita buscar una factura o una ficha de cliente.
-
-**Garantía de éxito:** Se muestran los registros que cumplen los filtros y que el usuario puede consultar.
-
-**Garantía mínima:** No se muestran datos de clientes fuera de su ámbito autorizado.
-
-### Escenario principal de éxito
-
-1. El usuario selecciona la búsqueda de clientes o de facturas.
-2. Introduce uno o varios filtros, como actividad, ciudad o código postal.
-3. El sistema busca únicamente entre los registros autorizados.
-4. El sistema muestra las coincidencias.
-5. El usuario selecciona un resultado para consultarlo; si es una factura, continúa mediante CU-016.
-
-### Extensiones / Flujos alternativos
-
-- **4a. Sin coincidencias:** El sistema informa de que no hay resultados.
-
----
-
-## CU-019. Tramitar la baja de un cliente
-
-**ID / Código:** CU-019  
-**Nombre:** Tramitar la baja de un cliente  
-**Descripción:** Gestionar la baja solicitada por una empresa cliente, detener las cuotas recurrentes y comprobar si existen deudas pendientes.  
-**Actor principal:** Administrador.  
-**Ámbito:** Gestión de clientes y facturación.  
-**Nivel:** Objetivo de usuario.
-
-**Interesados e intereses:** El cliente quiere tramitar su baja; la empresa debe detener nuevas cuotas sin perder deudas ni registros necesarios.
-
-**Precondiciones:** El administrador está autenticado y el cliente tiene una ficha en el sistema.
-
-**Disparador:** El administrador recibe y registra una solicitud de baja del cliente por un canal externo.
-
-**Garantía de éxito:** Se detiene la facturación recurrente y se aplica el tratamiento de baja correspondiente a la situación de la deuda.
-
-**Garantía mínima:** No se borran lógicamente fichas con deudas pendientes ni se eliminan datos antes del plazo legal aplicable.
-
-### Escenario principal de éxito
-
-1. El administrador selecciona el cliente y registra la solicitud de baja.
-2. El sistema detiene inmediatamente la generación de facturas recurrentes.
-3. El sistema consulta las facturas pendientes y su estado de pago.
-4. El sistema comprueba que el cliente no tiene deudas.
-5. El sistema realiza el borrado lógico de la ficha, conservando los históricos obligatorios.
-6. El sistema confirma la tramitación al administrador.
-
-### Extensiones / Flujos alternativos
-
-- **3a. No se puede consultar la deuda:** La baja queda pendiente de comprobación; no se realiza el borrado lógico.
-- **4a. Existen impagos:** La ficha se conserva sin borrado lógico y el sistema envía por correo la relación de deudas. Las cuotas recurrentes siguen detenidas.
-- **4b. Se liquida la deuda después de la solicitud:** El administrador vuelve a comprobarla y finaliza el borrado lógico si ya no hay impagos.
-- **4c. Falla el correo de impagos:** Se registra una incidencia y se gestiona mediante CU-021.
-
----
-
-## CU-020. Gestionar la ficha de un cliente
-
-**ID / Código:** CU-020  
-**Nombre:** Gestionar la ficha de un cliente  
-**Descripción:** Crear y actualizar fichas de empresas clientes, con sus datos comerciales, fiscales y documentos.  
-**Actor principal:** Administrador. El Superadministrador puede realizar las mismas operaciones y es el único que puede modificar la plantilla de clientes.  
-**Ámbito:** Gestión de clientes.  
-**Nivel:** Objetivo de usuario.
-
-**Interesados e intereses:** El administrador necesita mantener fichas correctas; la empresa quiere evitar duplicados y conservar la información necesaria.
-
-**Precondiciones:** El administrador está autenticado; para editar una ficha, esta debe existir.
-
-**Disparador:** El administrador necesita dar de alta un cliente o modificar sus datos.
-
-**Garantía de éxito:** La ficha se crea o actualiza con todos los datos obligatorios.
-
-**Garantía mínima:** No se guardan fichas incompletas, no se fusionan duplicados sin autorización ni se sobrescriben cambios concurrentes.
-
-### Escenario principal de éxito
-
-1. El administrador solicita crear una ficha.
-2. El sistema muestra la plantilla de clientes vigente.
-3. El administrador rellena los datos obligatorios: nombre de empresa y comercial, razón social, país, moneda, identificador fiscal, dirección, contactos, fecha de contratación, tarifa y condiciones de pago.
-4. El administrador adjunta los contratos firmados externamente, si los hay.
-5. El sistema valida los datos y comprueba posibles duplicados por identificador fiscal.
-6. El sistema guarda la ficha y confirma su creación.
-
-### Extensiones / Flujos alternativos
-
-- **1a. Editar una ficha:** El administrador modifica los datos autorizados; el sistema los valida y guarda.
-- **2a. Modificar la plantilla:** Solo el Superadministrador puede cambiarla; los demás usuarios no tienen permiso.
-- **3a. Faltan datos obligatorios:** El sistema bloquea el guardado. No se admiten fichas provisionales.
-- **5a. Cliente duplicado o histórico:** El sistema avisa y permite tramitar una reactivación. Cualquier fusión requiere autorización y queda registrada.
-- **6a. Edición simultánea:** El sistema rechaza el segundo guardado incompatible.
-
----
-
-## CU-021. Gestionar incidencias de entrega de correo
-
-**ID / Código:** CU-021  
-**Nombre:** Gestionar incidencias de entrega de correo  
 **Descripción:** Revisar incidencias por fallos de correo y gestionar sus reenvíos periódicos.  
 **Actor principal:** Administrador.  
-**Ámbito:** Facturación y comunicaciones.  
-**Nivel:** Objetivo de usuario.
-
-**Interesados e intereses:** El administrador necesita resolver los fallos; la empresa quiere conservar el historial; el cliente necesita recibir sus comunicaciones.
 
 **Precondiciones:** El administrador está autenticado y existe una incidencia de correo registrada.
 
