@@ -119,5 +119,6 @@ Gabriel, Francisco y Ángel
 
 ### Tareas:
 - [x] Mejorar la estructura, organización y presentación del Sprint Backlog. *(Ángel)*
-- [ ] Mejorar la estructura, organización y presentación de Requisitos *(Ángel)*
+- [x] Mejorar la estructura, organización y presentación de Requisitos *(Ángel)*
 - [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Gabriel, Francisco y Ángel)*
+- [x] Definir las dependencias entre los requisitos funcionales *(Gabriel, Francisco y Ángel)*
