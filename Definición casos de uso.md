@@ -44,7 +44,7 @@ Tramitar baja de cliente ( cliente / administrador)
 
 Gestionar clientes / incidencias 
 
-aprobar factura
+aprobar factura ( cambios manuales que se puedan realizar , que han de ser aprobados posteriormente por un administrador)
 
 
 
