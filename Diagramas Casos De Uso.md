@@ -31,7 +31,7 @@ lector --|> user
 (CU-17\n Gestionar incidencias de entregta de correo) as CU17
 
 user -- CU00
-CU00 ..> CU01 : <<dependency>>
+CU00 <.. CU01 : <<dependency>>
 
 CU01 <.. CU02 : <<include>>
 CU01 <.. CU06 : <<include>>
@@ -44,31 +44,42 @@ CU01 <.. CU04 : <<include>>
 CU01 <.. CU11 : <<include>>
 CU01 <.. CU16 : <<include>>
 
+CU02 ..> CU00 : <<dependency>>
+
 admin -- CU06
 admin -- CU17
 admin -- CU13
-CU13 ..> CU07 : <<include>>
+CU13 ..> CU07 : <<dependency>>
 admin -- CU02
+admin -- CU03
 
 lector -- CU03
 lector -- CU11
 lector -- CU04
 lector -- CU16
 
+CU03 ..> CU07 : <<dependency>>
+
 lector -- CU07
-CU07 ..> CU08 : <<extends>>
-CU08 ..> CU09 : <<include>>
+CU07 <.. CU08 : <<dependency>>
 CU08 ..> CU12 : <<include>>
-CU12 ..> CU15 : <<include>>
+CU12 <.. CU15 : <<dependency>>
+CU12 <.. CU09 : <<dependency>>
 
 lector -- CU14
-CU14 ..> CU10 : <<include>>
+CU14 ..> CU10 : <<extends>>
 CU10 <.. CU11 : <<dependency>>
 CU10 ..> CU12 : <<include>>
 
-CU04 ..> CU05 : <<extends>>
+CU04 <.. CU05 : <<extends>>
 
-CU16 ..> CU07 : <<dependency>>
+CU16 ..> CU12 : <<dependency>>
 
+CU05 ..> CU12 : <<dependency>>
+
+CU13 ..> CU09 : <<dependency>>
+
+CU15 ..> CU09 : <<dependency>>
+CU15 ..> CU05 : <<dependency>>
 
 @enduml
