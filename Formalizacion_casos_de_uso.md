@@ -253,7 +253,7 @@ Extensiones:
 
 ---
 
-## CU-11: Modificar factura (En Borrador) / Aprobar excepción
+## CU-11: Modificar factura en borrador
 
 > (Nota: Por el requisito NFR12, está prohibido editar facturas ya emitidas; solo se editan borradores o se aprueban excepciones).
 
@@ -275,7 +275,7 @@ Extensiones:
 
 - **1a.** Intento de editar una factura ya emitida: El sistema bloquea la acción e indica que debe generarse una factura rectificativa (CU-12).
 
-## CU-012. Emitir y enviar una factura o factura rectificativa
+## CU-12. Emitir y enviar una factura o factura rectificativa
 
 **Actor principal:** Administrador o Lector con permiso para facturar.  
 
@@ -305,7 +305,7 @@ Extensiones:
 
 ---
 
-## CU-013. Actualizar la tarifa según los cobros anuales
+## CU-13. Actualizar la tarifa según los cobros anuales
 
 **Actor principal:** Administrador.  
 
@@ -334,7 +334,7 @@ Extensiones:
 
 ---
 
-## CU-014. Aprobar una excepción financiera
+## CU-14. Aprobar una excepción financiera
 
 **Nombre:** Aprobar una excepción financiera  
 **Descripción:** Autorizar operaciones excepcionales, como importes inusuales, descuentos extraordinarios, cambios manuales de precio o vencimientos fuera de la política habitual.  
@@ -368,7 +368,7 @@ Extensiones:
 
 ---
 
-## CU-015. Generar un comprobante de una operación
+## CU-15. Generar un comprobante de una operación
  
 **Nombre:** Generar un comprobante de una operación  
 **Descripción:** Crear manualmente un documento PDF que refleje los datos registrados de una factura, un cobro o una notificación, cuando la empresa cliente solicite un comprobante. Es un documento distinto de la factura original.  
@@ -403,7 +403,7 @@ Extensiones:
 
 ---
 
-## CU-016. Consultar una factura y obtener su PDF
+## CU-16. Consultar una factura y obtener su PDF
 
 **Nombre:** Consultar una factura y obtener su PDF  
 **Descripción:** Consultar una factura existente y obtener el PDF que tiene guardado.  
@@ -436,7 +436,7 @@ Extensiones:
 
 ---
 
-## CU-017. Gestionar incidencias de entrega de correo
+## CU-17. Gestionar incidencias de entrega de correo
 
 **Descripción:** Revisar incidencias por fallos de correo y gestionar sus reenvíos periódicos.  
 **Actor principal:** Administrador.  
