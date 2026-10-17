@@ -300,8 +300,8 @@ Extensiones:
 - **1a. Factura rectificativa:** Se selecciona la factura original y se crea una rectificativa vinculada a ella.
 - **1b. Facturación recurrente:** El sistema genera y envía automáticamente las cuotas programadas. Prorratea la primera cuota hasta final de mes y emite las siguientes el día 1. Procesa los lotes en segundo plano.
 - **3a. Datos fiscales incompletos:** Se bloquea la emisión y se indican los errores.
-- **4a. Se requiere aprobación:** La factura permanece en borrador hasta que se apruebe mediante CU-014.
-- **7a. Falla el envío:** La factura se conserva y el sistema abre una incidencia para CU-021.
+- **4a. Se requiere aprobación:** La factura permanece en borrador hasta que se apruebe mediante CU-14.
+- **7a. Falla el envío:** La factura se conserva y el sistema abre una incidencia para CU-17.
 
 ---
 
@@ -358,7 +358,7 @@ Extensiones:
 2. El sistema muestra la operación y sus condiciones.
 3. El administrador revisa la información y aprueba la solicitud, aunque la haya creado él mismo.
 4. El sistema registra la aprobación y permite continuar la operación.
-5. Si se trata de una factura, su emisión continúa mediante CU-012.
+5. Si se trata de una factura, su emisión continúa mediante CU-12.
 
 ### Extensiones / Flujos alternativos
 
