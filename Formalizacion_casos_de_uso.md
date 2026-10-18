@@ -1,8 +1,8 @@
 ## CU-00: Registrarse en el sistema (Alta de empleado)
 
-**Actor principal:** Empleado(adminitrador).
+**Actor principal:** Empleado(administrador) o Usuario de la app.
 
-**Descripción:** Un nuevo empleado interno genera su perfil de usuario mediante la dirección corporativa para utilizar las funciones de la plataforma.
+**Descripción:** Un nuevo usuario genera su perfil de usuario mediante la dirección corporativa para utilizar las funciones de la plataforma.
 
 **Precondiciones:** El trabajador dispone de una cuenta de correo corporativo activa (@turbine...) sin registro previo en la plataforma.
 
