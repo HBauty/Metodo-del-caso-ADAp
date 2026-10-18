@@ -176,12 +176,6 @@ Permitir la importación masiva de clientes mediante archivos CSV ,que incluya u
 
 > **Dependencias:** FR9 (importa y exporta datos de clientes); FR12 (exporta facturas emitidas); FR13 (incluye facturas rectificativas vinculadas).
 
-### 5. Ampliaciones opcionales (Dependen de su dificultad de implementar en casos de uso)
-
-#### FR29. Monitorización y salud del sistema
-
-Disponer de una pantalla de administración técnica corta que muestre el estado de la última ejecución recurrente masiva, la cola de correos pendientes, errores de integración recientes y el resultado del último backup.
-
 ---
 
 ## Requisitos no Funcionales Generalizados:
