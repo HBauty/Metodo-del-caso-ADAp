@@ -1,6 +1,6 @@
 ## CU-00: Registrarse en el sistema (Alta de empleado)
 
-**Actor principal:** Empleado.
+**Actor principal:** Empleado(adminitrador).
 
 **Descripción:** Un nuevo empleado interno genera su perfil de usuario mediante la dirección corporativa para utilizar las funciones de la plataforma.
 
