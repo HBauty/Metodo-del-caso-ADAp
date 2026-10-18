@@ -28,7 +28,7 @@ lector --|> user
 (CU-14\n Aprobar una excepción financiera) as CU14
 (CU-15\n Generar un comprobante de una operación) as CU15
 (CU-16\n Consultar una factura y obtener su PDF) as CU16
-(CU-17\n Gestionar incidencias de entregta de correo) as CU17
+(CU-17\n Gestionar incidencias de entrega de correo) as CU17
 
 user -- CU00
 CU00 <.. CU01 : <<dependency>>
