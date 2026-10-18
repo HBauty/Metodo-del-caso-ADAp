@@ -72,7 +72,7 @@ Extensiones:
 
 **Actor principal:** Administrador / Lector asignado.
 
-**Descripción:** El usuario detiene temporalmente la facturación recurrente de un cliente activo sin cancelar su contrato y añadiendo una fecha estipulada para reanudar la subscripcion.
+**Descripción:** El usuario detiene temporalmente la facturación recurrente de un cliente activo sin cancelar su contrato y añadiendo una fecha estipulada para reanudar la suscripcion.
 
 **Precondiciones:** El cliente tiene una suscripción activa en el sistema.
 
