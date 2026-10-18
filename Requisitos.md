@@ -192,10 +192,6 @@ Disponer de una pantalla de administración técnica corta que muestre el estado
 
 Descripción: El proceso completo de generación, guardado y envío de una factura debe realizarse en menos de 1 minuto.
 
-Descripción: La tarea de generar facturas debe durar menos de 1 minuto, dicho proceso de generación, guardado, y envío es llevado a cabo por el usuario.
-
-----------------Duplicado---------------
-
 - **Métrica:** Tiempo total inferior a 60 segundos en cada ejecución, medido desde que se solicita generar la factura hasta que el PDF queda guardado y el proveedor del canal confirma la aceptación del envío
 - **Método de verificación:** Ejecutar pruebas de extremo a extremo con facturas puntuales y recurrentes, registrar las marcas temporales de inicio, almacenamiento y aceptación del envío y comprobar que cada ejecución cumple el límite.
 
