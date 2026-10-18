@@ -21,7 +21,7 @@ Leyenda de estado:	`[x]` Completada·
 ---
 ## Sprint 1
 
-### Sesión 01/10
+### Sesión organizativa 01/10
 
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel y Ángel.
@@ -43,7 +43,7 @@ Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubr
 
 ---
 
-### Sesión 8/10
+### Sesión organizativa 8/10
 
 ### Asistentes 
 Hugo, Aquiles, Rubén, Jose, Gabriel y Francisco.
@@ -60,9 +60,20 @@ Se ha llevado a cabo una reunión de control, donde hemos analizado la situació
 - [x] Empezar diagrama de casos de uso. *(Hugo y Aquiles)*
 - [x] Establecer todos los posibles casos de uso. *(Jose)*
 
+### Sesión organizativa 8/10
+
+### Asistentes
+Gabriel y Francisco
+
+### Duración
+3 h
+
+### Tareas:
+- [x] Definir los requisitos funcionales y no funcionales provisionales. *(Gabriel y Francisco)*
+
 ---
 
-### Sesión 13/10
+### Sesión organizativa 13/10
 
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel.
@@ -90,9 +101,10 @@ Algunos miembros del grupo equipo se han quedado esperando a que otros terminen 
 Se cree que este sprint ha sido demasiado largo, por lo que el siguiente, durará una semana, en vez de dos. Pese a esto, el trabajo ha sido fluido y la participación muy positiva por parte de todos los miembros.
 
 ---
+
 ## SPRINT 2
 
-### Sesión 14/10
+### Sesión organizativa 14/10
 
 ### Asistentes
 Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
@@ -104,21 +116,62 @@ Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
 En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning que tendrá la duración de una semana.
 
 ### Tareas: 
-- [ ] Revisar y refinar casos de uso (Prioritaria del sprint anterior).
-- [ ] Revisar y refinar diagramas de casos de uso (Prioritaria del sprint anterior).
-- [ ] Crear y revisar artefactos necesarios para la primera entrega.
-- [ ] Crear documento común para estudiar la exposición. *(Hugo)*
+- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. (Gabriel, Francisco y Ángel)
+- [x] Formalizar los casos de usos (Rubén y Jose)
+- [x] Mejorar la estructura, organización y presentación de los documentos para la entrega. (Ángel)
 
-### Sesión 15/10
+---
 
-### Duración
-3 h
+### Sesión trabajo 15/10
 
 ### Asistentes
 Gabriel, Francisco y Ángel
+
+### Duración
+3 h
 
 ### Tareas:
 - [x] Mejorar la estructura, organización y presentación del Sprint Backlog. *(Ángel)*
 - [x] Mejorar la estructura, organización y presentación de Requisitos *(Ángel)*
 - [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Gabriel, Francisco y Ángel)*
 - [x] Definir las dependencias entre los requisitos funcionales *(Gabriel, Francisco y Ángel)*
+
+---
+
+### Sesión trabajo 16/10
+
+### Asistentes
+Rubén, Jose y Ángel
+
+### Duración
+15 min
+
+### Tareas:
+- [x] Formalizar los casos de usos (Rubén y Jose)
+- [x] Mejorar la organización y presentación de Requisitos *(Ángel)*
+
+---
+
+### Sesión trabajo 17/10
+
+### Asistentes
+Aquiles y Hugo
+
+### Duración
+3 h
+
+### Tareas:
+- [x] Crear diagramas de caso de usos
+
+### Sesión organizativa y de trabajo 18/10
+
+### Asistentes
+Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
+
+### Duración
+
+
+### Tareas:
+- [x] Crear el guion (Gabriel, Francisco y Ángel)
+- [x] Empezar presentación (Aquiles, Rubén, Gabriel, Francisco y Ángel)
+- [x] Revisión general de los documentos realizados (Todos)
