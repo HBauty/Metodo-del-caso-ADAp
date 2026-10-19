@@ -37,7 +37,7 @@ Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubr
 - [x] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
 - [x] Establecer roles de los integrantes.
 - [x] Revisar transcripción de la charla en busca de requisitos. *(Ángel, Gabriel y Francisco)*
-- [x] Crear diagrama de caso de uso en PlantUML.* (Hugo y Aquiles)*
+- [x] Crear diagrama de caso de uso en PlantUML. *(Hugo y Aquiles)*
 
 ---
 
@@ -113,9 +113,9 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning que tendrá la duración de una semana.
 
 ### Tareas: 
-- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. (Ángel, Gabriel y Francisco)
-- [x] Formalizar los casos de usos (Rubén y Jose)
-- [x] Mejorar la estructura, organización y presentación de los documentos para la entrega. (Ángel)
+- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Ángel, Gabriel y Francisco)*
+- [x] Formalizar los casos de usos *(Rubén y Jose)*
+- [x] Mejorar la estructura, organización y presentación de los documentos para la entrega. *(Ángel)*
 
 ---
 
@@ -144,7 +144,7 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 15 min
 
 ### Tareas:
-- [x] Formalizar los casos de usos (Rubén y Jose)
+- [x] Formalizar los casos de usos *(Rubén y Jose)*
 - [x] Mejorar la organización y presentación de casos de usos *(Ángel)*
 
 ---
@@ -158,7 +158,7 @@ Hugo y Aquiles
 3 h
 
 ### Tareas:
-- [x] Crear diagrama de caso de usos (Hugo y Aquiles)
+- [x] Crear diagrama de caso de usos *(Hugo y Aquiles)*
 
 ### Sesión organizativa y de trabajo 18/10
 
@@ -166,9 +166,21 @@ Hugo y Aquiles
 Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 
 ### Duración
-
+3 h
 
 ### Tareas:
-- [x] Crear el guion (Ángel, Gabriel y Francisco)
-- [x] Empezar presentación (Ángel, Aquiles, Rubén, Gabriel y Francisco)
-- [x] Revisión general de los documentos realizados (Todos)
+- [x] Crear parte de requisitos del guion *(Ángel, Gabriel y Francisco)*
+- [x] Definir el contenido de cada diapositiva de la presentación *(Ángel, Aquiles, Rubén, Gabriel y Francisco)*
+- [x] Revisión general de los documentos realizados *(Todos)*
+
+### Sesión organizativa y de trabajo 19/10
+
+### Asistentes
+Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
+
+### Duración
+
+### Tareas:
+- [x] Crear parte de casos de uso del guion *(Ángel, Aquiles, Rubén, Jose y Francisco)*
+- [x] Darle formato a la presentación *(Ángel)*
+- [x] Mejorar la organización y presentación del diagrama de casos de usos *(Ángel)*
