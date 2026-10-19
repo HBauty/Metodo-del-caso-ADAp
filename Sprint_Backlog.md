@@ -36,10 +36,8 @@ Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubr
 ### Tareas:
 - [x] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
 - [x] Establecer roles de los integrantes.
-- [x] Revisar transcripción de la charla en busca de requisitos. *(Ángel y Francisco)*
-- [x] Definir los requisitos funcionales y no funcionales. *(Gabriel)*
-- [ ] Definir los casos de uso. *(Hugo)*
-- [ ] Crear diagrama de uso en PlantUML.
+- [x] Revisar transcripción de la charla en busca de requisitos. *(Ángel, Gabriel y Francisco)*
+- [x] Crear diagrama de uso en PlantUML.*(Hugo y Aquiles)*
 
 ---
 
@@ -55,10 +53,9 @@ Se ha llevado a cabo una reunión de control, donde hemos analizado la situació
 1 h y 45 min
 
 ### Tareas:
-- [x] Definir casos de uso. *(Rubén y Jose)*
 - [x] Definir los requisitos funcionales y no funcionales provisionales. *(Gabriel y Francisco)*
+- [x] Establecer todos los posibles casos de uso. *(Rubén y Jose)*
 - [x] Empezar diagrama de casos de uso. *(Hugo y Aquiles)*
-- [x] Establecer todos los posibles casos de uso. *(Jose)*
 
 ### Sesión organizativa 8/10
 
@@ -87,13 +84,13 @@ Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, ad
 ### Tareas:
 - [x] Añadir los nuevos requisitos y fusionar aquellos que presentaban contenido similar. *(Gabriel y Francisco)*
 - [x] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables. *(Ángel)*
-- [x] Formalizar los casos de uso. *(Rubén y Jose)*
+- [ ] Formalizar los casos de uso. *(Rubén y Jose)*
 - [x] Empezar diagrama de casos de uso. *(Hugo y Aquiles)*
 
 
 ### Sprint review
 
-De 15 tareas se han completado 13, hemos creado una buena aproximación de los casos de uso y su respectivo diagrama. Por otro lado, se ha establecido el objetivo para el siguiente sprint de completar el diagrama de casos de uso. Las tareas que no se completaron (revisar casos de uso y su diagrama respectivamente) fueron por falta de tiempo así que se dejarán como tareas prioritarias para el siguiente sprint.
+De 11 tareas se han completado 10, hemos creado una buena aproximación de los casos de uso y su respectivo diagrama. Por otro lado, se ha establecido el objetivo para el siguiente sprint de completar el diagrama de casos de uso. Las tareas que no se completaron (revisar casos de uso y su diagrama respectivamente) fueron por falta de tiempo así que se dejarán como tareas prioritarias para el siguiente sprint.
 
 ### Sprint retrospective
 
@@ -117,7 +114,7 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 
 ### Tareas: 
 - [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. (Ángel, Gabriel y Francisco)
-- [x] Formalizar los casos de usos (Jose y Rubén)
+- [x] Formalizar los casos de usos (Rubén y Jose)
 - [x] Mejorar la estructura, organización y presentación de los documentos para la entrega. (Ángel)
 
 ---
