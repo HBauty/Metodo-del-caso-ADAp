@@ -336,7 +336,7 @@ Extensiones:
 
 ## CU-14. Aprobar una excepción financiera
 
-**Nombre:** Aprobar una excepción financiera  
+ 
 **Descripción:** Autorizar operaciones excepcionales, como importes inusuales, descuentos extraordinarios, cambios manuales de precio o vencimientos fuera de la política habitual.  
 **Actor principal:** Administrador.  
 **Ámbito:** Sistema de facturación.  
@@ -370,8 +370,7 @@ Extensiones:
 
 ## CU-15. Generar un comprobante de una operación
  
-**Nombre:** Generar un comprobante de una operación  
-**Descripción:** Crear manualmente un documento PDF que refleje los datos registrados de una factura, un cobro o una notificación, cuando la empresa cliente solicite un comprobante. Es un documento distinto de la factura original.  
+ **Descripción:** Crear manualmente un documento PDF que refleje los datos registrados de una factura, un cobro o una notificación, cuando la empresa cliente solicite un comprobante. Es un documento distinto de la factura original.  
 **Actor principal:** Administrador.  
 **Ámbito:** Facturación y comunicaciones.  
 **Nivel:** Objetivo de usuario.
@@ -405,7 +404,7 @@ Extensiones:
 
 ## CU-16. Consultar una factura y obtener su PDF
 
-**Nombre:** Consultar una factura y obtener su PDF  
+
 **Descripción:** Consultar una factura existente y obtener el PDF que tiene guardado.  
 **Actor principal:** Lector.  
 **Ámbito:** Sistema de facturación.  
