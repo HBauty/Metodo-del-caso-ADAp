@@ -37,7 +37,7 @@ Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubr
 - [x] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
 - [x] Establecer roles de los integrantes.
 - [x] Revisar transcripción de la charla en busca de requisitos. *(Ángel, Gabriel y Francisco)*
-- [x] Crear diagrama de uso en PlantUML.*(Hugo y Aquiles)*
+- [x] Crear diagrama de uso en PlantUML.* (Hugo y Aquiles)*
 
 ---
 
@@ -128,8 +128,8 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 3 h
 
 ### Tareas:
-- [x] Mejorar la estructura, organización y presentación del Sprint Backlog. *(Ángel)*
-- [x] Mejorar la estructura, organización y presentación de Requisitos *(Ángel)*
+- [x] Mejorar la estructura, organización y presentación del sprint backlog. *(Ángel)*
+- [x] Mejorar la estructura, organización y presentación de requisitos *(Ángel)*
 - [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Ángel, Gabriel y Francisco)*
 - [x] Definir las dependencias entre los requisitos funcionales *(Ángel, Gabriel y Francisco)*
 
@@ -145,7 +145,7 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 
 ### Tareas:
 - [x] Formalizar los casos de usos (Rubén y Jose)
-- [x] Mejorar la organización y presentación de Requisitos *(Ángel)*
+- [x] Mejorar la organización y presentación de casos de usos *(Ángel)*
 
 ---
 
