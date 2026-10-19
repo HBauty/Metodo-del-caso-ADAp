@@ -44,28 +44,44 @@ Este documento reúne los actores, los casos de uso identificados y sus relacion
 
 ## 4. Diagrama de casos de uso
 
-```plantuml
-@startuml
+```@startuml
 left to right direction
 
+' Presentación visual
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam ArrowFontSize 12
+skinparam ArrowColor #64748B
+skinparam usecase {
+    BackgroundColor #F1F5F9
+    BorderColor #334155
+    FontColor #0F172A
+    FontSize 15
+}
+skinparam actor {
+    BackgroundColor #FFFFFF
+    BorderColor #334155
+    FontColor #0F172A
+    FontSize 16
+}
 actor "Lector" as lector
 actor "Administrador" as admin
 actor "Superadministrador" as superadmin
 
-actor "Usuario" as user
-
 superadmin --|> admin
-admin --|> user
-lector --|> user
+admin --|> lector
+
 
 (CU-00\n Registrarse en el sistema) as CU00
 (CU-01\n Iniciar Sesión) as CU01
 (CU-02\n Asignar roles y permisos) as CU02
 (CU-03\n Pausar Suscripción) as CU03
 (CU-04\n Tramitar baja de cliente) as CU04
-(CU-05\n Notificar avisos e impagos) as CU05
 (CU-06\n Consultar y gestionar fichas de clientes e historial) as CU06
 (CU-07\n Registrar ficha de suscripción - Acuerdo Comercial) as CU07
+(CU-05\n Notificar avisos e impagos) as CU05
 (CU-08\n Emitir orden de cobro / Envío de factura automática) as CU08
 (CU-09\n Verificar y conciliar cobros) as CU09
 (CU-10\n Generar factura manual - puntual) as CU10
@@ -77,8 +93,10 @@ lector --|> user
 (CU-16\n Consultar una factura y obtener su PDF) as CU16
 (CU-17\n Gestionar incidencias de entrega de correo) as CU17
 
-user -- CU00
+
+lector -- CU00
 CU00 <.. CU01 : <<dependency>>
+
 
 CU01 <.. CU02 : <<include>>
 CU01 <.. CU06 : <<include>>
@@ -90,6 +108,7 @@ CU01 <.. CU14 : <<include>>
 CU01 <.. CU04 : <<include>>
 CU01 <.. CU11 : <<include>>
 CU01 <.. CU16 : <<include>>
+
 
 CU02 ..> CU00 : <<dependency>>
 
@@ -128,6 +147,5 @@ CU13 ..> CU09 : <<dependency>>
 
 CU15 ..> CU09 : <<dependency>>
 CU15 ..> CU05 : <<dependency>>
-
 @enduml
 ```
