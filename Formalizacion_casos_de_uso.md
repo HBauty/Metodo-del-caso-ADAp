@@ -317,7 +317,6 @@ Extensiones:
 
 **Garantía de éxito:** La decisión queda registrada y, si se aprueba el cambio, la nueva tarifa se aplica a pagos futuros.
 
-**Garantía mínima:** No se cambia la tarifa sin aprobación ni se modifican facturas ya emitidas.
 
 ### Escenario principal de éxito
 
@@ -336,13 +335,11 @@ Extensiones:
 
 ## CU-14. Aprobar una excepción financiera
 
- 
 **Descripción:** Autorizar operaciones excepcionales, como importes inusuales, descuentos extraordinarios, cambios manuales de precio o vencimientos fuera de la política habitual.  
-**Actor principal:** Administrador.  
-**Ámbito:** Sistema de facturación.  
-**Nivel:** Objetivo de usuario.
 
-**Interesados e intereses:** El administrador controla las excepciones; la empresa evita operaciones económicas no autorizadas.
+**Actor principal:** Administrador.  
+
+**Ámbito:** Sistema de facturación.  
 
 **Precondiciones:** El administrador está autenticado y existe una operación pendiente de aprobación que todavía no se ha aplicado o emitido.
 
@@ -350,7 +347,6 @@ Extensiones:
 
 **Garantía de éxito:** La aprobación queda registrada y la operación puede continuar.
 
-**Garantía mínima:** Ninguna operación sujeta a aprobación se aplica sin autorización.
 
 ### Escenario principal de éxito
 
@@ -371,11 +367,10 @@ Extensiones:
 ## CU-15. Generar un comprobante de una operación
  
  **Descripción:** Crear manualmente un documento PDF que refleje los datos registrados de una factura, un cobro o una notificación, cuando la empresa cliente solicite un comprobante. Es un documento distinto de la factura original.  
+ 
 **Actor principal:** Administrador.  
-**Ámbito:** Facturación y comunicaciones.  
-**Nivel:** Objetivo de usuario.
 
-**Interesados e intereses:** La empresa cliente quiere recibir una constancia documental; el administrador necesita generarla con datos fiables.
+**Ámbito:** Facturación y comunicaciones.  
 
 **Precondiciones:** El administrador está autenticado; la empresa cliente está registrada y sus datos identificativos son válidos. La factura, el cobro o la notificación correspondiente existe en el sistema.
 
@@ -383,7 +378,6 @@ Extensiones:
 
 **Garantía de éxito:** El comprobante PDF se guarda, queda asociado al cliente y a la operación, y se pone a disposición para su entrega.
 
-**Garantía mínima:** El comprobante no presenta como realizado un cobro o una entrega que no conste confirmada.
 
 ### Escenario principal de éxito
 
@@ -404,13 +398,11 @@ Extensiones:
 
 ## CU-16. Consultar una factura y obtener su PDF
 
-
 **Descripción:** Consultar una factura existente y obtener el PDF que tiene guardado.  
-**Actor principal:** Lector.  
-**Ámbito:** Sistema de facturación.  
-**Nivel:** Objetivo de usuario.
 
-**Interesados e intereses:** El lector necesita consultar facturas de sus clientes asignados; la empresa debe proteger la información.
+**Actor principal:** Lector.  
+
+**Ámbito:** Sistema de facturación.  
 
 **Precondiciones:** El lector está autenticado y tiene acceso a la factura, que ya dispone de su PDF.
 
@@ -418,7 +410,6 @@ Extensiones:
 
 **Garantía de éxito:** Se muestra la factura y se obtiene su PDF correspondiente.
 
-**Garantía mínima:** No se muestran facturas fuera del ámbito autorizado ni se genera una factura nueva.
 
 ### Escenario principal de éxito
 
@@ -438,6 +429,7 @@ Extensiones:
 ## CU-17. Gestionar incidencias de entrega de correo
 
 **Descripción:** Revisar incidencias por fallos de correo y gestionar sus reenvíos periódicos.  
+
 **Actor principal:** Administrador.  
 
 **Precondiciones:** El administrador está autenticado y existe una incidencia de correo registrada.
@@ -445,8 +437,6 @@ Extensiones:
 **Disparador:** El sistema detecta un fallo de entrega, crea una incidencia y avisa al administrador.
 
 **Garantía de éxito:** La comunicación se reenvía correctamente, se registra el resultado y se resuelve la incidencia.
-
-**Garantía mínima:** Una entrega fallida no se marca como realizada. Los reintentos no deben generar envíos duplicados involuntarios.
 
 ### Escenario principal de éxito
 
