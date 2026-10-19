@@ -176,12 +176,12 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 ### Sesión organizativa y de trabajo 19/10
 
 ### Asistentes
-Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 
 ### Duración
 
 ### Tareas:
-- [x] Crear parte de casos de uso del guion *(Ángel, Aquiles, Rubén, Jose y Francisco)*
+- [x] Crear parte de casos de uso del guion *(Aquiles, Rubén, Jose y Francisco)*
 - [x] Darle formato a la presentación *(Ángel)*
 - [x] Mejorar la organización y presentación del diagrama de casos de usos *(Ángel)*
 
