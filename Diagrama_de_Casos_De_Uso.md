@@ -44,7 +44,8 @@ Este documento reúne los actores, los casos de uso identificados y sus relacion
 
 ## 4. Diagrama de casos de uso
 
-```@startuml
+```plantuml
+@startuml
 left to right direction
 
 ' Presentación visual
