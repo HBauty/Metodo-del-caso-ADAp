@@ -1,3 +1,47 @@
+**Grupo:** Arquímedes  
+**Documento:** Diagrama de casos de uso (UML)
+
+---
+
+## 1. Descripción
+
+Este documento reúne los actores, los casos de uso identificados y sus relaciones, de acuerdo con el modelo definido para el sistema.
+
+## 2. Actores del sistema
+
+| Actor | Identificador en el diagrama |
+|:--|:--|
+| Lector | `lector` |
+| Administrador | `admin` |
+| Superadministrador | `superadmin` |
+| Usuario | `user` |
+
+## 3. Catálogo de casos de uso
+
+| Código | Denominación |
+|:--|:--|
+| CU-00 | Registrarse en el sistema |
+| CU-01 | Iniciar Sesión |
+| CU-02 | Asignar roles y permisos |
+| CU-03 | Pausar Suscripción |
+| CU-04 | Tramitar baja de cliente |
+| CU-05 | Notificar avisos e impagos |
+| CU-06 | Consultar y gestionar fichas de clientes e historial |
+| CU-07 | Registrar ficha de suscripción - Acuerdo Comercial |
+| CU-08 | Emitir orden de cobro / Envío de factura automática |
+| CU-09 | Verificar y conciliar cobros |
+| CU-10 | Generar factura manual - puntual |
+| CU-11 | Modificar Borrador de factura / Aprobar excepción |
+| CU-12 | Emitir y enviar una factura o factura rectificativa |
+| CU-13 | Actualizar la tarifa según los cobros anuales |
+| CU-14 | Aprobar una excepción financiera |
+| CU-15 | Generar un comprobante de una operación |
+| CU-16 | Consultar una factura y obtener su PDF |
+| CU-17 | Gestionar incidencias de entrega de correo |
+
+## 4. Diagrama de casos de uso
+
+```plantuml
 @startuml
 left to right direction
 
@@ -83,3 +127,4 @@ CU15 ..> CU09 : <<dependency>>
 CU15 ..> CU05 : <<dependency>>
 
 @enduml
+```
