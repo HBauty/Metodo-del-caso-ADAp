@@ -169,7 +169,7 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 3 h
 
 ### Tareas:
-- [x] Crear parte de requisitos del guion *(Ángel, Gabriel y Francisco)*
+- [x] Crear la parte de requisitos del guion *(Ángel, Gabriel y Francisco)*
 - [x] Definir el contenido de cada diapositiva de la presentación *(Ángel, Aquiles, Rubén, Gabriel y Francisco)*
 - [x] Revisión general de los documentos realizados *(Todos)*
 
@@ -179,9 +179,10 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 
 ### Duración
+4 h y 30 min
 
 ### Tareas:
-- [x] Crear parte de casos de uso del guion *(Aquiles, Rubén, Jose y Francisco)*
+- [x] Crear la parte de casos de uso del guion *(Aquiles, Rubén, Jose y Francisco)*
 - [x] Darle formato a la presentación *(Ángel)*
 - [x] Mejorar la organización y presentación del diagrama de casos de usos *(Ángel)*
 
