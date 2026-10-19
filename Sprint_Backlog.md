@@ -8,12 +8,12 @@
 | Integrante | Rol |
 | :--- | :--- |
 | Hugo Bautista Ocaña | **Scrum Master** |
+| Ángel Sergio Sánchez Marín | **Product Owner** |
 | Aquiles Fernández Gambero | Desarrollador |
 | Rubén Plata Ríos | Desarrollador |
 | Jose Godoy Salazar | Desarrollador |
 | Gabriel Liébana Valero | Desarrollador |
 | Francisco Rosales Arévalo | Desarrollador |
-| Ángel Sergio Sánchez Marín | **Product Owner** |
 
 Leyenda de estado:	`[x]` Completada· 
 			`[ ]` Pendiente. 
@@ -24,7 +24,7 @@ Leyenda de estado:	`[x]` Completada·
 ### Sesión organizativa 01/10
 
 ### Asistentes
-Hugo, Aquiles, Rubén, Jose, Gabriel y Ángel.
+Hugo, Ángel, Aquiles, Rubén, Jose y Gabriel.
 
 ### Duración
 1 h y 45 min
@@ -36,7 +36,7 @@ Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubr
 ### Tareas:
 - [x] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
 - [x] Establecer roles de los integrantes.
-- [x] Revisar transcripción de la charla en busca de requisitos. *(Francisco y Ángel)*
+- [x] Revisar transcripción de la charla en busca de requisitos. *(Ángel y Francisco)*
 - [x] Definir los requisitos funcionales y no funcionales. *(Gabriel)*
 - [ ] Definir los casos de uso. *(Hugo)*
 - [ ] Crear diagrama de uso en PlantUML.
@@ -76,7 +76,7 @@ Gabriel y Francisco
 ### Sesión organizativa 13/10
 
 ### Asistentes
-Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel.
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 
 ### Duración
 1 h
@@ -85,11 +85,11 @@ Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel.
 Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, además de planificar y comenzar el siguiente sprint.
 
 ### Tareas:
-- [x] Revisar casos de uso y refinar el diagrama de casos de uso. *(Hugo y aquiles)*
-- [x] Añadir los nuevos requisitos y fusionar aquellos que presentaban contenido similar. *(Francisco y Gabriel)*
+- [x] Añadir los nuevos requisitos y fusionar aquellos que presentaban contenido similar. *(Gabriel y Francisco)*
 - [x] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables. *(Ángel)*
-- [x] Formalizar los casos de uso. *(Jose y Rubén)*
+- [x] Formalizar los casos de uso. *(Rubén y Jose)*
 - [x] Empezar diagrama de casos de uso. *(Hugo y Aquiles)*
+
 
 ### Sprint review
 
@@ -107,7 +107,7 @@ Se cree que este sprint ha sido demasiado largo, por lo que el siguiente, durar�
 ### Sesión organizativa 14/10
 
 ### Asistentes
-Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 
 ### Duración
 1 h y 45 min
@@ -116,8 +116,8 @@ Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
 En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning que tendrá la duración de una semana.
 
 ### Tareas: 
-- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. (Gabriel, Francisco y Ángel)
-- [x] Formalizar los casos de usos (Rubén y Jose)
+- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. (Ángel, Gabriel y Francisco)
+- [x] Formalizar los casos de usos (Jose y Rubén)
 - [x] Mejorar la estructura, organización y presentación de los documentos para la entrega. (Ángel)
 
 ---
@@ -125,7 +125,7 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 ### Sesión trabajo 15/10
 
 ### Asistentes
-Gabriel, Francisco y Ángel
+Ángel, Gabriel y Francisco.
 
 ### Duración
 3 h
@@ -133,15 +133,15 @@ Gabriel, Francisco y Ángel
 ### Tareas:
 - [x] Mejorar la estructura, organización y presentación del Sprint Backlog. *(Ángel)*
 - [x] Mejorar la estructura, organización y presentación de Requisitos *(Ángel)*
-- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Gabriel, Francisco y Ángel)*
-- [x] Definir las dependencias entre los requisitos funcionales *(Gabriel, Francisco y Ángel)*
+- [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Ángel, Gabriel y Francisco)*
+- [x] Definir las dependencias entre los requisitos funcionales *(Ángel, Gabriel y Francisco)*
 
 ---
 
 ### Sesión trabajo 16/10
 
 ### Asistentes
-Rubén, Jose y Ángel
+Ángel, Rubén y Jose.
 
 ### Duración
 15 min
@@ -155,23 +155,23 @@ Rubén, Jose y Ángel
 ### Sesión trabajo 17/10
 
 ### Asistentes
-Aquiles y Hugo
+Hugo y Aquiles
 
 ### Duración
 3 h
 
 ### Tareas:
-- [x] Crear diagramas de caso de usos
+- [x] Crear diagramas de caso de usos (Hugo y Aquiles)
 
 ### Sesión organizativa y de trabajo 18/10
 
 ### Asistentes
-Hugo, Aquiles, Rubén, Jose, Gabriel, Francisco y Ángel
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 
 ### Duración
 
 
 ### Tareas:
-- [x] Crear el guion (Gabriel, Francisco y Ángel)
-- [x] Empezar presentación (Aquiles, Rubén, Gabriel, Francisco y Ángel)
+- [x] Crear el guion (Ángel, Gabriel y Francisco)
+- [x] Empezar presentación (Ángel, Aquiles, Rubén, Gabriel y Francisco)
 - [x] Revisión general de los documentos realizados (Todos)
