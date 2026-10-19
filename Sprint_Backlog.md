@@ -184,3 +184,13 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 - [x] Crear parte de casos de uso del guion *(Ángel, Aquiles, Rubén, Jose y Francisco)*
 - [x] Darle formato a la presentación *(Ángel)*
 - [x] Mejorar la organización y presentación del diagrama de casos de usos *(Ángel)*
+
+### Sprint review
+
+Se han completado todas las tareas, hemos revisado e incluido todo lo que conlleva la ampliación de la entrevista, tanto por la parte de requisitos como de casos de uso. Hemos hecho la presentación y el guión principal que debemos seguir.
+
+### Sprint retrospective
+
+No ha habido graves problemas en este sprint, se implementaron los requisitos primero de forma muy rápida y posteriormente se ampliaron los casos de uso y su diagrama. El flujo de trabajo, como anteriormente, ha sido muy rápido y se han realizado sesiones de trabajo conjunto entre todos los compañeros para refinar el proyecto completo.
+
+---
