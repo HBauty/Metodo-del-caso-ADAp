@@ -37,7 +37,7 @@ Acordamos hacer un sprint de dos semanas. Este sprint terminará el 14 de octubr
 - [x] Organizar equipo, creación de Discord, GitHub, Trello y otras herramientas. *(General)*
 - [x] Establecer roles de los integrantes.
 - [x] Revisar transcripción de la charla en busca de requisitos. *(Ángel, Gabriel y Francisco)*
-- [x] Crear diagrama de uso en PlantUML.* (Hugo y Aquiles)*
+- [x] Crear diagrama de caso de uso en PlantUML.* (Hugo y Aquiles)*
 
 ---
 
@@ -57,7 +57,7 @@ Se ha llevado a cabo una reunión de control, donde hemos analizado la situació
 - [x] Establecer todos los posibles casos de uso. *(Rubén y Jose)*
 - [x] Empezar diagrama de casos de uso. *(Hugo y Aquiles)*
 
-### Sesión organizativa 8/10
+### Sesión trabajo 8/10
 
 ### Asistentes
 Gabriel y Francisco
@@ -85,12 +85,12 @@ Se ha llevado a cabo la reunión del sprint review y el sprint retrospective, ad
 - [x] Añadir los nuevos requisitos y fusionar aquellos que presentaban contenido similar. *(Gabriel y Francisco)*
 - [x] Documentar en Word los errores, contradicciones y posibles mejoras detectadas en los requisitos, basándose en las entrevistas y la documentación del cliente, para su posterior refinamiento con los responsables. *(Ángel)*
 - [ ] Formalizar los casos de uso. *(Rubén y Jose)*
-- [x] Empezar diagrama de casos de uso. *(Hugo y Aquiles)*
+- [ ] Continuar diagrama de casos de uso. *(Hugo y Aquiles)*
 
 
 ### Sprint review
 
-De 11 tareas se han completado 10, hemos creado una buena aproximación de los casos de uso y su respectivo diagrama. Por otro lado, se ha establecido el objetivo para el siguiente sprint de completar el diagrama de casos de uso. Las tareas que no se completaron (revisar casos de uso y su diagrama respectivamente) fueron por falta de tiempo así que se dejarán como tareas prioritarias para el siguiente sprint.
+De 11 tareas se han completado 9, hemos creado una buena aproximación de los casos de uso y su respectivo diagrama. Por otro lado, se ha establecido el objetivo para el siguiente sprint de completar el diagrama de casos de uso. Las tareas que no se completaron (revisar casos de uso y su diagrama respectivamente) fueron por falta de tiempo así que se dejarán como tareas prioritarias para el siguiente sprint.
 
 ### Sprint retrospective
 
@@ -158,7 +158,7 @@ Hugo y Aquiles
 3 h
 
 ### Tareas:
-- [x] Crear diagramas de caso de usos (Hugo y Aquiles)
+- [x] Crear diagrama de caso de usos (Hugo y Aquiles)
 
 ### Sesión organizativa y de trabajo 18/10
 
