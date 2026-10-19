@@ -1,6 +1,49 @@
-# Requisitos generalizados
 
-## Requisitos Funcionales Generalizados:
+# Requisitos
+
+**Documento de Requisitos del Sistema**
+
+Base consolidada para revisión del equipo, elaborada a partir de la transcripción y los documentos de requisitos; las mejoras opcionales y las propuestas del equipo se identifican expresamente.
+
+## Índice
+
+1. [Requisitos de negocio]
+2. [Requisitos de usuario]
+3. [Requisitos funcionales generalizados]
+4. [Requisitos no funcionales generalizados]
+
+## 1. Requisitos de negocio
+
+Necesidades, objetivos y reglas de Turbine que motivan y delimitan el desarrollo del sistema.
+
+- **RN1.** Reducir el trabajo administrativo manual automatizando la creación de facturas, el seguimiento de pagos y la comunicación de incidencias.
+- **RN2.** Centralizar el control de clientes, facturación y cobros para conocer lo facturado, cobrado y pendiente y facilitar la supervisión financiera.
+- **RN3.** Delegar la gestión de clientes entre empleados, manteniendo permisos por cliente, supervisión global y avisos al responsable correspondiente.
+- **RN4.** Facilitar la gestión diaria en pocos clics, con poco aprendizaje y desde cualquier lugar, incluido el teléfono móvil.
+- **RN5.** Sostener el crecimiento hasta miles de clientes y conservar su histórico de facturas y cobros.
+- **RN6.** Cobrar suscripciones mensuales por tramos de facturación anual del cliente, sin permanencia anual ni pagos fraccionados, con precio ordinario estable durante el año y revisión anual, además de servicios puntuales con importe propio.
+- **RN7.** Proteger los datos personales y fiscales y mantener facturas válidas, coherentes y conservadas conforme a la categoría de información y finalidad aplicables.
+- **RN8.** Disponer de una aplicación administrativa interna independiente de Brain, con una solución técnica asequible y sin imponer una tecnología concreta.
+
+## 2. Requisitos de usuario
+
+Tareas y resultados que los actores necesitan obtener; el lector opera sobre sus clientes asignados, el administrador sobre todos y el superadministrador añade configuración avanzada y acceso a todos los administradores y lectores.
+
+- **RU1.** El personal interno necesita iniciar sesión con correo corporativo y contraseña y acceder únicamente a los clientes autorizados para crearlos, consultarlos, modificarlos y darlos de baja lógicamente. Además poder importar sus datos desde CSV.
+- **RU2.** El administrador necesita registrar empleados y asignarles clientes y permisos; el superadministrador necesita gestionar los privilegios administrativos y acceder a todos los administradores y lectores.
+- **RU3.** El personal autorizado necesita crear y modificar facturas puntuales o configurar suscripciones mensuales dentro de las restricciones acordadas. Además enviar sus PDF, consultar y descargar el histórico del cliente.
+- **RU4.** El personal autorizado necesita modificar facturas dentro de las restricciones de edición acordadas, enviar sus PDF y consultar y descargar el histórico del cliente.
+- **RU5.** El lector asignado necesita conocer qué facturas están pagadas, pendientes o vencidas, revisar cobros y recibir avisos de pago e impago de sus clientes.
+- **RU6.** El cliente externo necesita recibir facturas y recordatorios amigables, disponer del correo y teléfono de soporte, mediante comunicaciones externas y sin acceder a la aplicación.
+- **RU7.** El personal autorizado necesita registrar la comunicación de baja, consultar, notificar deudas y completar la baja administrativa tras su liquidación.
+- **RU8.** El administrador y el superadministrador necesitan consultar un panel global de facturado, cobrado y pendiente por períodos trimestrales y anuales.
+- **RU9.** El superadministrador necesita poder crear nuevos administradores, modificar la plantilla y tener acceso para modificar las facturas.
+- **RU10.** El lector necesita visualizar las próximas facturas en un calendario, limitado a sus clientes asignados o global según su rol.
+- **RU11.** El equipo de Turbine necesita realizar sus tareas desde móvil, tableta u ordenador y disponer de documentación de uso y configuración.
+
+# 3. Requisitos generalizados
+
+## 3.1 Requisitos Funcionales Generalizados:
 
 ### 1. Gestión de Accesos, Usuarios y Roles
 
@@ -28,7 +71,7 @@ Permitir la desactivación de cuentas de usuarios internos que dejen la empresa,
 
 > **Dependencias:** FR1 (requiere gestionar autenticación y sesiones); FR2 (requiere identificar la cuenta y su rol).
 
-### 2. Gestión de Clientes y Bajas
+### 3.2 Gestión de Clientes y Bajas
 
 #### FR5. Flujo de baja con borrado lógico
 
@@ -70,7 +113,7 @@ Habilitar un sistema de clasificación flexible mediante etiquetas manuales y ad
 
 > **Dependencias:** FR9 (las etiquetas se asignan a fichas de clientes).
 
-### 3. Facturación y Pagos
+### 3.3 Facturación y Pagos
 
 #### FR12. Emisión automatizada
 
@@ -108,7 +151,7 @@ Consulta automática de fuentes externas, principalmente Stripe. Las deudas no s
 
 > **Dependencias:** FR12 (requiere facturas emitidas para asociar y conciliar movimientos).
 
-### 4. Notificaciones, Filtros e Informes
+### 3.4 Notificaciones, Filtros e Informes
 
 #### FR18. Histórico de pagados
 
@@ -178,9 +221,9 @@ Permitir la importación masiva de clientes mediante archivos CSV ,que incluya u
 
 ---
 
-## Requisitos no Funcionales Generalizados:
+## 4. Requisitos no Funcionales Generalizados:
 
-### 1. Rendimiento y Eficiencia
+### 4.1 Rendimiento y Eficiencia
 
 #### NFR1. Velocidad de facturación
 
@@ -201,7 +244,7 @@ Descripción: El proceso completo de generación, guardado y envío de una factu
 - **Métrica:** 0% de impacto en la navegación web (carga ≤ 2 segundos) y 0 caídas del lote masivo, garantizando que el 100% de los errores individuales queden aislados y registrados en el log sin detener el resto del proceso.
 - **Método de validación:** Disparar la generación masiva del Día 1 con un lote que incluyan facturas con datos rotos deliberadamente y verificar con herramientas de carga que las pantallas web responden con fluidez, las facturas válidas se emiten con éxito y las erróneas quedan correctamente identificadas en el registro de salud.
 
-### 2. Usabilidad y Accesibilidad
+### 4.2 Usabilidad y Accesibilidad
 
 #### NFR4. Diseño intuitivo e idiomas
 
@@ -215,7 +258,7 @@ Descripción: El proceso completo de generación, guardado y envío de una factu
 - **Métrica:** El 100 % de los flujos esenciales de acceso, gestión de clientes y generación, envío y consulta de facturas funciona en ordenadores, tablets y móviles, sin controles inaccesibles ni contenido esencial oculto; matriz de sistemas, navegadores y tamaños de pantalla por acordar.
 - **Método de verificación:** Ejecutar los mismos flujos en dispositivos reales y emuladores de las tres categorías, utilizando distintos tamaños y orientaciones, y comprobar visualmente la interfaz y funcionalmente sus controles en cada combinación de la matriz.
 
-### 3. Escalabilidad y Concurrencia
+### 4.3 Escalabilidad y Concurrencia
 
 #### NFR6. Capacidad de crecimiento
 
@@ -241,7 +284,7 @@ Descripción: El proceso completo de generación, guardado y envío de una factu
 - **Métrica:** Desviación monetaria exactamente igual a 0.00 euros en el 100% de los cálculos del sistema, garantizando que la suma de las líneas de detalle coincida de forma precisa con el total del PDF, el almacenamiento y los paneles financieros agregados.
 - **Método de verificación:** Ejecutar pruebas unitarias automatizadas inyectando líneas de factura con múltiples decimales e IVA combinados, verificar en el código y en el esquema de la base de datos que se usan tipos de precisión fija (Decimal / enteros), y comprobar que las agregaciones del dashboard no sufren pérdidas de céntimos.
 
-### 4. Seguridad, Privacidad y Arquitectura
+### 4.4 Seguridad, Privacidad y Arquitectura
 
 #### NFR10. Privacidad por diseño
 
