@@ -6,6 +6,8 @@
 
 **Precondiciones:** El trabajador dispone de una cuenta de correo corporativo activa (@turbine...) sin registro previo en la plataforma.
 
+**disparador** El empleado de turbine solicita una cuenta nueva en la plataforma.
+
 **Garantía de éxito:** Se da de alta la cuenta del usuario, se guarda el registro en la auditoría y permanece a la espera de que la administración le asigne permisos y carteras.
 
 ### Escenario principal de éxito:
@@ -29,6 +31,8 @@ Extensiones:
 **Descripción:** El empleado se autentica mediante correo corporativo y contraseña para acceder a las funciones e información permitidas por su rol.
 
 **Precondiciones:** El empleado tiene una cuenta activa previamente registrada en el sistema.
+
+**disparador** El empleado solicita acceder al sistema.
 
 **Garantía de éxito:** Se inicia la sesión y se carga el entorno restringido a sus permisos y clientes autorizados.
 
@@ -76,6 +80,8 @@ Extensiones:
 
 **Precondiciones:** El cliente tiene una suscripción activa en el sistema.
 
+**disparador** el administrador selecciona una suscripción activa y la quiere detener.
+
 **Garantía de éxito:** Se bloquea la emisión de nuevas facturas recurrentes hasta la fecha de reactivación, manteniendo activas las alertas de deudas previas.
 
 ### Escenario principal de éxito:
@@ -98,6 +104,8 @@ Extensiones:
 **Descripción:** El usuario registra la solicitud de baja de un cliente, deteniendo su suscripción y aplicando el borrado lógico tras liquidar deudas.
 
 **Precondiciones:** El cliente existe y está activo en el sistema.
+
+**disparador** El usuario solicita la baja del sistema.
 
 **Garantía de éxito:** Se detienen las facturas recurrentes y los datos del cliente pasan a estado bloqueado (borrado lógico) por el tiempo legal permitido.
 
@@ -122,6 +130,8 @@ Extensiones:
 
 **Precondiciones:** Existen facturas emitidas pendientes de pago o vencidas en el sistema.
 
+**disparador** El reloj del sistema alcanza la programación diaria de revisión de vencimientos 
+
 **Garantía de éxito:** Las comunicaciones se envían en el idioma del cliente y quedan registradas en el historial.
 
 ### Escenario principal de éxito:
@@ -145,6 +155,8 @@ Extensiones:
 **Descripción:** El actor busca, filtra, consulta y edita la información fiscal, contactos múltiples e historial de facturación de los clientes.
 
 **Precondiciones:** El actor ha iniciado sesión.
+
+**disparador** el empleado busca algun dato del cliente.
 
 **Garantía de éxito:** Se muestran o actualizan los datos respetando los permisos de visibilidad del rol y el control de concurrencia.
 
@@ -191,6 +203,8 @@ Extensiones:
 **Descripción:** El sistema ejecuta el ciclo de facturación programado (día 1 de cada mes o día de alta) generando y enviando el documento de cobro al cliente.
 
 **Precondiciones:** El cliente tiene una suscripción activa.
+
+**disparador** El reloj del sistema alcanza el limite o se confirma un nuevo alta 
 
 **Garantía de éxito:** La factura se emite, se almacena el PDF íntegro y se envía al cliente en menos de 1 minuto.
 
@@ -282,6 +296,8 @@ Extensiones:
 **Descripción:** Generar una factura, guardar su PDF y enviarla al cliente. Incluye facturas puntuales, recurrentes y rectificativas.  
 
 **Precondiciones:** El usuario está autenticado y autorizado; existe la ficha del cliente. Si es una rectificativa, debe existir la factura original.
+
+**disparador** Se detecta un error o anulación sobre una factura ya emitida y solicita rectificarla.
 
 **Garantía de éxito:** La factura y su PDF quedan guardados y asociados al cliente; se realiza el envío y se registra su resultado.
 
