@@ -118,7 +118,6 @@ admin -- CU17
 admin -- CU13
 CU13 ..> CU07 : <<dependency>>
 admin -- CU02
-admin -- CU03
 
 lector -- CU03
 lector -- CU11
