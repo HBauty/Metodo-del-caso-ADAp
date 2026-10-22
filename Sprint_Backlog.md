@@ -195,3 +195,21 @@ Se han completado todas las tareas, hemos revisado e incluido todo lo que conlle
 No ha habido graves problemas en este sprint, se implementaron los requisitos primero de forma muy rápida y posteriormente se ampliaron los casos de uso y su diagrama. El flujo de trabajo, como anteriormente, ha sido muy rápido y se han realizado sesiones de trabajo conjunto entre todos los compañeros para refinar el proyecto completo.
 
 ---
+
+## SPRINT 3
+### Sesión organizativa 22/10
+
+### Asistentes
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
+
+### Duración
+1 h
+
+### Sprint planning
+El sprint durará una semana. En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
+
+### Tareas
+- [ ] Identificar clases, enumerados y componentes para el diagrama *(por decidir)*
+- [ ] Establecer métodos para cada clase o interfaz identificada *(por decidir)*
+- [ ] Poner relaciones de herencia (si es necesario) entre clases *(por decidir)*
+- [ ] Revisar feedback del profesor *(todos)*
