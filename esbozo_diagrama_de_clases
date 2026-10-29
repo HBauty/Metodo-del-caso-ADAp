@@ -1,0 +1,277 @@
++----------------------------------------------------------------------------+
+
+|                               UsuarioInterno                               |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - nombre: String                                                           |
+| - email: String (dominio de la empresa)                                    |
+| - activo: Boolean                                                          |
++----------------------------------------------------------------------------+
+
+| + autenticar(): Boolean                                                    |
+| + desactivarCuenta(): Void //FR4                                           |
++----------------------------------------------------------------------------+
+                                      ^
+                                      | (Herencia)
+             +------------------------+
+
+             |                                                 
++----------------------------+      
+|           Lector           |   
++----------------------------+      
+
+|                            |      
++----------------------------+    
+
+| + crearFicha(cliente)      |     
+| + consultarFicha(c)        |     
+| + editarFicha(c)           |     
+| + borrarLogicoFicha(c)     |     
+| + crearFacturaManual(fac)  |      
+| + revisarDiferenciaPago(f) |      
++----------------------------+
+
+	            ^
+              | (Herencia)
+              |
++----------------------------+
+|       Administrador        |
++----------------------------+
+
+|                            |
++----------------------------+
+
+| + registrarLector(lector)  |
+| + asignarCliente(l, c)     |
+| + eliminarCliente(l,c)     |
+| + aprobarFactura(f) //FR23 |
+| + consultarInformes()      |
++----------------------------+
+
+	            ^
+              | (Herencia)
+              |
++----------------------------+
+|     Superadministrador     |
++----------------------------+
+
+|                            |
++----------------------------+
+
+| + crearAdministrador(a)    |
+| + modificarPlantilla(p)    |
+| + modificarConfigSistema() |
+| + configurarRecordatorios()|
++----------------------------+
+
+
+
+
+
+
+
+
++----------------------------------------------------------------------------+
+
+|                                  Cliente                                   |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - nombreEmpresa: String                                                    |
+| - nombreComercial: String                                                  |
+| - razonSocial: String                                                      |
+| - pais: String                                                             |
+| - moneda: String                                                           |
+| - nifOIdentificadorInternacional: String (Índice único para FR8)           |
+| - direccion: String                                                        |
+| - datosContacto: String                                                    |
+| - fechaContratacion: Date                                                  |
+| - tarifaAcordada: Decimal (NFR9)                                           |
+| - condicionesPagoParticulares: String                                      |
+| - estadoFicha: EstadoFicha {ACTIVO, PAUSADO, BAJA_LOGICA, ELIMINADO_LEGAL} |
+| - etiquetas: List<String> (FR11)                                           |
+| - lectorAsignadoId: UUID (FR2)                                             |
+| - version: Integer (NFR8)                                                  |
++----------------------------------------------------------------------------+
+
+| + asociarDocumentoExterno(doc): Void (FR9)                                 |
+| + pausarSuscripcion(motivo, fechaIni, fechaFin): Void (FR6)                |
+| + tramitarBaja(): Void (FR5)                                               |
+| + reactivarFicha(): Void (FR8)                                             |
+| + fusionarDuplicado(clienteOrigenId): Void (FR8 - Auditado)                |
+| + agregarEtiqueta(etiqueta): Void                                          |
++----------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++----------------------------------------------------------------------------+
+
+|                                  Factura                                   |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - numeroFactura: String (Serie + Numeración correlativa)                   |
+| - fechaEmision: Date                                                       |
+| - fechaVencimiento: Date                                                   |
+| - tipoFactura: TipoFactura {RECURRENTE, PUNTUAL, PROPORCIONAL}             |
+| - estadoFactura: EstadoFactura {BORRADOR, EMITIDA, PAGADA, DIFERENCIA_PENDIENTE, SEGUIMIENTO_PAUSADO}|
+| - subtotal: Decimal (NFR9)                                                 |
+| - porcentajeIVA: Decimal (NFR9)                                            |
+| - importeIVA: Decimal (NFR9)                                               |
+| - importeTotal: Decimal (NFR9)                                             |
+| - urlPdfAlmacenado: String                                                 |
+| - hashPdfSha256: String (NFR12)                                            |
+| - version: Integer (NFR8)                                                  |
++----------------------------------------------------------------------------+
+
+| + calcularTotales(): Void (Garantiza NFR9)                                 |
+| + generarPdfEstandar(): String (Retorna la URL del PDF / FR12)             |
+| + enviarPorEmail(): Boolean (FR12)                                         |
+| + pausarSeguimiento(motivoInterno, fechaLimite): Void (FR21)               |
+| + registrarIncidenciaEntrega(): Void (FR20)                                |
++----------------------------------------------------------------------------+
+                                      ^
+                                      | (Asociación / Extensión)
++----------------------------------------------------------------------------+
+
+|                             FacturaRectificativa                           |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - facturaOriginalId: UUID (FR13)                                           |
+| - motivoModificacion: String                                               |
+| - importeRectificado: Decimal (NFR9)                                       |
++----------------------------------------------------------------------------+
+
+| + vincularDocumentoOriginal(facturaId): Void                               |
++----------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
+
+
++----------------------------------------------------------------------------+
+
+|                             MovimientoConciliado                           |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - pasarelaOrigen: String (Ej: "Stripe" / FR17)                             |
+| - idTransaccionExterna: String                                             |
+| - importeRecibido: Decimal (NFR9)                                          |
+| - fechaMovimiento: Date                                                    |
++----------------------------------------------------------------------------+
+
+| + consultarFuenteExterna(facturaId): List<MovimientoConciliado> (FR17)     |
+| + conciliarFactura(factura): Void (Aplica lógica de no cascada / FR17)     |
++----------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
+
+
++----------------------------------------------------------------------------+
+
+|                           ComunicacionRecordatorio                         |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - facturaId: UUID                                                          |
+| - destinatarioEmail: String (NFR12)                                        |
+| - fechaEnvio: Date                                                         |
+| - tipoTono: TonoReclamacion {AMISTOSO, FORMAL, URGENTE} (FR27)             |
+| - resultadoEntrega: EstadoEntrega {ENTREGADO, FALLIDO} (FR18, FR20)        |
++----------------------------------------------------------------------------+
+
+| + programarSiguienteRecordatorio(diasRetraso): Void (FR19, FR27)           |
+| + enviarReclamacionAutomatica(): Void (FR27)                               |
++----------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
++----------------------------------------------------------------------------+
+
+|                             RegistroAuditoria                              |
++----------------------------------------------------------------------------+
+
+| - id: UUID                                                                 |
+| - timestamp: DateTime                                                      |
+| - usuarioId: UUID                                                          |
+| - accionEfectuada: String                                                  |
+| - entidadAfectada: String                                                  |
+| - idEntidadAfectada: UUID                                                  |
+| - detalleCambio: String (Valores anteriores y nuevos)                      |
++----------------------------------------------------------------------------+
+
+| + registrarEvento(usuario, accion, entidad, detalle): Void                 |
+|   (Nota de arquitectura: Implementado como estructura Append-Only / NFR13) |
++----------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
+
+
+
++----------------------------------------------------------------------------+
+
+|                              ModuloServicios                               |
+|          (Clases controladoras / Tareas en segundo plano asíncronas)       |
++----------------------------------------------------------------------------+
+
+| + ProcesadorLotesDía1 (NFR3)                                               |
+|   - ejecutarGeneracionMasivaRecurrentes(): Void                            |
+|   - aislarYRegistrarErrorFactura(facturaId, error): Void                   |
++----------------------------------------------------------------------------+
+
+| + MotorAlertasYPatrones (FR14)                                             |
+|   - evaluarDesviacionConsumoHistorico(clienteId, importeTotal): Boolean     |
+|   - emitirAlertaVisualAnomalia(facturaId): Void                            |
++----------------------------------------------------------------------------+
+
+| + GestorInformesYRevisiones (FR24)                                         |
+|   - obtenerPanelFinanciero(periodo): DatosDashboard                        |
+|   - simularPropuestaRevisionAnual(clienteId): Decimal                      |
++----------------------------------------------------------------------------+
+
+| + ExportadorMasivoZIP (FR28)                                               |
+|   - generarPaquetePeriodo(frecuencia): ArchivoZIP                          |
++----------------------------------------------------------------------------+
+
+| + ApiBajaExterna (FR25)                                                    |
+|   - consultarFacturasPendientesBaja(clienteId): List<Factura>              |
++----------------------------------------------------------------------------+
+
+
