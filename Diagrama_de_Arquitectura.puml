@@ -1,0 +1,129 @@
+@startuml TurbineH_arquitectura
+' UTF-8. Diagrama autocontenido, sin includes ni dependencias remotas.
+' Fuentes: Requisitos.md, Formalizacion_casos_de_uso.md,
+' Diagrama_de_Clases.puml y Sesion 1.7 de modelado arquitectonico.
+' Propuesta: arquitectura en capas, backend modular y trabajador asincrono.
+' Los modulos pertenecen a la misma aplicacion, no son microservicios.
+' Cada conector visible nombra el contrato/interfaz y su mecanismo.
+' Una flecha indica quien invoca o entrega; el retorno usa la misma interfaz.
+
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam ArrowFontSize 12
+skinparam ArrowColor #475569
+skinparam componentStyle uml2
+skinparam packageStyle rectangle
+skinparam nodesep 60
+skinparam ranksep 65
+skinparam component {
+  BackgroundColor #EFF6FF
+  BorderColor #334155
+}
+skinparam database {
+  BackgroundColor #FEF3C7
+  BorderColor #92400E
+}
+
+title TurbineH - Arquitectura de componentes
+
+actor "Usuario interno\nLector / Admin / Superadmin" as USUARIO
+
+component "Interfaz web\nNavegador, móvil o PC" as WEB #DBEAFE
+
+component "Backend modular de TurbineH" as APP #F8FAFC {
+  component "Acceso y usuarios\nSesiones, roles y permisos" as ACCESO #DBEAFE
+  component "Gestión administrativa\nClientes, suscripciones e informes" as GESTION #DCFCE7
+  component "Facturación y cobros\nFacturas, PDF y conciliación" as FACTURACION #FCE7F3
+  component "Comunicaciones\nAvisos e incidencias" as COMUNICACIONES #EDE9FE
+}
+
+component "Procesamiento en segundo plano\nPlanificador y trabajador" as TRABAJADOR #CFFAFE
+database "Base de datos de TurbineH\nDatos, auditoría, PDF y trabajos" as BD
+
+component "Stripe\nFuente de movimientos" as STRIPE <<externo>> #F1F5F9
+component "Proveedor de correo" as CORREO <<externo>> #F1F5F9
+actor "Cliente externo\nRecibe comunicaciones" as CLIENTE
+
+' Entrada principal y operaciones interactivas.
+USUARIO -down-> WEB : 1. IInteraccionWeb\nHTML / HTTPS
+WEB -down-> ACCESO : 2. IAcceso\nHTTPS / JSON
+WEB -down-> GESTION : 3a. IGestion\nHTTPS / JSON
+WEB -down-> FACTURACION : 3b. IFacturacion\nHTTPS / JSON
+WEB -down-> COMUNICACIONES : 3c. IComunicaciones\nHTTPS / JSON
+
+' Colaboraciones dentro del mismo backend.
+GESTION -right-> FACTURACION : IConsultaDeudas\nAPI interna autorizada
+FACTURACION -right-> COMUNICACIONES : IComunicaciones\nPreparar aviso / llamada interna
+
+' Interfaces de infraestructura requeridas por el backend en su conjunto.
+' El conector sale del limite del backend para evitar repetir una flecha
+' de persistencia por cada modulo. No significa acceso desde el navegador.
+APP -down-> BD : IPersistencia / AlmacenDocumentos / ColaPersistente\nSQL transaccional: datos, PDF y salida pendiente
+
+' La cola duradera se implementa sobre la misma BD para limitar componentes.
+' El trabajador reutiliza los mismos servicios y reglas del backend.
+TRABAJADOR -down-> BD : ColaPersistente\nSQL: reservar, confirmar y reintentar
+TRABAJADOR ..> APP : IGestion / IFacturacion / IComunicaciones\nDespacho interno según tipo de trabajo
+
+' Integraciones externas: toda conexion explicita su interfaz.
+FACTURACION -down-> STRIPE : PasarelaPagos\nHTTPS / API de Stripe
+COMUNICACIONES -down-> CORREO : ProveedorCorreo\nHTTPS: enviar y consultar entrega
+CORREO -down-> CLIENTE : IEntregaCorreo\nEmail: facturas y recordatorios
+
+note right of WEB
+  La web concentra las funciones del empleado.
+  El cliente externo recibe correo, sin iniciar sesión.
+end note
+
+note bottom of ACCESO
+  Cada operación del backend comprueba en servidor
+  sesión, rol y permiso por cliente mediante IAcceso.
+end note
+
+note bottom of BD
+  Emisión y trabajo de envío en una transacción.
+  PDF inmutable y verificación SHA-256.
+  Auditoría de solo inserción.
+end note
+
+legend bottom
+  1: entrar por la web. 2: autenticar. 3a / 3b / 3c: elegir una función.
+  Línea continua: invocación. Línea discontinua: ejecución en segundo plano.
+  Las respuestas regresan por la misma interfaz; no se duplican las flechas.
+  El trabajador atiende cuotas, cobros, avisos y revisiones sin bloquear la web.
+  Las interfaces de persistencia pertenecen al backend y al trabajador.
+endlegend
+
+' Trazabilidad con el modelo de clases, sin añadir clases de negocio:
+' ACCESO: ServicioAcceso, Usuario, Sesion y AsignacionCliente.
+' GESTION: ServicioClientes, ServicioSupervision, Cliente, Contacto,
+' Etiqueta, Suscripcion, Tarifa, RevisionAnual, Nota, TareaInterna,
+' ConfiguracionSistema y Plantilla. FuenteVolumenSimulada es interna.
+' FACTURACION: ServicioFacturacion, ServicioCobros, ApiBajas, Factura,
+' LineaFactura, SerieFacturacion, Aprobacion, MovimientoPago y Documento.
+' COMUNICACIONES: ServicioComunicaciones, Comunicacion, IntentoEnvio,
+' IncidenciaEntrega; solicita tareas internas y usa los PDF ya guardados.
+' TRABAJADOR: Planificador, TrabajoAsincrono y adaptador de ColaPersistente.
+' BD: repositorios, RegistroAuditoria y adaptadores de AlmacenDocumentos
+' y ColaPersistente. BLOB inmutable para PDF; no se impone un SGBD.
+' STRIPE: AdaptadorStripe realiza PasarelaPagos.
+' CORREO: proveedor intercambiable mediante ProveedorCorreo.
+'
+' IGestion agrupa contratos de clientes, suscripciones y supervision.
+' IFacturacion agrupa contratos de facturas, excepciones y cobros.
+' IConsultaDeudas corresponde a ApiBajas.consultarFacturasPendientes.
+' Son contratos de los servicios existentes, no nuevas clases del dominio.
+'
+' Restricciones: sin acceso directo web-BD; backend independiente de Brain;
+' validacion fiscal y aprobaciones previas a emitir; rectificativas para
+' corregir facturas emitidas; Decimal para dinero y control por version.
+' Recordatorios configurables, errores aislados y claves de idempotencia.
+' ACEPTADO por el proveedor no significa ENTREGADO. Consultar el estado;
+' solo un fallo confirmado permite reenvio y abre una incidencia.
+' Guardar secretos recuperables cifrados fuera del repositorio, contrasenas
+' con hash seguro; copias y restauraciones probadas, retencion por categoria.
+
+@enduml
