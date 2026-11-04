@@ -1,0 +1,141 @@
+@startuml TurbineH_clases
+' Vista general del mismo modelo desarrollado en las vistas de detalle.
+' Solo se muestran clases centrales y operaciones representativas.
+' UTF-8. Vista autocontenida: no necesita includes ni archivos externos.
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam classAttributeIconSize 0
+skinparam nodesep 55
+skinparam ranksep 65
+skinparam ArrowColor #64748B
+skinparam class {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+  BackgroundColor<<referencia>> #E2E8F0
+  BackgroundColor<<servicio>> #DBEAFE
+  BackgroundColor<<control>> #E0E7FF
+  BackgroundColor<<adaptador>> #DCFCE7
+  BackgroundColor<<inmutable>> #FEF3C7
+}
+hide empty members
+
+title TurbineH - Vista general de clases
+
+class Usuario #DBEAFE {
+  - rol: Rol [0..1]
+  - estado: EstadoUsuario
+  + desactivar(): void
+}
+class AsignacionCliente #DBEAFE {
+  - permisos: Set<Permiso>
+  - desde: DateTime
+  - hasta: DateTime [0..1]
+  + estaVigente(ahora: DateTime): Boolean
+}
+class Cliente #DCFCE7 {
+  - identificadorFiscal: String
+  - moneda: String
+  - estado: EstadoCliente
+  + solicitarBaja(fecha: DateTime): void
+  + reactivar(): void
+}
+class Suscripcion #FFEDD5 {
+  - cuotaMensualAcordada: Decimal
+  - estado: EstadoSuscripcion
+  - proximaEmision: Date [0..1]
+  + pausar(motivo: String, inicio: Date, retorno: Date [0..1]): void
+  + cancelar(fecha: DateTime): void
+}
+class Tarifa #FFEDD5 {
+  - plan: String
+  - rangoAnualDesde: Decimal
+  - rangoAnualHasta: Decimal [0..1]
+  - precioMensual: Decimal
+}
+class RevisionAnual #FFEDD5 {
+  - cuotaPropuesta: Decimal
+  - efectivaDesde: Date
+  - estado: EstadoDecision
+  + aprobar(actor: Usuario, motivo: String): void
+}
+class Factura #FCE7F3 {
+  - tipo: TipoFactura
+  - estadoEmision: EstadoEmision
+  - estadoCobro: EstadoCobro
+  - seguimientoPausado: Boolean
+  - total: Decimal
+  + calcularTotales(): void
+  + actualizarEstadoCobro(): void
+}
+class LineaFactura #FCE7F3 {
+  - concepto: String
+  - cantidad: Decimal
+  - precioUnitario: Decimal
+  - impuestoPorcentaje: Decimal
+  + calcular(): Decimal
+}
+class Aprobacion #FCE7F3 {
+  - estado: EstadoDecision
+  - hashPropuesta: String
+  + aprobar(actor: Usuario, justificacion: String): void
+}
+class MovimientoPago #FCE7F3 {
+  - idExterno: String
+  - importe: Decimal
+  - estado: EstadoMovimiento
+  + compararImporte(): Decimal
+}
+class Documento #FEF3C7 {
+  - tipo: TipoDocumento
+  - sha256: String
+  + verificarIntegridad(bytes: Binary): Boolean
+}
+class Comunicacion #EDE9FE {
+  - tipo: TipoComunicacion
+  - /estadoEntrega: EstadoEntrega
+  + estaEntregada(): Boolean
+}
+class IncidenciaEntrega #EDE9FE {
+  - proximoReintento: DateTime [0..1]
+  - resueltaEn: DateTime [0..1]
+  + resolver(entregaConfirmada: Boolean): void
+}
+
+Usuario "1" -- "0..*" AsignacionCliente : empleado
+Cliente "1" -- "0..*" AsignacionCliente : accesos delegados
+Cliente "1" -- "0..*" Suscripcion : acuerdos
+Cliente "1" -- "0..*" Factura : facturas
+Suscripcion "0..*" --> "1" Tarifa : tarifa de referencia
+Suscripcion "1" -- "0..*" RevisionAnual : revisión del precio
+Suscripcion "0..1" <-- "0..*" Factura : origen recurrente
+Factura "1" *-- "1..*" LineaFactura : detalle
+Factura "0..*" --> "0..1" Factura : original rectificada
+Factura "0..1" <-- "0..*" Aprobacion : objetivo financiero
+Suscripcion "0..1" <-- "0..*" Aprobacion : objetivo comercial
+Factura "0..1" <-- "0..*" MovimientoPago : cobros individuales
+Factura "0..1" --> "0..1" Documento : PDF definitivo
+Suscripcion "0..*" -- "0..*" Documento : contratos
+Comunicacion "0..*" -- "1..*" Factura : comunica
+Comunicacion "1" -- "0..*" IncidenciaEntrega : fallos confirmados
+
+note bottom of Aprobacion
+  Objetivo: Factura o Suscripcion, exactamente uno.
+  Solo administración aprueba excepciones.
+end note
+
+note bottom of Factura
+  Emitida: contenido y PDF inmutables.
+  Correcciones mediante rectificativa vinculada.
+  Emisión, cobro y seguimiento son independientes.
+end note
+
+legend bottom
+  Vista general: clases esenciales; atributos y operaciones seleccionados.
+  El mismo modelo se amplía en cuatro vistas de detalle y una de enumeraciones.
+  Decimal para dinero. Multiplicidades en los extremos.
+  Composición solo para las líneas; los históricos tienen vida independiente.
+endlegend
+@enduml
