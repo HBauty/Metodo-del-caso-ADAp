@@ -44,10 +44,20 @@ activate auth
 auth --> sys : Permisos autorizados
 deactivate auth
 
-sys -> db : 7. Actualizar datos de clientes
+sys -> sys : Validar Cambios
+
+sys -> db : 7. Guardar datos de clientes
+activate db
+db --> sys : Guardado correcto
+deactivate db
 
 participant ":Log de Auditoría" as audit
 
-sys -> audit : Registrar cambios
+sys -> audit : 8.Registrar cambios
+activate audit
+audit --> sys : Cambios registrados correctamente
+deactivate audit
 
+sys --> admin : Devolver Confirmación
+deactivate sys
 @enduml
