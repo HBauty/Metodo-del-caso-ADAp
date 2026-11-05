@@ -45,11 +45,11 @@
 | + registrarLector(lector)  |
 | + asignarCliente(l, c)     |
 | + eliminarCliente(l,c)     |
-| + aprobarFactura(f) //FR23 |
+| + aprobarFactura(f)        |
 | + consultarInformes()      |
 +----------------------------+
 
-	            ^
+	          ^
               | (Herencia)
               |
 +----------------------------+
@@ -98,8 +98,7 @@
 | + asociarDocumentoExterno(doc): Void (FR9)                                 |
 | + pausarSuscripcion(motivo, fechaIni, fechaFin): Void (FR6)                |
 | + tramitarBaja(): Void (FR5)                                               |
-| + reactivarFicha(): Void (FR8)                                             |
-| + fusionarDuplicado(clienteOrigenId): Void (FR8 - Auditado)                |
+| + reactivarFicha(): Void (FR8)                                             |              |
 | + agregarEtiqueta(etiqueta): Void                                          |
 +----------------------------------------------------------------------------+
 
@@ -130,7 +129,7 @@
 | - estadoFactura: EstadoFactura {BORRADOR, EMITIDA, PAGADA, DIFERENCIA_PENDIENTE, SEGUIMIENTO_PAUSADO}|
 | - subtotal: Decimal (NFR9)                                                 |
 | - porcentajeIVA: Decimal (NFR9)                                            |
-| - importeIVA: Decimal (NFR9)                                               |
+| - importeIVA: Decimal (NFR9)          esto lo quitaba                      |
 | - importeTotal: Decimal (NFR9)                                             |
 | - urlPdfAlmacenado: String                                                 |
 | - hashPdfSha256: String (NFR12)                                            |
