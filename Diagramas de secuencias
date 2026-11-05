@@ -1,0 +1,54 @@
+CU0 Registrarse en el sistema 
+
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": Empleado" as emp
+participant ": InterfazRegistro" as ui
+participant ": ControladorRegistro" as ctrl
+participant ": DataBase" as db
+participant ": Usuario" as usr
+participant ": ServicioEmail" as email
+
+emp -> ui : 1: SolicitarCreacionPerfil()
+activate ui
+ui --> emp : MostrarFormulario()
+deactivate ui
+
+emp -> ui : 2: RegistrarEmpleado(nombre, correo, clave)
+activate ui
+
+ui -> ctrl : 3: ProcesarAlta(nombre, correo, clave)
+activate ctrl
+
+ctrl -> ctrl : 4: ValidarDominioCorporativo(correo)
+
+ctrl -> db : 5: ComprobarCorreoExistente(correo)
+activate db
+db --> ctrl : False (no existe de antemano)
+deactivate db
+
+create usr
+ctrl --> usr : 6: CrearUsuario(nombre, correo, clave, "PENDIENTE_ROLES")
+
+ctrl -> db : 7: GuardarUsuario(usr)
+activate db
+db --> ctrl : True
+deactivate db
+
+ctrl ->> email : 8: enviarNotificacionAdministracion(correo)
+
+ctrl -> db : 10: GuardarRegistroAuditoria(audit)
+activate db
+db --> ctrl : True
+deactivate db
+
+ctrl --> ui : True
+deactivate ctrl
+
+ui --> emp : ConfirmarRealizacionProceso()
+deactivate ui
+
+@enduml
+
