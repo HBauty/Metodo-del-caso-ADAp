@@ -25,22 +25,56 @@ hide empty members
 title TurbineH - Vista general de clases
 
 class Usuario #DBEAFE {
-  - rol: Rol [0..1]
+  - id: UUID
+  - nombre: String 
+  - email: String
   - estado: EstadoUsuario
+  + autenticar(): Boolean
   + desactivar(): void
 }
-class AsignacionCliente #DBEAFE {
-  - permisos: Set<Permiso>
-  - desde: DateTime
-  - hasta: DateTime [0..1]
-  + estaVigente(ahora: DateTime): Boolean
+class Lector #DBEAFE {
++ crearFicha(cliente)    
+ + consultarFicha(c)        
+ + editarFicha(c)            
+ + borrarLogicoFicha(c)       
+ + crearFacturaManual(fac)      
+ + revisarDiferenciaPago(f)
+}
+class administrador #DBEAFE {
++ registrarLector(lector)  
++ asignarCliente(l, c)     
++ eliminarCliente(l,c)    
++ aprobarFactura(f) 
++ consultarInformes() 
+}
+class superadministrador #DBEAFE {
++ crearAdministrador(a)   
++ modificarPlantilla(p)    
++ modificarConfigSistema() 
++ configurarRecordatorios() 
 }
 class Cliente #DCFCE7 {
-  - identificadorFiscal: String
-  - moneda: String
-  - estado: EstadoCliente
-  + solicitarBaja(fecha: DateTime): void
-  + reactivar(): void
+  - id: UUID                                                                 
+ - nombreEmpresa: String                                                    
+ - nombreComercial: String                                                  
+ - razonSocial: String                                                      
+ - pais: String                                                             
+ - moneda: String                                                           
+ - nifOIdentificadorInternacional: String            
+ - direccion: String                                                        
+ - datosContacto: String                                                    
+ - fechaContratacion: Date                                                  
+ - tarifaAcordada: Decimal                                            
+ - condicionesPagoParticulares: String                                      
+ - estadoFicha: EstadoFicha {ACTIVO, PAUSADO, BAJA_LOGICA, ELIMINADO_LEGAL} 
+ - etiquetas: List<String>                                            
+ - lectorAsignadoId: UUID                                              
+ - version: Integer    
+  + asociarDocumentoExterno(doc): Void (FR9)                                 
+  + pausarSuscripcion(motivo, fechaIni, fechaFin): Void (FR6)                
+  + tramitarBaja(): Void (FR5)                                               
+  + reactivarFicha(): Void (FR8)                                                         
+  + agregarEtiqueta(etiqueta): Void 
 }
 class Suscripcion #FFEDD5 {
   - cuotaMensualAcordada: Decimal
@@ -62,12 +96,23 @@ class RevisionAnual #FFEDD5 {
   + aprobar(actor: Usuario, motivo: String): void
 }
 class Factura #FCE7F3 {
-  - tipo: TipoFactura
-  - estadoEmision: EstadoEmision
-  - estadoCobro: EstadoCobro
-  - seguimientoPausado: Boolean
-  - total: Decimal
-  + calcularTotales(): void
+  - id: UUID                                                                 
+  - numeroFactura: String                   
+  - fechaEmision: Date                                                        
+  - fechaVencimiento: Date                                                   
+  - tipoFactura: TipoFactura {RECURRENTE, PUNTUAL, PROPORCIONAL}             
+  - estadoFactura: EstadoFactura {BORRADOR, EMITIDA, PAGADA, DIFERENCIA_PENDIENTE, SEGUIMIENTO_PAUSADO}
+  - subtotal: Decimal                                                 
+  - porcentajeIVA: Decimal                                             
+ - importeIVA: Decimal                                
+- importeTotal: Decimal                                             
+- urlPdfAlmacenado: String                                                 
+- hashPdfSha256: String                                             
+  + calcularTotales(moneda): Void                                
+  + generarPdfEstandar(): String             
+  + enviarPorEmail(): Boolean                                         
+  + pausarSeguimiento(motivoInterno, fechaLimite): Void               
+  + registrarIncidenciaEntrega(): Void 
   + actualizarEstadoCobro(): void
 }
 class LineaFactura #FCE7F3 {
@@ -104,7 +149,9 @@ class IncidenciaEntrega #EDE9FE {
   + resolver(entregaConfirmada: Boolean): void
 }
 
-Usuario "1" -- "0..*" AsignacionCliente : empleado
+Usuario "1" <-- "1..*" Lector : hereda de
+administrador "1..*" --> "1..*" Lector : hereda de
+superadministrador "1" --> "1" administrador : hereda de
 Cliente "1" -- "0..*" AsignacionCliente : accesos delegados
 Cliente "1" -- "0..*" Suscripcion : acuerdos
 Cliente "1" -- "0..*" Factura : facturas
