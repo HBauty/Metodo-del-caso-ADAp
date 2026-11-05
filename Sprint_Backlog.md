@@ -223,5 +223,5 @@ Hugo, Jose, Aquiles, Gabriel, Rosales, Ángel
 1 h y 45 min
 
 ### Tareas
-- [x] Refactorizar diagramas de clases *(Rosales y Gabriel)*
+- [x] Refactorizar diagramas de clases *(Rosales, Gabriel y Ángel)*
 - [x] Realizar diagramas de secuencia *(Hugo, Jose, Aquiles)*
