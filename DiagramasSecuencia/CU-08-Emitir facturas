@@ -32,10 +32,10 @@ sys -> factura : 5. Almacenar Factura
 activate factura
 factura --> sys : Factura Almacenada
 
-sys -> cliente : 6. Enviar factura por e-mail
-activate cliente
-cliente --> sys : Enviar confirmación
-deactivate cliente
+sys -> client : 6. Enviar factura por e-mail
+activate client
+client --> sys : Enviar confirmación
+deactivate client
 
 sys -> factura : 7. Cambiar estado a enviada e Iniciar contador de 5 días
 deactivate factura
