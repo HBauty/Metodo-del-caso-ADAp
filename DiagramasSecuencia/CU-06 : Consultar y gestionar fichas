@@ -1,0 +1,53 @@
+
+@startuml
+title CU-06: Consultar y gestionar fichas de clientes e historial
+
+actor "Administrador / Lector asignado" as admin
+
+participant ":Sistema de gestión" as sys
+participant ":Control de permisos" as auth
+database "Base de datos" as db
+
+
+admin -> sys : 1. Aplicar filtros de búsqueda
+activate sys
+
+sys -> auth : Comprobar permisos de consulta
+activate auth
+auth --> sys : Permisos y clientes autorizados
+deactivate auth
+
+sys -> db : 2. Buscar clientes autorizados\n(aplicando filtros)
+activate db
+db --> sys : Lista de clientes
+deactivate db
+
+sys --> admin : 3. Mostrar resultados
+
+admin -> sys : 4. Consultar ficha de cliente
+
+sys -> auth : Comprobar acceso a la ficha
+activate auth
+auth --> sys : Acceso permitido
+deactivate auth
+
+sys -> db : 5. Obtener ficha e historial
+activate db
+db --> sys : Fichas e historial
+deactivate db
+
+sys --> admin : Mostrar ficha e historial
+
+admin -> sys : 6. Modificar Datos de cliente
+sys -> auth : Comprobar permisos de edición
+activate auth
+auth --> sys : Permisos autorizados
+deactivate auth
+
+sys -> db : 7. Actualizar datos de clientes
+
+participant ":Log de Auditoría" as audit
+
+sys -> audit : Registrar cambios
+
+@enduml
