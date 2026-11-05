@@ -1,3 +1,9 @@
+## Reparto de Casos de uso para Diagramas de Secuencia
+
+**Jose:** CU-00 a CU-05
+**Aquiles:** CU-06 a CU-12
+**Hugo:** CU-13 a CU-17
+
 ## CU-00: Registrarse en el sistema (Alta de empleado)
 
 **Actor principal:** Empleado(administrador) o Usuario de la app.
