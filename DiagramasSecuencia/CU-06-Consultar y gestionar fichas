@@ -47,9 +47,11 @@ deactivate auth
 sys -> sys : Validar Cambios
 
 sys -> db : 7. Guardar datos de clientes
+
+alt No hay conflicto de concurrencia
+
 activate db
 db --> sys : Guardado correcto
-deactivate db
 
 participant ":Log de Auditoría" as audit
 
@@ -59,5 +61,17 @@ audit --> sys : Cambios registrados correctamente
 deactivate audit
 
 sys --> admin : Devolver Confirmación
+
+else Hay conflicto de concurrencia
+
+db --> sys : Conflicto de versiones
+sys --> admin : Avisar de conflicto y solicitar recarga
+
+end
+
+deactivate db
+
 deactivate sys
+
+
 @enduml
