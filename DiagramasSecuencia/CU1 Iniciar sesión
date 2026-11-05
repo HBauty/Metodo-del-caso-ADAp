@@ -1,0 +1,52 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": Usuario" as act
+participant ": InterfazLogin" as ui
+participant ": ControladorAuth" as ctrl
+participant ": DataBase" as db
+participant ": Usuario" as usr
+
+act -> ui : 1: IniciarSesion(correo, contraseña)
+activate ui
+
+ui -> ctrl : 2: Autenticar(correo, contraseña)
+activate ctrl
+
+ctrl -> ctrl : 3: VerificarDominioCorporativo(correo)
+
+ctrl -> db : 4: ObtenerUsuario(correo)
+activate db
+
+alt #LightGreen Usuario existe en el sistema
+    create usr
+    db --> usr : 5: CrearUsuario
+    db --> ctrl : Usuario
+    deactivate db
+
+    ctrl -> usr : 6: ValidarCredencialesYEstado(contraseña)
+    activate usr
+    usr --> ctrl : True (Cuenta activa y clave válida)
+    deactivate usr
+
+    ctrl -> usr : 7: ObtenerRolYPermisos()
+    activate usr
+    usr --> ctrl : rol, modulos, clientesAsignados
+    deactivate usr
+
+    ctrl --> ui : 8: AccesoConcedido(rol, modulos, clientesAsignados)
+    ui --> act : 9: CargarEntornoRestringido(modulos, clientesAsignados)
+
+else #Pink Usuario NO existe (Fin de secuencia)
+    db --> ctrl : null (Usuario no encontrado)
+    deactivate db
+    
+    ctrl --> ui : ErrorUsuarioNoExiste()
+    deactivate ctrl
+    
+    ui --> act : InformarUsuarioNoRegistrado()
+    deactivate ui
+end
+
+@enduml
