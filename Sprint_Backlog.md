@@ -213,3 +213,15 @@ El sprint durará una semana. En este sprint, la tarea principal será construir
 - [ ] Establecer métodos para cada clase o interfaz identificada *(por decidir)*
 - [ ] Poner relaciones de herencia (si es necesario) entre clases *(por decidir)*
 - [ ] Revisar feedback del profesor *(todos)*
+
+### Sesión de trabajo 5/11
+
+### Asistentes
+Hugo, Jose, Aquiles, Gabriel, Rosales
+
+### Duración 
+1 h y 45 min
+
+### Tareas
+- [x] Refactorizar diagramas de clases *(Rosales y Gabriel)*
+- [x] Realizar diagramas de secuencia *(Hugo, Jose, Aquiles)*
