@@ -1,0 +1,10 @@
+@startuml
+actor Administrador
+actor Cliente
+Administrador -> IncidenciaEntrega : getUltimaIncidencia()
+alt EXISTE UNA INCIDENCIA
+IncidenciaEntrega -> Administrador : incidencia
+Administrador -> Administrador: analiza la incidencia
+Administrador -> Cliente: Entrega manual de la factura rectificada
+Administrador -> IncidenciaEntrega : eliminarUltimaIncidencia()
+@enduml
