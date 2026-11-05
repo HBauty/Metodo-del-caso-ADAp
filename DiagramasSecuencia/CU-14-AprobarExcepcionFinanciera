@@ -1,0 +1,13 @@
+@startuml
+actor Administrador
+actor Cliente
+Cliente -> Administrador: Solicita excepción financiera
+Cliente -> Administrador: nuevaTarifa
+alt APRUEBA EXCEPCION
+Administrador -> ClassCliente: getSuscripcion()
+ClassCliente -> Administrador: Suscripcion
+Administrador -> Suscripcion: setTarifa(nuevaTarifa: Decimal)
+Administrador -> ClassCliente: setSuscripcion(nuevaSuscripcion: Suscripcion)
+else DENIEGA EXCEPCION
+Administrador -> Cliente: Solicitud denegada
+@enduml
