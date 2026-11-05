@@ -1,0 +1,63 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": Empleado" as emp
+participant ": InterfazRegistro" as ui
+participant ": ControladorRegistro" as ctrl
+participant ": DataBase" as db
+participant ": Usuario" as usr
+participant ": ServicioEmail" as email
+emp -> ui : 1: SolicitarCreacionPerfil()
+activate ui
+ui --> emp : MostrarFormulario()
+deactivate ui
+
+emp -> ui : 2: RegistrarEmpleado(nombre, correo, clave)
+activate ui
+
+ui -> ctrl : 3: ProcesarAlta(nombre, correo, clave)
+activate ctrl
+
+ctrl -> ctrl : 4: ValidarDominioCorporativo(correo)
+
+alt #LightGreen Dominio válido (@turbine...)
+    ctrl -> db : 5: ComprobarCorreoExistente(correo)
+    activate db
+    db --> ctrl : existeCorreo
+    deactivate db
+
+    alt Correo NO registrado previamente (Escenario principal de éxito)
+        create usr
+        ctrl --> usr : 6: CrearUsuario(nombre, correo, clave, "PENDIENTE_ROLES")
+
+        ctrl -> db : 7: GuardarUsuario(usr)
+        activate db
+        db --> ctrl : True
+        deactivate db
+
+        ctrl ->> email : 8: enviarNotificacionAdministracion(correo)
+
+     
+
+        ctrl -> db : 10: GuardarRegistroAuditoria(audit)
+        activate db
+        db --> ctrl : True
+        deactivate db
+
+        ctrl --> ui : True (Registro completado)
+        ui --> emp : ConfirmarRealizacionProceso()
+
+    else #Pink 3b. Usuario ya registrado (Termina la secuencia de alta)
+        ctrl --> ui : ErrorCorreoYaRegistrado()
+        ui --> emp : RedirigirPantallaInicioSesion(CU-01)
+    end
+
+else #Pink 3a. Correo no válido (No pertenece a @turbine... - Termina la secuencia)
+    ctrl --> ui : DenegarProcedimientoDominio()
+    ui --> emp : InformarSoloCuentasCorporativasOficiales()
+end
+
+deactivate ctrl
+deactivate ui
+@enduml
