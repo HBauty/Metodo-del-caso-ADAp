@@ -123,17 +123,18 @@
 
 | - id: UUID                                                                 |
 | - numeroFactura: String (Serie + Numeración correlativa)                   |
+| - facturaOriginalId: UUID                                                  |
+| - texto: String                                                            |
 | - fechaEmision: Date                                                       |
 | - fechaVencimiento: Date                                                   |
 | - tipoFactura: TipoFactura {RECURRENTE, PUNTUAL, PROPORCIONAL}             |
 | - estadoFactura: EstadoFactura {BORRADOR, EMITIDA, PAGADA, DIFERENCIA_PENDIENTE, SEGUIMIENTO_PAUSADO}|
 | - subtotal: Decimal (NFR9)                                                 |
 | - porcentajeIVA: Decimal (NFR9)                                            |
-| - importeIVA: Decimal (NFR9)          esto lo quitaba                      |
+| - importeIVA: Decimal (NFR9)                                               |
 | - importeTotal: Decimal (NFR9)                                             |
 | - urlPdfAlmacenado: String                                                 |
 | - hashPdfSha256: String (NFR12)                                            |
-| - version: Integer (NFR8)                                                  |
 +----------------------------------------------------------------------------+
 
 | + calcularTotales(): Void (Garantiza NFR9)                                 |
@@ -142,21 +143,7 @@
 | + pausarSeguimiento(motivoInterno, fechaLimite): Void (FR21)               |
 | + registrarIncidenciaEntrega(): Void (FR20)                                |
 +----------------------------------------------------------------------------+
-                                      ^
-                                      | (Asociación / Extensión)
-+----------------------------------------------------------------------------+
-
-|                             FacturaRectificativa                           |
-+----------------------------------------------------------------------------+
-
-| - id: UUID                                                                 |
-| - facturaOriginalId: UUID (FR13)                                           |
-| - motivoModificacion: String                                               |
-| - importeRectificado: Decimal (NFR9)                                       |
-+----------------------------------------------------------------------------+
-
-| + vincularDocumentoOriginal(facturaId): Void                               |
-+----------------------------------------------------------------------------+
+                                     
 
 
 
