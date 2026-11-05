@@ -27,29 +27,33 @@ title TurbineH - Vista general de clases
 class Usuario #DBEAFE {
   - id: UUID
   - nombre: String 
+  - contraseña: String
   - email: String
-  - estado: EstadoUsuario
+  - activo: Boolean
   + autenticar(): Boolean
   + desactivar(): void
 }
 class Lector #DBEAFE {
-+ crearFicha(cliente)    
- + consultarFicha(c)        
- + editarFicha(c)            
- + borrarLogicoFicha(c)       
- + crearFacturaManual(fac)      
- + revisarDiferenciaPago(f)
+ - clientes: List [Cliente]
+ + crearCliente(Cliente)    
+ + consultarCliente(Cliente)        
+ + editarCliente(Cliente)            
+ + borrarCliente(Cliente)       
+ + crearFacturaManual(Factura)      
+ + revisarDiferenciaPago(Factura)
 }
-class administrador #DBEAFE {
-+ registrarLector(lector)  
-+ asignarCliente(l, c)     
-+ eliminarCliente(l,c)    
-+ aprobarFactura(f) 
+class Administrador #DBEAFE {
+- Lectores: List[Lector]
++ registrarLector(Lector)  
++ asignarCliente(Lector, Cliente)     
++ eliminarCliente(Lector,Cliente)    
++ aprobarFactura(Factura) 
 + consultarInformes() 
 }
-class superadministrador #DBEAFE {
-+ crearAdministrador(a)   
-+ modificarPlantilla(p)    
+class Superadministrador #DBEAFE {
+- admins: List[Administrador]
++ crearAdministrador()
++ modificarAdmin()      
 + modificarConfigSistema() 
 + configurarRecordatorios() 
 }
@@ -64,39 +68,37 @@ class Cliente #DCFCE7 {
  - direccion: String                                                        
  - datosContacto: String                                                    
  - fechaContratacion: Date                                                  
- - tarifaAcordada: Decimal                                            
+ - suscripción: Suscripción                                           
  - condicionesPagoParticulares: String                                      
- - estadoFicha: EstadoFicha {ACTIVO, PAUSADO, BAJA_LOGICA, ELIMINADO_LEGAL} 
+ - estadoFicha: EstadoFicha {ACTIVO, PAUSADO, BAJA_LÓGICA} 
  - etiquetas: List<String>                                            
- - lectorAsignadoId: UUID                                              
- - version: Integer    
-  + asociarDocumentoExterno(doc): Void (FR9)                                 
-  + pausarSuscripcion(motivo, fechaIni, fechaFin): Void (FR6)                
-  + tramitarBaja(): Void (FR5)                                               
-  + reactivarFicha(): Void (FR8)                                                         
+ - lectorAsignadoId: UUID                                                  
+  + asociarDocumentoExterno(doc): Void                              
+  + pausarSuscripción(motivo, fechaIni, fechaFin): Void (FR6)                
+  + tramitarBaja(): Void                                              
+  + reactivarFicha(): Void                                                         
   + agregarEtiqueta(etiqueta): Void 
 }
-class Suscripcion #FFEDD5 {
+class Suscripción #FFEDD5 {
   - cuotaMensualAcordada: Decimal
   - estado: EstadoSuscripcion
   - proximaEmision: Date [0..1]
+  - rangoAnualDesde: Decimal
+  - rangoAnualHasta: Decimal [0..1]
   + pausar(motivo: String, inicio: Date, retorno: Date [0..1]): void
   + cancelar(fecha: DateTime): void
 }
-class Tarifa #FFEDD5 {
-  - plan: String
-  - rangoAnualDesde: Decimal
-  - rangoAnualHasta: Decimal [0..1]
-  - precioMensual: Decimal
-}
+
 class RevisionAnual #FFEDD5 {
+  - suscripción: Suscripción
   - cuotaPropuesta: Decimal
   - efectivaDesde: Date
-  - estado: EstadoDecision
-  + aprobar(actor: Usuario, motivo: String): void
+  - aprobada: Boolean
+  + resolver(actor: Usuario, motivo: String): void
 }
 class Factura #FCE7F3 {
-  - id: UUID                                                                 
+  - id: UUID       
+  - facturaOrigen: UUID                                                          
   - numeroFactura: String                   
   - fechaEmision: Date                                                        
   - fechaVencimiento: Date                                                   
@@ -107,71 +109,57 @@ class Factura #FCE7F3 {
  - importeIVA: Decimal                                
 - importeTotal: Decimal                                             
 - urlPdfAlmacenado: String                                                 
-- hashPdfSha256: String                                             
-  + calcularTotales(moneda): Void                                
+- hashPdfSha256: String 
+  + calcular(): Void                                                                         
   + generarPdfEstandar(): String             
   + enviarPorEmail(): Boolean                                         
   + pausarSeguimiento(motivoInterno, fechaLimite): Void               
   + registrarIncidenciaEntrega(): Void 
   + actualizarEstadoCobro(): void
 }
-class LineaFactura #FCE7F3 {
-  - concepto: String
-  - cantidad: Decimal
-  - precioUnitario: Decimal
-  - impuestoPorcentaje: Decimal
-  + calcular(): Decimal
-}
-class Aprobacion #FCE7F3 {
-  - estado: EstadoDecision
-  - hashPropuesta: String
-  + aprobar(actor: Usuario, justificacion: String): void
-}
+
 class MovimientoPago #FCE7F3 {
   - idExterno: String
   - importe: Decimal
-  - estado: EstadoMovimiento
+  - pasarela: String
+  - pagado: Boolean
+  + conectarPasarela(): Boolean
   + compararImporte(): Decimal
 }
 class Documento #FEF3C7 {
   - tipo: TipoDocumento
+  - contenido: String
   - sha256: String
   + verificarIntegridad(bytes: Binary): Boolean
 }
-class Comunicacion #EDE9FE {
-  - tipo: TipoComunicacion
-  - /estadoEntrega: EstadoEntrega
+class Notificación #EDE9FE {
+  - tipo: String
+  - texto: String
   + estaEntregada(): Boolean
 }
-class IncidenciaEntrega #EDE9FE {
+class Incidencia #EDE9FE {
+  - pago: MovimientoPago
   - proximoReintento: DateTime [0..1]
   - resueltaEn: DateTime [0..1]
-  + resolver(entregaConfirmada: Boolean): void
+  - texto: String 
+  + resolver(): void
 }
 
 Usuario "1" <-- "1..*" Lector : hereda de
-administrador "1..*" --> "1..*" Lector : hereda de
-superadministrador "1" --> "1" administrador : hereda de
-Cliente "1" -- "0..*" AsignacionCliente : accesos delegados
-Cliente "1" -- "0..*" Suscripcion : acuerdos
+Administrador "1..*" --> "1..*" Lector : hereda de
+Superadministrador "1" --> "1" Administrador : hereda de
+Cliente "1" -- "0..*" Suscripción : acuerdos
 Cliente "1" -- "0..*" Factura : facturas
-Suscripcion "0..*" --> "1" Tarifa : tarifa de referencia
-Suscripcion "1" -- "0..*" RevisionAnual : revisión del precio
-Suscripcion "0..1" <-- "0..*" Factura : origen recurrente
-Factura "1" *-- "1..*" LineaFactura : detalle
+Suscripción "1" -- "0..*" RevisionAnual : revisión del precio
+Suscripción "0..1" <-- "0..*" Factura : origen recurrente
 Factura "0..*" --> "0..1" Factura : original rectificada
-Factura "0..1" <-- "0..*" Aprobacion : objetivo financiero
-Suscripcion "0..1" <-- "0..*" Aprobacion : objetivo comercial
 Factura "0..1" <-- "0..*" MovimientoPago : cobros individuales
 Factura "0..1" --> "0..1" Documento : PDF definitivo
-Suscripcion "0..*" -- "0..*" Documento : contratos
-Comunicacion "0..*" -- "1..*" Factura : comunica
-Comunicacion "1" -- "0..*" IncidenciaEntrega : fallos confirmados
+Suscripción "0..*" -- "0..*" Documento : contratos
+Notificación "0..*" -- "1..*" Factura : comunica
+Notificación "1" -- "0..*" Incidencia : fallos confirmados
 
-note bottom of Aprobacion
-  Objetivo: Factura o Suscripcion, exactamente uno.
-  Solo administración aprueba excepciones.
-end note
+
 
 note bottom of Factura
   Emitida: contenido y PDF inmutables.
@@ -179,10 +167,4 @@ note bottom of Factura
   Emisión, cobro y seguimiento son independientes.
 end note
 
-legend bottom
-  Vista general: clases esenciales; atributos y operaciones seleccionados.
-  El mismo modelo se amplía en cuatro vistas de detalle y una de enumeraciones.
-  Decimal para dinero. Multiplicidades en los extremos.
-  Composición solo para las líneas; los históricos tienen vida independiente.
-endlegend
 @enduml
