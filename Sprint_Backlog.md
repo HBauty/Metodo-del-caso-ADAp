@@ -217,7 +217,7 @@ El sprint durará una semana. En este sprint, la tarea principal será construir
 ### Sesión de trabajo 5/11
 
 ### Asistentes
-Hugo, Jose, Aquiles, Gabriel, Rosales
+Hugo, Jose, Aquiles, Gabriel, Rosales, Ángel
 
 ### Duración 
 1 h y 45 min
