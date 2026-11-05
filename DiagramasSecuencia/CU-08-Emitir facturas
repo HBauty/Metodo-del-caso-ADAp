@@ -1,0 +1,47 @@
+
+@startuml
+
+title CU-08: Emitir orden de cobro / Envío de factura automática
+
+actor "Lector Asignado" as admin
+
+participant ":Reloj del sistema" as clock
+participant ":Sistema" as sys
+participant ":Gestor de Suscripciones" as sus
+participant ":Factura" as factura
+participant ":Cliente" as client
+
+clock -> sys : 1. Disparar proceso de facturación
+activate sys
+sys -> sus : 2. Consultar suscripciones activas
+activate sus
+sus --> sys : Devolver suscripciones activas
+deactivate sus
+
+loop Por cada factura
+
+sys -> sys : 3. Calcular IVA y prorrateos
+
+sys -> factura : 4. Generar Factura
+activate factura
+factura -> factura : Asignar numeración e Idioma
+factura --> sys : PDF Generado
+deactivate factura
+
+sys -> factura : 5. Almacenar Factura
+activate factura
+factura --> sys : Factura Almacenada
+
+sys -> cliente : 6. Enviar factura por e-mail
+activate cliente
+cliente --> sys : Enviar confirmación
+deactivate cliente
+
+sys -> factura : 7. Cambiar estado a enviada e Iniciar contador de 5 días
+deactivate factura
+
+end
+sys --> admin : Devolver resumen de la facturación
+deactivate sys
+
+@enduml
