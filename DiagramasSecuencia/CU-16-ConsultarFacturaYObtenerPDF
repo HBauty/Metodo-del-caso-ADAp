@@ -1,0 +1,8 @@
+@startuml
+actor Lector
+Lector -> Cliente: getFacturas()
+Cliente -> Lector: facturas
+alt EL CLIENTE TIENE FACTURAS
+Lector -> Factura: getPDF(factura: Facturas)
+Factura -> Lector: pdf
+@enduml
