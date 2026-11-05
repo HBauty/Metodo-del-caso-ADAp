@@ -1,0 +1,48 @@
+
+@startuml
+title CU-07: Registrar ficha de suscripción (Acuerdo Comercial)
+
+actor "Administrador / Lector Asignado" as admin
+
+participant ":Sistema de gestión de clientes" as sys
+participant ":Cliente" as client
+
+admin -> sys : 1.Seleciona Cliente
+activate sys
+sys -> client : 2. Buscar cliente
+
+activate client
+client --> sys : Devolver Datos
+deactivate client
+
+sys --> admin : Devolver Datos
+
+participant ":Suscripción" as sus
+
+admin -> sys : 3.Introducir condiciones de contrato (fecha, tarifa, etc)
+admin -> sys : 4. Adjuntar contrato firmado
+sys -> sus : 5.Validar condiciones
+activate sus
+
+alt Condiciones fuera de política
+
+sus --> sys : Condiciones inválidas
+sys --> admin : Acuerdo retenido, enviado a aprobación
+
+else Condiciones dentro de política
+
+sus --> sys : Condiciones válidas
+
+participant ":Sistema de Facturación" as fact
+
+sys -> sus : 6. Guardar ficha de suscripción
+sus --> sys : Ficha Guardada
+deactivate sus
+sys -> fact : 7. Programar facturación
+activate fact
+fact --> sys : Facturación guardada
+deactivate fact
+sys --> admin : Confirmar registro
+deactivate sys
+
+@enduml
