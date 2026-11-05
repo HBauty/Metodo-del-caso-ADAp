@@ -1,0 +1,11 @@
+@startuml
+actor Administrador
+Administrador -> Comprobante: generarComprobante(cliente: Cliente, factura: Factura)
+Comprobante -> Cliente: verificarCliente(cliente: Cliente)
+alt EXISTE EL CLIENTE
+Cliente -> Comprobante: true
+Comprobante -> Cliente: verificarFactura(factura: Factura)
+alt EXISTE LA FACTURA ASOCIADA AL CLIENTE
+Cliente -> Comprobante: true
+Comprobante -> Administrador: comprobante
+@enduml
