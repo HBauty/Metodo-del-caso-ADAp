@@ -1,0 +1,35 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": Reloj / Sistema" as sys
+participant ": DataBase" as db
+participant ": Factura" as fac
+participant ": ServicioEmail" as email
+actor ": Lector asignado" as lector
+
+sys -> db : 1: ObtenerFacturas()
+activate db
+create fac
+db --> fac : 2: ObtenerFactura
+db --> sys : Factura
+deactivate db
+
+sys -> fac : 3: RevisarVencimientoYGenerarMensaje(idioma, tono)
+activate fac
+fac --> sys : mensaje
+deactivate fac
+
+sys -> email : 4: EnviarAvisoCliente(contactoCliente, mensaje)
+activate email
+email --> sys : True (Entregado)
+deactivate email
+
+sys ->> lector : 5: AvisarNotificacionEnviada()
+
+sys -> db : 6: RegistrarEnvioHistorial(idFactura, "NOTIFICADA")
+activate db
+db --> sys : True
+deactivate db
+
+@enduml
