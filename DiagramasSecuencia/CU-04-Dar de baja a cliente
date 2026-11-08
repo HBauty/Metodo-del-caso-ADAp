@@ -1,0 +1,65 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": Lector asignado" as act
+participant ": Interfaz" as ui
+participant ": DataBase" as db
+participant ": Cliente" as cli
+participant ": ServicioEmail" as email
+
+act -> ui : 1: SolicitarBajaCliente(idCliente)
+activate ui
+
+ui -> db : 2: ObtenerCliente(idCliente)
+activate db
+create cli
+db --> cli : 3: ObtenerCliente
+db --> ui : Cliente
+deactivate db
+
+ui -> cli : 4: DetenerFacturacionRecurrente()
+activate cli
+cli --> ui : True
+deactivate cli
+
+ui -> db : 5: ComprobarFacturasPendientes(idCliente)
+activate db
+
+alt #LightGreen Sin facturas pendientes ni vencidas (Escenario de éxito)
+    db --> ui : False (Sin deudas)
+    deactivate db
+
+    ui -> cli : 6: AplicarBorradoLogico("BLOQUEADO_LEGAL")
+    activate cli
+    cli --> ui : True
+    deactivate cli
+
+    ui -> db : 7: GuardarEstadoCliente(cli)
+    activate db
+    db --> ui : True
+    deactivate db
+
+    ui --> act : ConfirmarBajaCliente()
+
+else #Pink 3a. El cliente tiene impagos pendientes (Termina la secuencia)
+    db --> ui : True (Con deudas pendientes)
+    deactivate db
+
+    ui -> cli : 8: BloquearBajaDefinitivaYMantenerReclamacion()
+    activate cli
+    cli --> ui : True
+    deactivate cli
+
+    ui -> db : 9: GuardarEstadoCliente(cli)
+    activate db
+    db --> ui : True
+    deactivate db
+
+    ui ->> email : 10: enviarNotificacionDeudaPendiente(correoCliente)
+
+    ui --> act : InformarBloqueoBajaPorImpagos()
+end
+
+deactivate ui
+@enduml
