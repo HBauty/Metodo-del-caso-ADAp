@@ -1,0 +1,47 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": SuperAdmin / Admin" as admin
+participant ": Interfaz" as ui
+participant ": DataBase" as db
+participant ": Usuario" as usr
+
+admin -> ui : 1: SeleccionarORegistrarEmpleado(correo, rolAsignado, listaClientes)
+activate ui
+
+ui -> ui : 2: ValidarDominioCorporativo(correo)
+
+alt #LightGreen Dominio válido (@turbine...)
+    ui -> db : 3: BuscarEmpleado(correo)
+    activate db
+
+    alt Empleado ya existe en DataBase
+        create usr
+        db --> usr : 4a: ObtenerUsuario
+        db --> ui : Usuario
+    else #LightYellow Empleado nuevo (No registrado)
+        db --> ui : null
+        create usr
+        ui --> usr : 4b: CrearUsuario(correo)
+    end
+    deactivate db
+
+    ui -> usr : 5: AsignarRolYClientes(rolAsignado, listaClientes)
+    activate usr
+    usr --> ui : True
+    deactivate usr
+
+    ui -> db : 6: GuardarConfiguracion(usr)
+    activate db
+    db --> ui : True
+    deactivate db
+
+    ui --> admin : ConfirmarActualizacionPermisos()
+
+else #Pink 1a. Correo no perteneciente a Turbine (Termina la secuencia)
+    ui --> admin : RechazarAltaEInformarError()
+end
+
+deactivate ui
+@enduml
