@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+
+actor ": Admin / Lector" as act
+participant ": Interfaz" as ui
+participant ": DataBase" as db
+participant ": Suscripcion" as sub
+
+act -> ui : 1: SeleccionarSuscripcionYPausar(idSuscripcion)
+activate ui
+ui --> act : 2: SolicitarDatosPausa(motivo, fechaInicio, fechaReactivacion)
+deactivate ui
+
+act -> ui : 3: IntroducirDatosPausa(idSuscripcion, motivo, fechaInicio, fechaReactivacion)
+activate ui
+
+ui -> ui : 4: ValidarDatosObligatorios(motivo, fechaInicio, fechaReactivacion)
+
+alt #LightGreen Datos completos (Escenario principal de éxito)
+    ui -> db : 5: ObtenerSuscripcion(idSuscripcion)
+    activate db
+    
+    create sub
+    db --> sub : 6: ObtenerSuscripcion
+    db --> ui : Suscripcion
+    deactivate db
+
+    ui -> sub : 7: Pausar(motivo, fechaInicio, fechaReactivacion)
+    activate sub
+    sub -> sub : CambiarEstado("Pausada")
+    sub -> sub : DetenerFacturacionRecurrente()
+    sub --> ui : True
+    deactivate sub
+
+    ui -> db : 8: GuardarSuscripcion(sub)
+    activate db
+    db --> ui : True
+    deactivate db
+
+    ui --> act : ConfirmarSuscripcionPausada()
+
+else #Pink 3a. Faltan datos obligatorios (motivo o fechas - Termina la secuencia)
+    ui --> act : ImpedirContinuarYSolicitarCompletarInfo()
+end
+
+deactivate ui
+@enduml
