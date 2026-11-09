@@ -1,0 +1,98 @@
+
+@startuml
+
+title CU-12: Emitir y enviar una factura o factura rectificativa
+
+actor "Administrador / Lector autorizado" as admin
+
+participant ":Sistema" as sys
+participant ":Cliente" as client
+participant ":Facturación" as fact
+
+admin -> sys : 1. Seleccionar cliente e iniciar factura
+activate sys
+
+sys -> client : Consultar datos fiscales
+activate client
+client --> sys : Devolver datos fiscales
+deactivate client
+
+alt Factura normal
+
+    sys -> fact : 2. Crear borrador de factura
+
+else Factura rectificativa
+
+    admin -> sys : Seleccionar factura original
+
+    sys -> fact : Consultar factura original
+    activate fact
+    fact --> sys : Datos de factura original
+    deactivate fact
+
+    sys -> fact : Crear borrador rectificativo\nvinculado a factura original
+
+else Facturación recurrente
+
+    sys -> fact : Generar factura programada
+
+end
+
+fact --> sys : Borrador preparado
+
+sys -> sys : 3. Validar datos e importes
+
+alt Datos fiscales incompletos
+
+    sys --> admin : Mostrar errores y bloquear emisión
+
+else Datos correctos
+
+    sys --> admin : Mostrar vista previa del PDF
+
+    sys -> sys : 4. Comprobar importes y condiciones
+
+    alt Requiere aprobación
+
+        sys --> admin : Mantener factura en borrador\nhasta su aprobación
+
+    else No requiere aprobación
+
+        opt Factura manual
+
+            admin -> sys : 5. Confirmar emisión
+
+        end
+
+        sys -> fact : 6. Emitir factura y guardar PDF
+        activate fact
+        fact --> sys : Factura y PDF guardados
+        deactivate fact
+
+        sys -> client : 7. Enviar factura
+        activate client
+
+        alt Envío correcto
+
+            client --> sys : Confirmación de envío
+            sys -> fact : Registrar resultado del envío
+            fact --> sys : Resultado registrado
+
+        else Error en el envío
+
+            client --> sys : Error de envío
+            sys -> fact : Registrar incidencia de envío
+            fact --> sys : Incidencia registrada
+            sys --> admin : Notificar incidencia
+
+        end
+
+        deactivate client
+
+    end
+
+end
+
+deactivate sys
+
+@enduml
