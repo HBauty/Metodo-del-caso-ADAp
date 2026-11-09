@@ -1,0 +1,44 @@
+
+@startuml
+title CU-11: Modificar factura en borrador
+actor "Administrador / Lector asignado" as admin
+
+participant ":Sistema" as sys
+participant ":Facturación" as fact
+participant ":Log de auditoría" as audit
+
+admin -> sys : 1.Seleccionar factura en borrador
+activate sys
+sys -> fact : 2.Fetch Factura
+activate fact
+fact --> sys : Factura en borrador
+deactivate fact
+sys --> admin : Factura en borrador
+
+admin -> sys : 3.Añade modificaciones/Valida excepción
+
+alt Factura no emitida (No hay problemas)
+sys -> fact : 4.Guardar cambios
+activate fact
+fact --> sys : Cambios guardados
+deactivate fact
+
+sys -> audit : 5.Introducir en Log de auditoría
+activate audit
+audit --> sys : Confirmación
+deactivate audit
+
+sys -> fact : 6. Emitir Factura
+activate fact
+fact --> sys
+deactivate fact
+
+else Factura ya emitida
+
+sys -> sys : 7. Bloquear modificación
+sys -> admin : 8. Notificar necesidad de factura rectificativa
+
+deactivate sys
+
+
+@enduml
