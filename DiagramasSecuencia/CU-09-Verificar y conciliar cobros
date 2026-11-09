@@ -1,0 +1,56 @@
+
+@startuml
+title CU-09: Verificar y conciliar cobros
+
+actor "Administrador / Lector asignado" as admin
+
+participant ":Sistema" as sys
+participant ":Pasarelas de pago" as pagos
+participant ":Facturación" as fact
+participant ":Cliente" as client
+
+activate sys
+sys -> pagos : 1.Consulta periódica de movimientos
+activate pagos
+pagos --> sys : Devolver datos bancarios
+deactivate pagos
+
+sys -> sys : 2.Detección de ingreso
+sys -> fact : 3.Asignar importe a factura
+activate fact
+fact --> sys
+deactivate fact
+
+sys -> fact : 4.Comprobar importe
+activate fact
+fact --> sys : Importe
+deactivate fact
+
+alt No hay discrepancia
+
+sys -> fact : 5. Marcar como pagada
+activate fact
+fact --> sys : ok
+deactivate fact
+sys -> fact : 6. Detener recordatorios
+activate fact
+fact --> sys : ok
+deactivate fact
+sys -> client : 7. Enviar confirmación de cobro
+activate client
+client --> sys : Confirmación de recepción
+deactivate client
+sys -> admin : 8. Notificar responsable
+
+else Discrepancia de importe
+sys -> fact : 9. Marcar como parcialmente conciliada
+activate fact
+fact --> sys
+deactivate fact
+
+sys -> admin :10. Notificar administrador para supervisión manual
+deactivate sys
+
+end
+
+@enduml
