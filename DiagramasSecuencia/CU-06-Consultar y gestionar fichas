@@ -2,76 +2,22 @@
 @startuml
 title CU-06: Consultar y gestionar fichas de clientes e historial
 
-actor "Administrador / Lector asignado" as admin
+actor ":Lector" as lector
+participant ":Cliente" as cliente
 
-participant ":Sistema de gestión" as sys
-participant ":Control de permisos" as auth
-database "Base de datos" as db
+lector -> cliente : 1. consultarCliente(Cliente)
+activate cliente
+cliente --> lector : Cliente
 
-
-admin -> sys : 1. Aplicar filtros de búsqueda
-activate sys
-
-sys -> auth : Comprobar permisos de consulta
-activate auth
-auth --> sys : Permisos y clientes autorizados
-deactivate auth
-
-sys -> db : 2. Buscar clientes autorizados\n(aplicando filtros)
-activate db
-db --> sys : Lista de clientes
-deactivate db
-
-sys --> admin : 3. Mostrar resultados
-
-admin -> sys : 4. Consultar ficha de cliente
-
-sys -> auth : Comprobar acceso a la ficha
-activate auth
-auth --> sys : Acceso permitido
-deactivate auth
-
-sys -> db : 5. Obtener ficha e historial
-activate db
-db --> sys : Fichas e historial
-deactivate db
-
-sys --> admin : Mostrar ficha e historial
-
-admin -> sys : 6. Modificar Datos de cliente
-sys -> auth : Comprobar permisos de edición
-activate auth
-auth --> sys : Permisos autorizados
-deactivate auth
-
-sys -> sys : Validar Cambios
-
-sys -> db : 7. Guardar datos de clientes
+lector -> cliente : 2. editarCliente(Cliente)
 
 alt No hay conflicto de concurrencia
-
-activate db
-db --> sys : Guardado correcto
-
-participant ":Log de Auditoría" as audit
-
-sys -> audit : 8.Registrar cambios
-activate audit
-audit --> sys : Cambios registrados correctamente
-deactivate audit
-
-sys --> admin : Devolver Confirmación
-
+    cliente --> lector : modificación aceptada
 else Hay conflicto de concurrencia
-
-db --> sys : Conflicto de versiones
-sys --> admin : Avisar de conflicto y solicitar recarga
-
+    cliente --> lector : aviso de conflicto
+    lector -> cliente : recargar datos actuales
+    cliente --> lector : datos actualizados
 end
-
-deactivate db
-
-deactivate sys
-
+deactivate cliente
 
 @enduml
