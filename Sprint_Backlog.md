@@ -206,7 +206,7 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 1 h
 
 ### Sprint planning
-El sprint durará una semana. En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
+El sprint durará 4 semanas. En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
 
 ### Tareas
 - [ ] Identificar clases, enumerados y componentes para el diagrama *(por decidir)*
@@ -225,3 +225,21 @@ Hugo, Jose, Aquiles, Gabriel, Rosales, Ángel
 ### Tareas
 - [x] Refactorizar diagramas de clases *(Rosales, Gabriel y Ángel)*
 - [x] Realizar diagramas de secuencia *(Hugo, Jose, Aquiles)*
+
+
+## SPRINT 4
+### Sesión organizativa 19/11
+
+### Asistentes
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
+
+### Duración
+1 h
+
+### Sprint planning
+El sprint durará 5 días. En este sprint, la tarea principal será terminar los diagramas y crear la presentación para la entrega del parcial del día 24
+
+### Tareas
+- [ ] Creacion de la presentación *(Ángel y Gabriel)* 
+- [ ] Revisión de lso diagraams *(todos)*
+- [ ] Crear el registro de sesiones de estos últimos días previos a la entrega.
