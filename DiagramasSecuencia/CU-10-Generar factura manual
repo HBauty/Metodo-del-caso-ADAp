@@ -1,57 +1,29 @@
-
 @startuml
+
 title CU-10: Generar factura manual (Puntual)
 
-actor "Administrador / Lector asignado" as admin
+actor "Lector asignado" as actor
 
-participant ":Sistema" as sys
-participant ":Facturación" as fact
-participant ":Cliente" as client
-database "Base de datos" as db
+participant ":Cliente" as cliente
+participant ":Factura" as factura
 
-admin -> sys : 1. Seleccionar cliente
-activate sys
+actor -> cliente : 1. consultarCliente(Cliente)
+cliente --> actor : Datos del cliente
 
-sys -> db : 2. Fetch cliente
-activate db
+actor -> factura : 2. crearFacturaManual(Factura)
+activate factura
 
-db --> sys : Cliente
-deactivate db
+factura -> factura : 3. calcular()
 
-sys --> admin : Cliente
-admin -> sys : 3. Introducir concepto, importe, fecha de vencimiento
+    factura -> factura : 4. generarPdfEstandar()
 
-sys -> sys : 4. Comprobar parámetros y política
+    factura -> factura : 5. enviarPorEmail()
+    factura --> actor : Confirmación de envío
+    factura -> factura : 6. actualizarEstadoCobro()
 
-alt Datos correctos
+    deactivate factura
 
-sys -> fact : 5. Generar PDF correlativo
-activate fact
-fact --> sys : PDF
-deactivate fact
-
-sys -> db: 6. Guardar en Base de Datos
-activate db
-db --> sys
-deactivate db
-
-sys -> client : 7. Enviar a cliente
-activate client
-client --> sys : Confirmar recepción
-deactivate client
-
-sys -> admin : 8. Enviar resumen
-deactivate db
-
-else Input fuera de política
-
-sys -> fact : 9. Retener factura; Pendiente de aprobación
-activate fact
-fact --> sys
-deactivate fact
-
-sys -> admin : 10. Solicitar validación
-
-end
+deactivate factura
 
 @enduml
+
