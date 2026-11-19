@@ -1,0 +1,301 @@
+@startuml TurbineH_ER_02_LIGERO
+
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam nodesep 28
+skinparam ranksep 35
+skinparam ArrowColor #64748B
+skinparam entity {
+  BorderColor #475569
+  FontColor #0F172A
+}
+skinparam package {
+  BorderColor #CBD5E1
+  FontColor #334155
+}
+hide circle
+hide empty members
+title TurbineH - ER 2/2: clientes y facturacion (vista ligera)
+
+package "Clientes" #F0FDF4 {
+  entity "CLIENTE" as CLIENTE #DCFCE7 {
+    * id_cliente: UUID <<PK>>
+    --
+      nombre_empresa: VARCHAR
+      nombre_comercial: VARCHAR
+      razon_social: VARCHAR
+      nif_identificador_fiscal: VARCHAR
+      pais: VARCHAR
+      moneda: CHAR(3)
+      direccion: TEXT
+      datos_contacto_general: TEXT
+      condiciones_pago_particulares: TEXT
+      fecha_contratacion: DATE
+      estado_ficha: ENUM
+      fecha_solicitud_baja: DATETIME
+      fecha_baja_logica: DATETIME
+      sector: VARCHAR
+      version: INTEGER
+      id_lector_asignado: UUID <<FK / USUARIO ER 1>>
+  }
+
+  entity "CONTACTO" as CONTACTO #DCFCE7 {
+    * id_contacto: UUID <<PK>>
+    --
+      id_cliente: UUID <<FK>>
+      nombre: VARCHAR
+      email: VARCHAR
+      telefono: VARCHAR
+      tipo_contacto: ENUM
+      idioma: VARCHAR
+      activo: BOOLEAN
+  }
+
+  entity "ETIQUETA" as ETIQUETA #DCFCE7 {
+    * id_etiqueta: UUID <<PK>>
+    --
+      nombre: VARCHAR <<UK>>
+  }
+
+  entity "CLIENTE_ETIQUETA" as CLIENTE_ETIQUETA #DCFCE7 {
+    * id_cliente: UUID <<PK, FK>>
+    * id_etiqueta: UUID <<PK, FK>>
+  }
+}
+
+package "Suscripciones y tarifas" #FFF7ED {
+  entity "TARIFA" as TARIFA #FFEDD5 {
+    * id_tarifa: UUID <<PK>>
+    --
+      nombre: VARCHAR
+      ingreso_anual_min: DECIMAL
+      ingreso_anual_max: DECIMAL
+      cuota_mensual_base: DECIMAL
+      moneda: CHAR(3)
+      activa: BOOLEAN
+  }
+
+  entity "SUSCRIPCION" as SUSCRIPCION #FFEDD5 {
+    * id_suscripcion: UUID <<PK>>
+    --
+      id_cliente: UUID <<FK>>
+      id_tarifa: UUID <<FK>>
+      id_comercial: UUID <<FK / USUARIO ER 1>>
+      fecha_inicio: DATE
+      cuota_mensual_acordada: DECIMAL
+      rango_anual_desde: DECIMAL
+      rango_anual_hasta: DECIMAL
+      condiciones_pago: TEXT
+      estado_suscripcion: ENUM
+      proxima_emision: DATE
+      fecha_cancelacion: DATETIME
+      motivo_cancelacion: TEXT
+      cancelada_por: UUID <<FK / USUARIO ER 1>>
+      version: INTEGER
+  }
+
+  entity "PAUSA_SUSCRIPCION" as PAUSA_SUSCRIPCION #FFEDD5 {
+    * id_pausa: UUID <<PK>>
+    --
+      id_suscripcion: UUID <<FK>>
+      id_usuario: UUID <<FK / USUARIO ER 1>>
+      motivo: TEXT
+      fecha_inicio: DATE
+      fecha_reactivacion_prevista: DATE
+      fecha_reactivacion_real: DATE
+  }
+
+  entity "REVISION_ANUAL" as REVISION_ANUAL #FFEDD5 {
+    * id_revision: UUID <<PK>>
+    --
+      id_suscripcion: UUID <<FK>>
+      id_tarifa_propuesta: UUID <<FK>>
+      id_administrador: UUID <<FK / USUARIO ER 1>>
+      fecha_revision: DATE
+      ingresos_cobrados_anio: DECIMAL
+      cuota_propuesta: DECIMAL
+      decision: ENUM
+      efectiva_desde: DATE
+      fecha_resolucion: DATE
+      motivo: TEXT
+  }
+}
+
+package "Facturas y cobros" #FDF2F8 {
+  entity "FACTURA" as FACTURA #FCE7F3 {
+    * id_factura: UUID <<PK>>
+    --
+      id_cliente: UUID <<FK>>
+      id_suscripcion: UUID <<FK - opcional si puntual>>
+      id_factura_original: UUID <<FK - si rectificativa>>
+      id_pdf: UUID <<FK, UK / DOCUMENTO>>
+      numero_factura: VARCHAR <<UK - al emitir>>
+      concepto: TEXT
+      fecha_emision: DATE
+      fecha_vencimiento: DATE
+      periodo_facturado: DATE
+      tipo_factura: ENUM
+      prorrateada: BOOLEAN
+      estado_emision: ENUM
+      estado_cobro: ENUM
+      seguimiento_pausado_hasta: DATE
+      motivo_pausa_seguimiento: TEXT
+      subtotal: DECIMAL
+      porcentaje_iva: DECIMAL
+      importe_iva: DECIMAL
+      importe_total: DECIMAL
+  }
+
+  entity "MOVIMIENTO_PAGO" as MOVIMIENTO_PAGO #FCE7F3 {
+    * id_movimiento: UUID <<PK>>
+    --
+      id_factura: UUID <<FK - opcional sin conciliar>>
+      id_externo: VARCHAR
+      pasarela: VARCHAR
+      fecha_operacion: DATETIME
+      importe: DECIMAL
+      moneda: CHAR(3)
+      estado_conciliacion: ENUM
+  }
+}
+
+package "Comunicaciones e incidencias" #F5F3FF {
+  entity "NOTIFICACION" as NOTIFICACION #EDE9FE {
+    * id_notificacion: UUID <<PK>>
+    --
+      id_cliente: UUID <<FK>>
+      id_contacto: UUID <<FK>>
+      id_regla_recordatorio: UUID <<FK - opcional>>
+      id_movimiento: UUID <<FK - opcional>>
+      tipo: ENUM
+      asunto: TEXT
+      mensaje: TEXT
+      idioma: VARCHAR
+      estado_entrega: ENUM
+      fecha_creacion: DATETIME
+      fecha_entrega: DATETIME
+  }
+
+  entity "FACTURA_NOTIFICACION" as FACTURA_NOTIFICACION #EDE9FE {
+    * id_factura: UUID <<PK, FK>>
+    * id_notificacion: UUID <<PK, FK>>
+  }
+
+  entity "INCIDENCIA" as INCIDENCIA #EDE9FE {
+    * id_incidencia: UUID <<PK>>
+    --
+      id_notificacion: UUID <<FK - opcional>>
+      id_movimiento: UUID <<FK - opcional>>
+      tipo: ENUM
+      descripcion: TEXT
+      estado: ENUM
+      fecha_deteccion: DATETIME
+      proximo_reintento: DATETIME
+      resuelta_en: DATETIME
+  }
+
+  entity "INTENTO_ENVIO" as INTENTO_ENVIO #EDE9FE {
+    * id_intento: UUID <<PK>>
+    --
+      id_notificacion: UUID <<FK>>
+      fecha_intento: DATETIME
+      resultado: ENUM
+      detalle_error: TEXT
+      id_externo: VARCHAR
+      entrega_confirmada: BOOLEAN
+  }
+
+  entity "REGLA_RECORDATORIO" as REGLA_RECORDATORIO #EDE9FE {
+    * id_regla: UUID <<PK>>
+    --
+      nombre: VARCHAR
+      dias_desde_vencimiento: INTEGER
+      frecuencia_dias: INTEGER
+      tono: VARCHAR
+      activa: BOOLEAN
+      modificada_por: UUID <<FK / USUARIO ER 1>>
+      fecha_modificacion: DATETIME
+  }
+}
+
+package "Documentos" #FFFBEB {
+  entity "DOCUMENTO" as DOCUMENTO #FEF3C7 {
+    * id_documento: UUID <<PK>>
+    --
+      id_cliente: UUID <<FK>>
+      tipo_documento: ENUM
+      uri_almacenamiento: TEXT
+      sha256: CHAR(64)
+      fecha_creacion: DATETIME
+      inmutable: BOOLEAN
+  }
+
+  entity "CONTRATO_SUSCRIPCION" as CONTRATO_SUSCRIPCION #FEF3C7 {
+    * id_suscripcion: UUID <<PK, FK>>
+    * id_documento: UUID <<PK, FK>>
+  }
+
+  entity "COMPROBANTE" as COMPROBANTE #FEF3C7 {
+    * id_comprobante: UUID <<PK>>
+    --
+      id_documento: UUID <<FK, UK>>
+      id_cliente: UUID <<FK>>
+      id_factura: UUID <<FK - opcional>>
+      id_movimiento: UUID <<FK - opcional>>
+      id_notificacion: UUID <<FK - opcional>>
+      creado_por: UUID <<FK / USUARIO ER 1>>
+      fecha_generacion: DATETIME
+  }
+}
+
+package "Aprobaciones de excepciones" #F8FAFC {
+  entity "SOLICITUD_APROBACION" as SOLICITUD_APROBACION #E2E8F0 {
+    * id_solicitud: UUID <<PK>>
+    --
+      id_factura: UUID <<FK - opcional>>
+      id_suscripcion: UUID <<FK - opcional>>
+      solicitada_por: UUID <<FK / USUARIO ER 1>>
+      resuelta_por: UUID <<FK / USUARIO ER 1>>
+      motivo: TEXT
+      justificacion: TEXT
+      estado: ENUM
+      fecha_solicitud: DATETIME
+      fecha_resolucion: DATETIME
+  }
+}
+
+CLIENTE ||--o{ CONTACTO : tiene
+CLIENTE ||--o{ CLIENTE_ETIQUETA : se clasifica
+ETIQUETA ||--o{ CLIENTE_ETIQUETA : etiqueta
+CLIENTE ||--o{ SUSCRIPCION : contrata
+TARIFA ||--o{ SUSCRIPCION : usa tarifa
+SUSCRIPCION ||--o{ PAUSA_SUSCRIPCION : historico pausas
+SUSCRIPCION ||--o{ REVISION_ANUAL : revisiones
+TARIFA |o--o{ REVISION_ANUAL : propuesta
+CLIENTE ||--o{ FACTURA : recibe
+SUSCRIPCION |o--o{ FACTURA : origen recurrente
+FACTURA |o--o{ FACTURA : rectifica original
+FACTURA |o--o{ MOVIMIENTO_PAGO : se concilia con
+CLIENTE ||--o{ NOTIFICACION : comunicaciones
+FACTURA ||--o{ FACTURA_NOTIFICACION : asociada
+NOTIFICACION ||--o{ FACTURA_NOTIFICACION : incluye
+NOTIFICACION |o--o{ INCIDENCIA : fallo entrega
+NOTIFICACION ||--o{ INTENTO_ENVIO : intentos
+REGLA_RECORDATORIO |o--o{ NOTIFICACION : regla aplicada
+DOCUMENTO |o--o| FACTURA : PDF de factura
+SUSCRIPCION ||--o{ CONTRATO_SUSCRIPCION : contratos
+DOCUMENTO ||--o{ CONTRATO_SUSCRIPCION : archivo de contrato
+DOCUMENTO ||--o| COMPROBANTE : PDF comprobante
+FACTURA |o--o{ SOLICITUD_APROBACION : excepcion factura
+SUSCRIPCION |o--o{ SOLICITUD_APROBACION : excepcion acuerdo
+
+
+legend bottom
+  FK / USUARIO ER 1 = referencia al primer diagrama.
+  Relaciones secundarias: consultar atributos FK.
+endlegend
+@enduml
