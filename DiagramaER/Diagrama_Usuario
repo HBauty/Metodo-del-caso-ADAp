@@ -1,0 +1,153 @@
+@startuml TurbineH_ER_01_Usuarios_COMPLETO
+' TurbineH - Modelo entidad-relacion, vista 1/2.
+' La informacion sobre metodos es una ANOTACION del diagrama de clases.
+' En un modelo ER se persisten roles y permisos, NO metodos Java/Python.
+' Referencias a la vista 2 se muestran como un unico CLIENTE_REF.
+
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam nodesep 42
+skinparam ranksep 56
+skinparam ArrowColor #64748B
+skinparam entity {
+  BorderColor #475569
+  FontColor #0F172A
+}
+skinparam package {
+  BorderColor #CBD5E1
+  FontColor #334155
+}
+hide circle
+hide empty members
+title TurbineH - ER 1/2: usuarios, roles y permisos
+
+package "Identidad" #EFF6FF {
+  entity "ROL" as ROL #DBEAFE {
+    * id_rol: UUID <<PK>>
+    --
+      nombre: VARCHAR <<UK>>
+      descripcion: TEXT
+      id_rol_padre: UUID <<FK / ROL - opcional>>
+  }
+
+  entity "USUARIO" as USUARIO #DBEAFE {
+    * id_usuario: UUID <<PK>>
+    --
+      id_rol: UUID <<FK - opcional al registrarse>>
+      nombre: VARCHAR
+      email_corporativo: VARCHAR <<UK>>
+      contrasena_hash: VARCHAR
+      estado_cuenta: ENUM
+      fecha_registro: DATETIME
+  }
+}
+
+package "Autorizacion por roles" #EFF6FF {
+  entity "PERMISO" as PERMISO #DBEAFE {
+    * id_permiso: UUID <<PK>>
+    --
+      codigo: VARCHAR <<UK>>
+      descripcion: VARCHAR
+      modulo: VARCHAR
+      activo: BOOLEAN
+  }
+
+  entity "ROL_PERMISO" as ROL_PERMISO #DBEAFE {
+    * id_rol: UUID <<PK, FK>>
+    * id_permiso: UUID <<PK, FK>>
+  }
+}
+
+package "Cartera y asignaciones" #F0FDF4 {
+  entity "ASIGNACION_CLIENTE" as ASIGNACION_CLIENTE #DCFCE7 {
+    * id_usuario: UUID <<PK, FK>>
+    * id_cliente: UUID <<PK, FK / ER 2>>
+    --
+      asignado_por: UUID <<FK / USUARIO>>
+      fecha_asignacion: DATETIME
+      activa: BOOLEAN
+  }
+}
+
+package "Trazabilidad y ajustes" #F8FAFC {
+  entity "AUDITORIA" as AUDITORIA #E2E8F0 {
+    * id_evento: UUID <<PK>>
+    --
+      id_usuario: UUID <<FK - opcional>>
+      fecha_evento: DATETIME
+      entidad_afectada: VARCHAR
+      entidad_id: UUID
+      accion: VARCHAR
+      resultado: VARCHAR
+      cambios_json: JSON
+      hash_anterior: CHAR(64)
+      hash_evento: CHAR(64)
+  }
+
+  entity "CONFIGURACION_SISTEMA" as CONFIGURACION #E2E8F0 {
+    * id_configuracion: UUID <<PK>>
+    --
+      clave: VARCHAR <<UK>>
+      valor_json: JSON
+      fecha_modificacion: DATETIME
+      modificada_por: UUID <<FK / USUARIO>>
+  }
+}
+
+' REFERENCIA, no una segunda tabla CLIENTE dentro de la base de datos.
+entity "CLIENTE (ver ER 2)" as CLIENTE_REF #F1F5F9 {
+  * id_cliente: UUID <<PK / ER 2>>
+  --
+    id_lector_asignado: UUID <<FK / USUARIO>>
+}
+
+' Cardinalidades: a la izquierda del conector se lee cuantos ROL,
+' etc. corresponde a cada entidad del lado derecho.
+ROL |o--o{ USUARIO : rol asignado
+ROL |o--o{ ROL : rol base de
+ROL ||--o{ ROL_PERMISO : contiene
+PERMISO ||--o{ ROL_PERMISO : habilita
+USUARIO ||--o{ ASIGNACION_CLIENTE : puede acceder
+CLIENTE_REF ||--o{ ASIGNACION_CLIENTE : cartera autorizada
+USUARIO |o--o{ CLIENTE_REF : lector responsable
+USUARIO |o--o{ AUDITORIA : realiza
+USUARIO |o--o{ CONFIGURACION : modifica
+
+' Relacion adicional de auditoria: cada asignacion registra quien la hizo.
+' Descomenta si quieres verla como linea (se evita otro cruce):
+' USUARIO ||--o{ ASIGNACION_CLIENTE : asignado por
+
+
+note right of PERMISO
+  Ejemplos de PERMISO.codigo:
+  CLIENTE_CREAR, CLIENTE_EDITAR
+  CLIENTE_BAJA_LOGICA, CLIENTE_ASIGNAR
+  FACTURA_CREAR_MANUAL, FACTURA_APROBAR
+  SUSCRIPCION_PAUSAR, SUSCRIPCION_CANCELAR
+  ADMIN_CREAR, RECORDATORIOS_CONFIGURAR
+  El archivo de guia relaciona TODOS los metodos
+  con sus codigos y entidades de destino.
+end note
+
+note bottom of CLIENTE_REF
+  Entidad completa en ER 2.
+  id_lector_asignado identifica UN responsable
+  (rol Lector); ASIGNACION_CLIENTE representa
+  TODOS los empleados con acceso a la cartera.
+end note
+
+legend bottom
+  <b>Roles almacenados en ROL:</b> LECTOR, ADMINISTRADOR, SUPERADMINISTRADOR.
+  <b>Herencia opcional:</b> ADMINISTRADOR -> LECTOR -> sin padre; SUPERADMINISTRADOR -> ADMINISTRADOR.
+  Los permisos efectivos son los propios + los heredados (si se habilita herencia).
+  Un usuario recien registrado puede no tener rol (CU-00).
+  CU-02 determina quien asigna permisos o roles a otros usuarios.
+  Se verifica el dominio corporativo y la autorizacion en la aplicacion.
+  FK / ER 2 = referencia a entidad completa del segundo diagrama.
+  La pausa, baja y cancelacion figuran en ER 2; aqui se autorizan por PERMISO.
+endlegend
+@enduml
