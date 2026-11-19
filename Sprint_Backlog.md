@@ -209,10 +209,10 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 El sprint durará 4 semanas. En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
 
 ### Tareas
-- [ ] Identificar clases, enumerados y componentes para el diagrama *(por decidir)*
-- [ ] Establecer métodos para cada clase o interfaz identificada *(por decidir)*
-- [ ] Poner relaciones de herencia (si es necesario) entre clases *(por decidir)*
-- [ ] Revisar feedback del profesor *(todos)*
+- [x] Identificar clases, enumerados y componentes para el diagrama
+- [x] Establecer métodos para cada clase o interfaz identificada
+- [x] Poner relaciones de herencia (si es necesario) entre clases
+- [x] Revisar feedback del profesor *(todos)*
 
 ### Sesión de trabajo 5/11
 
@@ -240,6 +240,6 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 El sprint durará 5 días. En este sprint, la tarea principal será terminar los diagramas y crear la presentación para la entrega del parcial del día 24
 
 ### Tareas
-- [ ] Creacion de la presentación *(Ángel y Gabriel)* 
-- [ ] Revisión de lso diagraams *(todos)*
-- [ ] Crear el registro de sesiones de estos últimos días previos a la entrega.
+- [x] Creacion de la presentación *(Ángel y Gabriel)* 
+- [x] Revisión de lso diagraams *(todos)*
+- [x] Crear el registro de sesiones de estos últimos días previos a la entrega.
