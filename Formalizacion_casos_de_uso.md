@@ -272,6 +272,23 @@ Extensiones:
 - **3a.** Importe inusual, descuento extraordinario o vencimiento fuera de política: El sistema retiene la factura en estado "Pendiente de aprobación", bloquea el envío y solicita validación a un Administrador/SuperAdmin.
 
 ---
+CU-11: Modificar factura en borrador
+(Nota: Por el requisito NFR12, está prohibido editar facturas ya emitidas; solo se editan borradores o se aprueban excepciones).
+
+Actor principal: Administrador / Superadministrador.
+
+Descripción: El actor edita los datos de una factura no emitida o aprueba/rechaza una factura retenida por excepción financiera.
+
+Precondiciones: La factura se encuentra en estado "Borrador" o "Pendiente de Aprobación".
+
+Garantía de éxito: La factura se actualiza o pasa a estado "Aprobada/Emitida", registrando la auditoría.
+
+Escenario principal de éxito:
+El actor selecciona una factura en estado Borrador o Pendiente de aprobación.
+El actor modifica los importes/condiciones o valida la excepción financiera introduciendo una justificación.
+El sistema guarda los cambios, registra la resolución en el log de auditoría y procede a emitir la factura.
+Extensiones:
+1a. Intento de editar una factura ya emitida: El sistema bloquea la acción e indica que debe generarse una factura rectificativa (CU-12).
 
 
 ## CU-12. Emitir y enviar una factura o factura rectificativa
