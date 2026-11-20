@@ -145,13 +145,13 @@ class Incidencia #EDE9FE {
   + resolver(): void
 }
 
-Usuario "1" <-- "1..*" Lector : hereda de
-Administrador "1..*" --> "1..*" Lector : hereda de
+Usuario "1" <-- "1" Lector : hereda de
+Administrador "1" --> "1" Lector : hereda de
 Superadministrador "1" --> "1" Administrador : hereda de
-Cliente "1" -- "0..*" Suscripción : acuerdos
+Cliente "1" -- "0..1" Suscripción : acuerdos
 Cliente "1" -- "0..*" Factura : facturas
 Suscripción "1" -- "0..*" RevisionAnual : revisión del precio
-Suscripción "0..1" <-- "0..*" Factura : origen recurrente
+Suscripción "1" <-- "0..*" Factura : origen recurrente
 Factura "0..*" --> "0..1" Factura : original rectificada
 Factura "0..1" <-- "0..*" MovimientoPago : cobros individuales
 Factura "0..1" --> "0..1" Documento : PDF definitivo
