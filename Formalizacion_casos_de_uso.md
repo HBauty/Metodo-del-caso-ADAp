@@ -158,7 +158,7 @@ Extensiones:
 
 **Actor principal:** Administrador / Lector asignado.
 
-**Descripción:** El actor busca, filtra, consulta y edita la información fiscal, contactos múltiples e historial de facturación de los clientes.
+**Descripción:** El actor busca, filtra 0 consulta  la información fiscal, contactos múltiples e historial de facturación de los clientes pudiendo también editar los campos en los que este permitido. 
 
 **Precondiciones:** El actor ha iniciado sesión.
 
@@ -273,27 +273,6 @@ Extensiones:
 
 ---
 
-## CU-11: Modificar factura en borrador
-
-> (Nota: Por el requisito NFR12, está prohibido editar facturas ya emitidas; solo se editan borradores o se aprueban excepciones).
-
-**Actor principal:** Administrador / Superadministrador.
-
-**Descripción:** El actor edita los datos de una factura no emitida o aprueba/rechaza una factura retenida por excepción financiera.
-
-**Precondiciones:** La factura se encuentra en estado "Borrador" o "Pendiente de Aprobación".
-
-**Garantía de éxito:** La factura se actualiza o pasa a estado "Aprobada/Emitida", registrando la auditoría.
-
-### Escenario principal de éxito:
-
-1. El actor selecciona una factura en estado Borrador o Pendiente de aprobación.
-2. El actor modifica los importes/condiciones o valida la excepción financiera introduciendo una justificación.
-3. El sistema guarda los cambios, registra la resolución en el log de auditoría y procede a emitir la factura.
-
-### Extensiones:
-
-- **1a.** Intento de editar una factura ya emitida: El sistema bloquea la acción e indica que debe generarse una factura rectificativa (CU-12).
 
 ## CU-12. Emitir y enviar una factura o factura rectificativa
 
