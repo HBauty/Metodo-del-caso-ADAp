@@ -1,98 +1,52 @@
 
-@startuml
+@startuml CU12_Emitirfactura
 
-title CU-12: Emitir y enviar una factura o factura rectificativa
+actor "Administrador / Lector" as Usuario
 
-actor "Administrador / Lector autorizado" as admin
-
-participant ":Sistema" as sys
+participant ":Lector" as lector
 participant ":Cliente" as client
-participant ":Facturación" as fact
+participant ":Suscripcion" as sus
+participant ":Factura" as factura
+participant ":Administrador" as admin
+participant ":Documento" as doc
+participant ":Notificacion" as notificacion
 
-admin -> sys : 1. Seleccionar cliente e iniciar factura
-activate sys
+Usuario -> client: 1.Seleccionar cliente
+client --> Usuario: Datos del cliente
 
-sys -> client : Consultar datos fiscales
-activate client
-client --> sys : Devolver datos fiscales
-deactivate client
+Usuario -> lector: 2.crearfacturaManual(factura)
+lector -> factura: 3.calcular()
+factura --> lector: Importes calculados
 
-alt Factura normal
-
-    sys -> fact : 2. Crear borrador de factura
-
-else Factura rectificativa
-
-    admin -> sys : Seleccionar factura original
-
-    sys -> fact : Consultar factura original
-    activate fact
-    fact --> sys : Datos de factura original
-    deactivate fact
-
-    sys -> fact : Crear borrador rectificativo\nvinculado a factura original
-
-else Facturación recurrente
-
-    sys -> fact : Generar factura programada
-
-end
-
-fact --> sys : Borrador preparado
-
-sys -> sys : 3. Validar datos e importes
+lector -> factura: 4.generarPdfEstandar()
+factura --> lector: PDF generado
 
 alt Datos fiscales incompletos
-
-    sys --> admin : Mostrar errores y bloquear emisión
+    lector --> Usuario: Mostrar errores de validación
 
 else Datos correctos
 
-    sys --> admin : Mostrar vista previa del PDF
-
-    sys -> sys : 4. Comprobar importes y condiciones
-
     alt Requiere aprobación
+        Usuario -> admin: Solicitar aprobación
+        admin -> admin: 5.aprobarfactura(factura)
+        admin --> Usuario: Aprobación registrada
+    end
 
-        sys --> admin : Mantener factura en borrador\nhasta su aprobación
+    Usuario -> factura: 6.Confirmar emisión
+    factura -> factura: 7.generarPdfEstandar()
+    factura -> doc: 8.verificarIntegridad(bytes)
+    doc --> factura: Resultado de integridad
 
-    else No requiere aprobación
+    factura -> factura: 9.enviarPorEmail()
 
-        opt Factura manual
+    alt Envío correcto
+        factura -> notificacion: 10.estaEntregada()
+        notificacion --> factura: Resultado de entrega
 
-            admin -> sys : 5. Confirmar emisión
-
-        end
-
-        sys -> fact : 6. Emitir factura y guardar PDF
-        activate fact
-        fact --> sys : Factura y PDF guardados
-        deactivate fact
-
-        sys -> client : 7. Enviar factura
-        activate client
-
-        alt Envío correcto
-
-            client --> sys : Confirmación de envío
-            sys -> fact : Registrar resultado del envío
-            fact --> sys : Resultado registrado
-
-        else Error en el envío
-
-            client --> sys : Error de envío
-            sys -> fact : Registrar incidencia de envío
-            fact --> sys : Incidencia registrada
-            sys --> admin : Notificar incidencia
-
-        end
-
-        deactivate client
-
+    else Error de envío
+        factura -> factura: 11.registrarIncidenciaEntrega()
     end
 
 end
-
-deactivate sys
 
 @enduml
