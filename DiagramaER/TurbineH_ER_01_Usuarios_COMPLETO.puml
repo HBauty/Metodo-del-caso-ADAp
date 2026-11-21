@@ -29,7 +29,7 @@ package "Identidad" #EFF6FF {
   entity "ROL" as ROL #DBEAFE {
     * id_rol: UUID <<PK>>
     --
-      nombre: VARCHAR <<UK>>
+      nombre: VARCHAR(100) <<UK>>
       descripcion: TEXT
       id_rol_padre: UUID <<FK / ROL - opcional>>
   }
@@ -38,10 +38,10 @@ package "Identidad" #EFF6FF {
     * id_usuario: UUID <<PK>>
     --
       id_rol: UUID <<FK - opcional al registrarse>>
-      nombre: VARCHAR
-      email_corporativo: VARCHAR <<UK>>
-      contrasena_hash: VARCHAR
-      estado_cuenta: ENUM
+      nombre: VARCHAR(100)
+      email_corporativo: VARCHAR(100) <<UK>>
+      contrasena_hash: VARCHAR(100)
+      estado_cuenta: ENUM('ACTIVA', 'SUSPENDIDA', 'PENDIENTE')
       fecha_registro: DATETIME
   }
 }
@@ -50,9 +50,9 @@ package "Autorizacion por roles" #EFF6FF {
   entity "PERMISO" as PERMISO #DBEAFE {
     * id_permiso: UUID <<PK>>
     --
-      codigo: VARCHAR <<UK>>
-      descripcion: VARCHAR
-      modulo: VARCHAR
+      codigo: VARCHAR(100) <<UK>>
+      descripcion: VARCHAR(100)
+      modulo: VARCHAR(100)
       activo: BOOLEAN
   }
 
@@ -79,10 +79,10 @@ package "Trazabilidad y ajustes" #F8FAFC {
     --
       id_usuario: UUID <<FK - opcional>>
       fecha_evento: DATETIME
-      entidad_afectada: VARCHAR
+      entidad_afectada: VARCHAR(100)
       entidad_id: UUID
-      accion: VARCHAR
-      resultado: VARCHAR
+      accion: VARCHAR(100)
+      resultado: VARCHAR(100)
       cambios_json: JSON
       hash_anterior: CHAR(64)
       hash_evento: CHAR(64)
@@ -91,7 +91,7 @@ package "Trazabilidad y ajustes" #F8FAFC {
   entity "CONFIGURACION_SISTEMA" as CONFIGURACION #E2E8F0 {
     * id_configuracion: UUID <<PK>>
     --
-      clave: VARCHAR <<UK>>
+      clave: VARCHAR(100) <<UK>>
       valor_json: JSON
       fecha_modificacion: DATETIME
       modificada_por: UUID <<FK / USUARIO>>
