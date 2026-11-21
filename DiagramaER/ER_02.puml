@@ -19,46 +19,51 @@ skinparam package {
 }
 hide circle
 hide empty members
-title TurbineH - ER 2/2: clientes y facturacion (vista ligera)
+title TurbineH - Modelo Físico 2/2: Clientes y Facturación
+
+' Referencia externa a la tabla USUARIO definida en el Modelo Físico 1/2
+entity "USUARIO <<externa ER 1>>" as USUARIO #F1F5F9 {
+  * id_usuario: UUID <<PK>>
+}
 
 package "Clientes" #F0FDF4 {
   entity "CLIENTE" as CLIENTE #DCFCE7 {
     * id_cliente: UUID <<PK>>
     --
-      nombre_empresa: VARCHAR
-      nombre_comercial: VARCHAR
-      razon_social: VARCHAR
-      nif_identificador_fiscal: VARCHAR
-      pais: VARCHAR
-      moneda: CHAR(3)
-      direccion: TEXT
-      datos_contacto_general: TEXT
-      condiciones_pago_particulares: TEXT
-      fecha_contratacion: DATE
-      estado_ficha: ENUM
-      fecha_solicitud_baja: DATETIME
-      fecha_baja_logica: DATETIME
-      sector: VARCHAR
-      version: INTEGER
-      id_lector_asignado: UUID <<FK / USUARIO ER 1>>
+    * nombre_empresa: VARCHAR(200)
+      nombre_comercial: VARCHAR(200) [NULL]
+    * razon_social: VARCHAR(200)
+    * nif_identificador_fiscal: VARCHAR(30) <<UK>>
+    * pais: VARCHAR(100)
+    * moneda: CHAR(3)
+      direccion: TEXT [NULL]
+      datos_contacto_general: TEXT [NULL]
+      condiciones_pago_particulares: TEXT [NULL]
+    * fecha_contratacion: DATE
+    * estado_ficha: ENUM('ACTIVO', 'PENDIENTE_BAJA', 'BAJA')
+      fecha_solicitud_baja: DATETIME [NULL]
+      fecha_baja_logica: DATETIME [NULL]
+      sector: VARCHAR(100) [NULL]
+    * version: INTEGER
+      id_lector_asignado: UUID <<FK>> [NULL]
   }
 
   entity "CONTACTO" as CONTACTO #DCFCE7 {
     * id_contacto: UUID <<PK>>
     --
-      id_cliente: UUID <<FK>>
-      nombre: VARCHAR
-      email: VARCHAR
-      telefono: VARCHAR
-      tipo_contacto: ENUM
-      idioma: VARCHAR
-      activo: BOOLEAN
+    * id_cliente: UUID <<FK>>
+    * nombre: VARCHAR(150)
+    * email: VARCHAR(255)
+      telefono: VARCHAR(30) [NULL]
+    * tipo_contacto: ENUM('PRINCIPAL', 'FACTURACION', 'TECNICO', 'OTRO')
+    * idioma: VARCHAR(10)
+    * activo: BOOLEAN
   }
 
   entity "ETIQUETA" as ETIQUETA #DCFCE7 {
     * id_etiqueta: UUID <<PK>>
     --
-      nombre: VARCHAR <<UK>>
+    * nombre: VARCHAR(50) <<UK>>
   }
 
   entity "CLIENTE_ETIQUETA" as CLIENTE_ETIQUETA #DCFCE7 {
@@ -71,57 +76,57 @@ package "Suscripciones y tarifas" #FFF7ED {
   entity "TARIFA" as TARIFA #FFEDD5 {
     * id_tarifa: UUID <<PK>>
     --
-      nombre: VARCHAR
-      ingreso_anual_min: DECIMAL
-      ingreso_anual_max: DECIMAL
-      cuota_mensual_base: DECIMAL
-      moneda: CHAR(3)
-      activa: BOOLEAN
+    * nombre: VARCHAR(100)
+    * ingreso_anual_min: DECIMAL(12,2)
+    * ingreso_anual_max: DECIMAL(12,2)
+    * cuota_mensual_base: DECIMAL(12,2)
+    * moneda: CHAR(3)
+    * activa: BOOLEAN
   }
 
   entity "SUSCRIPCION" as SUSCRIPCION #FFEDD5 {
     * id_suscripcion: UUID <<PK>>
     --
-      id_cliente: UUID <<FK>>
-      id_tarifa: UUID <<FK>>
-      id_comercial: UUID <<FK / USUARIO ER 1>>
-      fecha_inicio: DATE
-      cuota_mensual_acordada: DECIMAL
-      rango_anual_desde: DECIMAL
-      rango_anual_hasta: DECIMAL
-      condiciones_pago: TEXT
-      estado_suscripcion: ENUM
-      proxima_emision: DATE
-      fecha_cancelacion: DATETIME
-      motivo_cancelacion: TEXT
-      cancelada_por: UUID <<FK / USUARIO ER 1>>
-      version: INTEGER
+    * id_cliente: UUID <<FK>>
+    * id_tarifa: UUID <<FK>>
+    * id_comercial: UUID <<FK>>
+    * fecha_inicio: DATE
+    * cuota_mensual_acordada: DECIMAL(12,2)
+    * rango_anual_desde: DECIMAL(12,2)
+    * rango_anual_hasta: DECIMAL(12,2)
+      condiciones_pago: TEXT [NULL]
+    * estado_suscripcion: ENUM('ACTIVA', 'PAUSADA', 'CANCELADA')
+      proxima_emision: DATE [NULL]
+      fecha_cancelacion: DATETIME [NULL]
+      motivo_cancelacion: TEXT [NULL]
+      cancelada_por: UUID <<FK>> [NULL]
+    * version: INTEGER
   }
 
   entity "PAUSA_SUSCRIPCION" as PAUSA_SUSCRIPCION #FFEDD5 {
     * id_pausa: UUID <<PK>>
     --
-      id_suscripcion: UUID <<FK>>
-      id_usuario: UUID <<FK / USUARIO ER 1>>
-      motivo: TEXT
-      fecha_inicio: DATE
-      fecha_reactivacion_prevista: DATE
-      fecha_reactivacion_real: DATE
+    * id_suscripcion: UUID <<FK>>
+    * id_usuario: UUID <<FK>>
+    * motivo: TEXT
+    * fecha_inicio: DATE
+    * fecha_reactivacion_prevista: DATE
+      fecha_reactivacion_real: DATE [NULL]
   }
 
   entity "REVISION_ANUAL" as REVISION_ANUAL #FFEDD5 {
     * id_revision: UUID <<PK>>
     --
-      id_suscripcion: UUID <<FK>>
-      id_tarifa_propuesta: UUID <<FK>>
-      id_administrador: UUID <<FK / USUARIO ER 1>>
-      fecha_revision: DATE
-      ingresos_cobrados_anio: DECIMAL
-      cuota_propuesta: DECIMAL
-      decision: ENUM
-      efectiva_desde: DATE
-      fecha_resolucion: DATE
-      motivo: TEXT
+    * id_suscripcion: UUID <<FK>>
+      id_tarifa_propuesta: UUID <<FK>> [NULL]
+    * id_administrador: UUID <<FK>>
+    * fecha_revision: DATE
+    * ingresos_cobrados_anio: DECIMAL(12,2)
+    * cuota_propuesta: DECIMAL(12,2)
+    * decision: ENUM('PENDIENTE', 'ACEPTADA', 'RECHAZADA', 'AJUSTADA')
+      efectiva_desde: DATE [NULL]
+      fecha_resolucion: DATE [NULL]
+      motivo: TEXT [NULL]
   }
 }
 
@@ -129,37 +134,37 @@ package "Facturas y cobros" #FDF2F8 {
   entity "FACTURA" as FACTURA #FCE7F3 {
     * id_factura: UUID <<PK>>
     --
-      id_cliente: UUID <<FK>>
-      id_suscripcion: UUID <<FK - opcional si puntual>>
-      id_factura_original: UUID <<FK - si rectificativa>>
-      id_pdf: UUID <<FK, UK / DOCUMENTO>>
-      numero_factura: VARCHAR <<UK - al emitir>>
-      concepto: TEXT
-      fecha_emision: DATE
-      fecha_vencimiento: DATE
-      periodo_facturado: DATE
-      tipo_factura: ENUM
-      prorrateada: BOOLEAN
-      estado_emision: ENUM
-      estado_cobro: ENUM
-      seguimiento_pausado_hasta: DATE
-      motivo_pausa_seguimiento: TEXT
-      subtotal: DECIMAL
-      porcentaje_iva: DECIMAL
-      importe_iva: DECIMAL
-      importe_total: DECIMAL
+    * id_cliente: UUID <<FK>>
+      id_suscripcion: UUID <<FK>> [NULL]
+      id_factura_original: UUID <<FK>> [NULL]
+      id_pdf: UUID <<FK, UK>> [NULL]
+      numero_factura: VARCHAR(50) <<UK>> [NULL]
+    * concepto: TEXT
+    * fecha_emision: DATE
+    * fecha_vencimiento: DATE
+    * periodo_facturado: DATE
+    * tipo_factura: ENUM('RECURRENTE', 'PUNTUAL', 'RECTIFICATIVA')
+    * prorrateada: BOOLEAN
+    * estado_emision: ENUM('BORRADOR', 'EMITIDA', 'ANULADA')
+    * estado_cobro: ENUM('PENDIENTE', 'PAGADA', 'VENCIDA', 'INCOBRABLE')
+      seguimiento_pausado_hasta: DATE [NULL]
+      motivo_pausa_seguimiento: TEXT [NULL]
+    * subtotal: DECIMAL(12,2)
+    * porcentaje_iva: DECIMAL(5,2)
+    * importe_iva: DECIMAL(12,2)
+    * importe_total: DECIMAL(12,2)
   }
 
   entity "MOVIMIENTO_PAGO" as MOVIMIENTO_PAGO #FCE7F3 {
     * id_movimiento: UUID <<PK>>
     --
-      id_factura: UUID <<FK - opcional sin conciliar>>
-      id_externo: VARCHAR
-      pasarela: VARCHAR
-      fecha_operacion: DATETIME
-      importe: DECIMAL
-      moneda: CHAR(3)
-      estado_conciliacion: ENUM
+      id_factura: UUID <<FK>> [NULL]
+    * id_externo: VARCHAR(100)
+    * pasarela: VARCHAR(50)
+    * fecha_operacion: DATETIME
+    * importe: DECIMAL(12,2)
+    * moneda: CHAR(3)
+    * estado_conciliacion: ENUM('PENDIENTE', 'CONCILIADO', 'DISCREPANCIA')
   }
 }
 
@@ -167,17 +172,17 @@ package "Comunicaciones e incidencias" #F5F3FF {
   entity "NOTIFICACION" as NOTIFICACION #EDE9FE {
     * id_notificacion: UUID <<PK>>
     --
-      id_cliente: UUID <<FK>>
-      id_contacto: UUID <<FK>>
-      id_regla_recordatorio: UUID <<FK - opcional>>
-      id_movimiento: UUID <<FK - opcional>>
-      tipo: ENUM
-      asunto: TEXT
-      mensaje: TEXT
-      idioma: VARCHAR
-      estado_entrega: ENUM
-      fecha_creacion: DATETIME
-      fecha_entrega: DATETIME
+    * id_cliente: UUID <<FK>>
+    * id_contacto: UUID <<FK>>
+      id_regla_recordatorio: UUID <<FK>> [NULL]
+      id_movimiento: UUID <<FK>> [NULL]
+    * tipo: ENUM('FACTURA', 'RECORDATORIO', 'CONFIRMACION_PAGO', 'AVISO')
+    * asunto: TEXT
+    * mensaje: TEXT
+    * idioma: VARCHAR(10)
+    * estado_entrega: ENUM('PENDIENTE', 'ENVIADA', 'ENTREGADA', 'FALLIDA')
+    * fecha_creacion: DATETIME
+      fecha_entrega: DATETIME [NULL]
   }
 
   entity "FACTURA_NOTIFICACION" as FACTURA_NOTIFICACION #EDE9FE {
@@ -188,37 +193,37 @@ package "Comunicaciones e incidencias" #F5F3FF {
   entity "INCIDENCIA" as INCIDENCIA #EDE9FE {
     * id_incidencia: UUID <<PK>>
     --
-      id_notificacion: UUID <<FK - opcional>>
-      id_movimiento: UUID <<FK - opcional>>
-      tipo: ENUM
-      descripcion: TEXT
-      estado: ENUM
-      fecha_deteccion: DATETIME
-      proximo_reintento: DATETIME
-      resuelta_en: DATETIME
+      id_notificacion: UUID <<FK>> [NULL]
+      id_movimiento: UUID <<FK>> [NULL]
+    * tipo: ENUM('ERROR_ENVIO', 'PAGO_RECHAZADO', 'CONCILIACION')
+    * descripcion: TEXT
+    * estado: ENUM('ABIERTA', 'EN_PROCESO', 'RESUELTA')
+    * fecha_deteccion: DATETIME
+      proximo_reintento: DATETIME [NULL]
+      resuelta_en: DATETIME [NULL]
   }
 
   entity "INTENTO_ENVIO" as INTENTO_ENVIO #EDE9FE {
     * id_intento: UUID <<PK>>
     --
-      id_notificacion: UUID <<FK>>
-      fecha_intento: DATETIME
-      resultado: ENUM
-      detalle_error: TEXT
-      id_externo: VARCHAR
-      entrega_confirmada: BOOLEAN
+    * id_notificacion: UUID <<FK>>
+    * fecha_intento: DATETIME
+    * resultado: ENUM('EXITO', 'ERROR_TEMPORAL', 'ERROR_PERMANENTE')
+      detalle_error: TEXT [NULL]
+      id_externo: VARCHAR(100) [NULL]
+    * entrega_confirmada: BOOLEAN
   }
 
   entity "REGLA_RECORDATORIO" as REGLA_RECORDATORIO #EDE9FE {
     * id_regla: UUID <<PK>>
     --
-      nombre: VARCHAR
-      dias_desde_vencimiento: INTEGER
-      frecuencia_dias: INTEGER
-      tono: VARCHAR
-      activa: BOOLEAN
-      modificada_por: UUID <<FK / USUARIO ER 1>>
-      fecha_modificacion: DATETIME
+    * nombre: VARCHAR(100)
+    * dias_desde_vencimiento: INTEGER
+    * frecuencia_dias: INTEGER
+    * tono: VARCHAR(50)
+    * activa: BOOLEAN
+    * modificada_por: UUID <<FK>>
+    * fecha_modificacion: DATETIME
   }
 }
 
@@ -226,12 +231,12 @@ package "Documentos" #FFFBEB {
   entity "DOCUMENTO" as DOCUMENTO #FEF3C7 {
     * id_documento: UUID <<PK>>
     --
-      id_cliente: UUID <<FK>>
-      tipo_documento: ENUM
-      uri_almacenamiento: TEXT
-      sha256: CHAR(64)
-      fecha_creacion: DATETIME
-      inmutable: BOOLEAN
+    * id_cliente: UUID <<FK>>
+    * tipo_documento: ENUM('FACTURA_PDF', 'CONTRATO', 'COMPROBANTE')
+    * uri_almacenamiento: TEXT
+    * sha256: CHAR(64)
+    * fecha_creacion: DATETIME
+    * inmutable: BOOLEAN
   }
 
   entity "CONTRATO_SUSCRIPCION" as CONTRATO_SUSCRIPCION #FEF3C7 {
@@ -242,13 +247,13 @@ package "Documentos" #FFFBEB {
   entity "COMPROBANTE" as COMPROBANTE #FEF3C7 {
     * id_comprobante: UUID <<PK>>
     --
-      id_documento: UUID <<FK, UK>>
-      id_cliente: UUID <<FK>>
-      id_factura: UUID <<FK - opcional>>
-      id_movimiento: UUID <<FK - opcional>>
-      id_notificacion: UUID <<FK - opcional>>
-      creado_por: UUID <<FK / USUARIO ER 1>>
-      fecha_generacion: DATETIME
+    * id_documento: UUID <<FK, UK>>
+    * id_cliente: UUID <<FK>>
+      id_factura: UUID <<FK>> [NULL]
+      id_movimiento: UUID <<FK>> [NULL]
+      id_notificacion: UUID <<FK>> [NULL]
+    * creado_por: UUID <<FK>>
+    * fecha_generacion: DATETIME
   }
 }
 
@@ -256,46 +261,61 @@ package "Aprobaciones de excepciones" #F8FAFC {
   entity "SOLICITUD_APROBACION" as SOLICITUD_APROBACION #E2E8F0 {
     * id_solicitud: UUID <<PK>>
     --
-      id_factura: UUID <<FK - opcional>>
-      id_suscripcion: UUID <<FK - opcional>>
-      solicitada_por: UUID <<FK / USUARIO ER 1>>
-      resuelta_por: UUID <<FK / USUARIO ER 1>>
-      motivo: TEXT
-      justificacion: TEXT
-      estado: ENUM
-      fecha_solicitud: DATETIME
-      fecha_resolucion: DATETIME
+      id_factura: UUID <<FK>> [NULL]
+      id_suscripcion: UUID <<FK>> [NULL]
+    * solicitada_por: UUID <<FK>>
+      resuelta_por: UUID <<FK>> [NULL]
+    * motivo: TEXT
+    * justificacion: TEXT
+    * estado: ENUM('PENDIENTE', 'APROBADA', 'RECHAZADA')
+    * fecha_solicitud: DATETIME
+      fecha_resolucion: DATETIME [NULL]
   }
 }
 
+' Relaciones internas del dominio
 CLIENTE ||--o{ CONTACTO : tiene
 CLIENTE ||--o{ CLIENTE_ETIQUETA : se clasifica
 ETIQUETA ||--o{ CLIENTE_ETIQUETA : etiqueta
 CLIENTE ||--o{ SUSCRIPCION : contrata
-TARIFA ||--o{ SUSCRIPCION : usa tarifa
-SUSCRIPCION ||--o{ PAUSA_SUSCRIPCION : historico pausas
-SUSCRIPCION ||--o{ REVISION_ANUAL : revisiones
-TARIFA |o--o{ REVISION_ANUAL : propuesta
+TARIFA ||--o{ SUSCRIPCION : aplica
+SUSCRIPCION ||--o{ PAUSA_SUSCRIPCION : registra pausas
+SUSCRIPCION ||--o{ REVISION_ANUAL : tiene revisiones
+TARIFA |o--o{ REVISION_ANUAL : tarifa propuesta
 CLIENTE ||--o{ FACTURA : recibe
-SUSCRIPCION |o--o{ FACTURA : origen recurrente
-FACTURA |o--o{ FACTURA : rectifica original
-FACTURA |o--o{ MOVIMIENTO_PAGO : se concilia con
-CLIENTE ||--o{ NOTIFICACION : comunicaciones
+SUSCRIPCION |o--o{ FACTURA : genera
+FACTURA |o--o{ FACTURA : rectifica a
+FACTURA |o--o{ MOVIMIENTO_PAGO : concilia con
+CLIENTE ||--o{ NOTIFICACION : recibe
+CONTACTO ||--o{ NOTIFICACION : destinatario
+REGLA_RECORDATORIO |o--o{ NOTIFICACION : dispara
+MOVIMIENTO_PAGO |o--o{ NOTIFICACION : notifica sobre
 FACTURA ||--o{ FACTURA_NOTIFICACION : asociada
 NOTIFICACION ||--o{ FACTURA_NOTIFICACION : incluye
-NOTIFICACION |o--o{ INCIDENCIA : fallo entrega
-NOTIFICACION ||--o{ INTENTO_ENVIO : intentos
-REGLA_RECORDATORIO |o--o{ NOTIFICACION : regla aplicada
-DOCUMENTO |o--o| FACTURA : PDF de factura
-SUSCRIPCION ||--o{ CONTRATO_SUSCRIPCION : contratos
-DOCUMENTO ||--o{ CONTRATO_SUSCRIPCION : archivo de contrato
+NOTIFICACION |o--o{ INCIDENCIA : origina fallo
+MOVIMIENTO_PAGO |o--o{ INCIDENCIA : origina incidencia
+NOTIFICACION ||--o{ INTENTO_ENVIO : ejecuta
+CLIENTE ||--o{ DOCUMENTO : posee
+DOCUMENTO |o--o| FACTURA : PDF asociado
+SUSCRIPCION ||--o{ CONTRATO_SUSCRIPCION : vincula contrato
+DOCUMENTO ||--o{ CONTRATO_SUSCRIPCION : archivo
 DOCUMENTO ||--o| COMPROBANTE : PDF comprobante
+CLIENTE ||--o{ COMPROBANTE : pertenece a
+FACTURA |o--o{ COMPROBANTE : respalda factura
+MOVIMIENTO_PAGO |o--o{ COMPROBANTE : respalda pago
+NOTIFICACION |o--o{ COMPROBANTE : respalda envio
 FACTURA |o--o{ SOLICITUD_APROBACION : excepcion factura
-SUSCRIPCION |o--o{ SOLICITUD_APROBACION : excepcion acuerdo
+SUSCRIPCION |o--o{ SOLICITUD_APROBACION : excepcion suscripcion
 
+' Relaciones hacia entidad externa USUARIO (ER 1/2)
+USUARIO |o--o{ CLIENTE : lector asignado
+USUARIO ||--o{ SUSCRIPCION : comercial (id_comercial)
+USUARIO |o--o{ SUSCRIPCION : cancelada por
+USUARIO ||--o{ PAUSA_SUSCRIPCION : solicita pausa
+USUARIO ||--o{ REVISION_ANUAL : resuelve revision
+USUARIO ||--o{ REGLA_RECORDATORIO : modifica regla
+USUARIO ||--o{ COMPROBANTE : genera comprobante
+USUARIO ||--o{ SOLICITUD_APROBACION : solicita
+USUARIO |o--o{ SOLICITUD_APROBACION : resuelve
 
 legend bottom
-  FK / USUARIO ER 1 = referencia al primer diagrama.
-  Relaciones secundarias: consultar atributos FK.
-endlegend
-@enduml
