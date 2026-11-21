@@ -1,23 +1,24 @@
-
 @startuml
-title CU-06: Consultar y gestionar fichas de clientes e historial
+title CU-06: Consultar y editar fichas de clientes
+autonumber
 
-actor ":Lector" as lector
-participant ":Cliente" as cliente
+actor "Lector (persona)" as persona
+participant ":Lector" as lector
 
-lector -> cliente : 1. consultarCliente(Cliente)
-activate cliente
-cliente --> lector : Cliente
+persona -> lector : consultarCliente(Cliente)
+activate lector
+lector --> persona : Cliente
+deactivate lector
 
-lector -> cliente : 2. editarCliente(Cliente)
+persona -> lector : editarCliente(Cliente)
+activate lector
 
-alt No hay conflicto de concurrencia
-    cliente --> lector : modificación aceptada
-else Hay conflicto de concurrencia
-    cliente --> lector : aviso de conflicto
-    lector -> cliente : recargar datos actuales
-    cliente --> lector : datos actualizados
+alt Sin conflicto de concurrencia
+    lector --> persona : ficha actualizada
+else Conflicto de concurrencia
+    lector --> persona : aviso de conflicto
+    persona -> lector : consultarCliente(Cliente)
+    lector --> persona : Cliente (datos actuales)
 end
-deactivate cliente
-
+deactivate lector
 @enduml
