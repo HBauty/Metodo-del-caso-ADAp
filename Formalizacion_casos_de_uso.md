@@ -1,8 +1,3 @@
-## Reparto de Casos de uso para Diagramas de Secuencia
-
-**Jose:** CU-00 a CU-05
-**Aquiles:** CU-06 a CU-12
-**Hugo:** CU-13 a CU-17
 
 ## CU-00: Registrarse en el sistema (Alta de empleado)
 
@@ -38,7 +33,7 @@ Extensiones:
 
 **Precondiciones:** El empleado tiene una cuenta activa previamente registrada en el sistema.
 
-**disparador** El empleado solicita acceder al sistema.
+**Disparador:** El empleado solicita acceder al sistema.
 
 **Garantía de éxito:** Se inicia la sesión y se carga el entorno restringido a sus permisos y clientes autorizados.
 
@@ -62,6 +57,8 @@ Extensiones:
 **Descripción:** El actor registra empleados, define su rol (Administrador o Lector) y les asigna la cartera de clientes sobre la que pueden operar.
 
 **Precondiciones:** El actor ha iniciado sesión con permisos de administración.
+
+**Disparador:** El actor abre la ficha de un empleado para asignarle o cambiarle el rol o la cartera de clientes.
 
 **Garantía de éxito:** Los permisos del empleado se actualizan y la acción queda registrada en el log de auditoría.
 
@@ -204,13 +201,13 @@ Extensiones:
 
 ## CU-08: Emitir orden de cobro / Envío de factura automática
 
-**Actor principal:** Lector asignado
+**Actor principal:** El ciclo de facturación se ejecuta automáticamente mediante un proceso interno. Aunque el Lector asignado consulta las facturas y el resultado del envío de sus clientes.
 
 **Descripción:** El sistema ejecuta el ciclo de facturación programado (día 1 de cada mes o día de alta) generando y enviando el documento de cobro al cliente.
 
 **Precondiciones:** El cliente tiene una suscripción activa.
 
-**disparador** El reloj del sistema alcanza el limite o se confirma un nuevo alta 
+**Disparador:** Se envía la orden de cobro el día 1 de cada mes.
 
 **Garantía de éxito:** La factura se emite, se almacena el PDF íntegro y se envía al cliente en menos de 1 minuto.
 
