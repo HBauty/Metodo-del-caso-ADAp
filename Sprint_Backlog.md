@@ -114,7 +114,7 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 
 ### Tareas: 
 - [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Ángel, Gabriel y Francisco)*
-- [x] Formalizar los casos de usos *(Rubén y Jose)*
+- [x] Formalizar los casos de usos. *(Rubén y Jose)*
 - [x] Mejorar la estructura, organización y presentación de los documentos para la entrega. *(Ángel)*
 
 ---
@@ -129,9 +129,9 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 
 ### Tareas:
 - [x] Mejorar la estructura, organización y presentación del sprint backlog. *(Ángel)*
-- [x] Mejorar la estructura, organización y presentación de requisitos *(Ángel)*
+- [x] Mejorar la estructura, organización y presentación de requisitos. *(Ángel)*
 - [x] Actualización de los requisitos tras la revisión, en base a los errores, contradicciones y mejoras detectadas en la tarea de la sesión 13/10. *(Ángel, Gabriel y Francisco)*
-- [x] Definir las dependencias entre los requisitos funcionales *(Ángel, Gabriel y Francisco)*
+- [x] Definir las dependencias entre los requisitos funcionales. *(Ángel, Gabriel y Francisco)*
 
 ---
 
@@ -144,8 +144,8 @@ En esta sesión, nos hemos reunido para llevar a cabo el nuevo sprint planning q
 15 min
 
 ### Tareas:
-- [x] Formalizar los casos de usos *(Rubén y Jose)*
-- [x] Mejorar la organización y presentación de casos de usos *(Ángel)*
+- [x] Formalizar los casos de usos. *(Rubén y Jose)*
+- [x] Mejorar la organización y presentación de casos de usos. *(Ángel)*
 
 ---
 
@@ -206,40 +206,68 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 1 h
 
 ### Sprint planning
-El sprint durará 4 semanas. En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
+El sprint durará 2 semanas . En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
 
 ### Tareas
-- [x] Identificar clases, enumerados y componentes para el diagrama
-- [x] Establecer métodos para cada clase o interfaz identificada
-- [x] Poner relaciones de herencia (si es necesario) entre clases
-- [x] Revisar feedback del profesor *(todos)*
+- [x] Hacer los diagramas de secuencias *(Hugo, Aquiles y Jose)*
+- [x] Empezar el diagrama de clases *(Ángel, Gabriel y Francisco)*
 
 ### Sesión de trabajo 5/11
 
 ### Asistentes
-Hugo, Jose, Aquiles, Gabriel, Rosales, Ángel
+Ángel, Hugo, Jose, Aquiles, Gabriel y Francisco
 
-### Duración 
-1 h y 45 min
+### Duración
+4 h y 45 min
 
 ### Tareas
-- [x] Refactorizar diagramas de clases *(Rosales, Gabriel y Ángel)*
-- [x] Realizar diagramas de secuencia *(Hugo, Jose, Aquiles)*
-
+- [x] Revisar y actualizar el diagrama de clases a partir de las aclaraciones del profesor durante la sesión práctica. *(Rosales, Gabriel y Ángel)*
+- [x] Terminar la primera versión de los diagramas de secuencia. *(Hugo, Jose, Aquiles)*
 
 ## SPRINT 4
 ### Sesión organizativa 19/11
 
 ### Asistentes
-Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
+Hugo, Ángel, Aquiles, Rubén, Gabriel.
 
 ### Duración
-1 h
+4 h
 
 ### Sprint planning
 El sprint durará 5 días. En este sprint, la tarea principal será terminar los diagramas y crear la presentación para la entrega del parcial del día 24
 
 ### Tareas
-- [x] Creacion de la presentación *(Ángel y Gabriel)* 
-- [x] Revisión de lso diagraams *(todos)*
-- [x] Crear el registro de sesiones de estos últimos días previos a la entrega.
+- [x] Empezar la presentación *(Hugo, Aquiles y Gabriel)* 
+- [x] Alinear los diagramas de secuencia (CU06-12) con los métodos del diagrama de clases *(Ángel y Aquiles)*
+- [x] Realizar el diagrama entidad-relación. *(Rubén)*
+
+### Sesión organizativa 20/11
+
+### Asistentes
+Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
+
+### Duración
+2 h
+
+### Tareas
+- [x] Continuar con la presentación. *(Hugo y Gabriel)*
+- [x] Corrección del casos de uso CU-11 conforme al informe *(Ángel y Francisco)*
+- [x] Revisión de las asociaciones en el diagrama de clases. *(Ángel y Francisco)*
+- [x] Continuar diagramas de secuencia (CU06-12). *(Aquiles)*
+- [x] Revisar el diagrama entidad-relación. *(Rubén)*
+- [x] Revisión del diagrama de arquitectura. *(Gabriel)*
+- [x] Crear el guion para la presentación. *(Gabriel)*
+
+### Sesión organizativa 22/11
+Ángel, Aquiles, Rubén, Jose y  Gabriel.
+
+### Duración
+2 h
+
+### Tareas
+- [x] Corrección del casos de uso conforme al informe *(Ángel y Aquiles)*
+
+
+
+
+
