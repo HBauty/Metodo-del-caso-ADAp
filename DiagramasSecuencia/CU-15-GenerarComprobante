@@ -1,11 +1,17 @@
 @startuml
-actor Administrador
-Administrador -> Comprobante: generarComprobante(cliente: Cliente, factura: Factura)
-Comprobante -> Cliente: verificarCliente(cliente: Cliente)
-alt EXISTE EL CLIENTE
-Cliente -> Comprobante: true
-Comprobante -> Cliente: verificarFactura(factura: Factura)
-alt EXISTE LA FACTURA ASOCIADA AL CLIENTE
-Cliente -> Comprobante: true
-Comprobante -> Administrador: comprobante
+title TurbineH - Generar comprobante de una factura
+
+actor Administrador as Admin
+participant "Cliente" as Cliente
+participant "Factura" as Factura
+
+Admin -> Admin: consultarCliente(cliente: Cliente)
+alt cliente existe y la factura está en su asociación "facturas"
+    Admin -> Cliente: facturas
+    Cliente --> Admin: facturas [0..*]
+    Admin -> Factura: generarPdfEstandar()
+    Factura --> Admin: urlPdf: String
+else no existe el cliente o la factura no le pertenece
+    Admin --> Admin: error
+end
 @enduml
