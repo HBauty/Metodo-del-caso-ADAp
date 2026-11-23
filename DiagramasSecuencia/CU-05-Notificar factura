@@ -2,63 +2,39 @@
 hide footbox
 skinparam sequenceParticipant underline
 
-actor ": Reloj / Sistema" as sys
+actor ": Reloj del sistema /  Admin " as reloj
 participant ": DataBase" as db <<infra>>
 participant ": Factura" as fac
 participant ": ServicioEmail" as email <<infra>>
 participant ": Notificación" as notif
 actor ": Cliente" as cli
 
-sys -> db : 1: ObtenerFacturasVencidas()
+reloj -> db : 1: RevisionDiariaVencimientos()
 activate db
-note right of db
-  fechaVencimiento superada y estadoFactura distinto
-  de PAGADA y de SEGUIMIENTO_PAUSADO.
-end note
-create fac
-db --> fac : 2: cargar datos
-db --> sys : facturas
+db --> reloj : facturas pendientes y configuración de recordatorios
 deactivate db
 
-loop Por cada factura vencida
-    sys -> email : 3: GenerarMensaje(factura, idioma, tono)
-    activate email
-    note right of email
-      Idioma y tono no son atributos del modelo:
-      los resuelve el servicio de correo.
-    end note
-    email --> sys : mensaje
-    deactivate email
+loop #LightGreen Por cada factura con recordatorio programado y habilitado
 
-    sys -> fac : 4: enviarPorEmail()
+    reloj -> email : 2: GenerarAviso(factura, tono, idioma)
+    email --> reloj : aviso
+
+    reloj -> fac : 3: enviarPorEmail()
     activate fac
-    fac -> email : 5: EnviarAvisoCliente(contactoCliente, mensaje)
-    activate email
-    email ->> cli : 6: EnviarNotificacionImpago(mensaje)
-    email --> fac : entregado
-    deactivate email
-    fac --> sys : Boolean
+    fac -> email : 4: EnviarAvisoCliente(datosContacto, aviso)
+    email ->> cli : 5: EnviarNotificacionImpago(aviso)
+    fac --> reloj : Boolean
     deactivate fac
 
-    create notif
-    sys --> notif : 7: crear(tipo, texto)
 
-    sys -> notif : 8: estaEntregada()
-    activate notif
-    notif --> sys : Boolean
-    deactivate notif
+    create notif
+    reloj --> notif : 6: crear(tipo, texto)
 
     alt #Pink Entrega fallida
-        sys -> fac : 9: registrarIncidenciaEntrega()
-        activate fac
-        fac --> sys : Incidencia abierta
-        deactivate fac
+        reloj -> fac : 7: registrarIncidenciaEntrega()
     end
 
-    sys -> db : 10: GuardarNotificacion(notificacion)
-    activate db
-    db --> sys : True
-    deactivate db
+    reloj -> db : 8: ProgramarSiguienteAviso(idFactura)
 end
 
 @enduml
