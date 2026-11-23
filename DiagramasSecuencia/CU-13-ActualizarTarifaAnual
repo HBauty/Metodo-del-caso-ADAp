@@ -3,12 +3,11 @@ title TurbineH - Resolver revisión anual de un cliente
 
 actor Administrador as Admin
 participant "Cliente" as Cliente
-participant "Suscripción" as Suscripcion
 participant "RevisionAnual" as Revision
 
-Admin -> Cliente: consultarCliente()
+Admin -> Admin: consultarCliente(cliente: Cliente)
+Admin --> Cliente: <<lectura>>
 Cliente --> Admin: cliente
-Admin -> Suscripcion: consultar revisiones (acuerdos)
-Suscripcion --> Admin: revisionAnual
-Admin -> Revision: resolver(actor = Admin, motivo)
+Admin -> Revision: resolver(actor: Admin, motivo: String)
+Revision --> Admin: void
 @enduml
