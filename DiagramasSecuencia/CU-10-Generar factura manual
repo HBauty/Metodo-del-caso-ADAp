@@ -1,29 +1,32 @@
 @startuml
-
 title CU-10: Generar factura manual (Puntual)
+autonumber
 
-actor "Lector asignado" as actor
-
-participant ":Cliente" as cliente
+actor "Administrador / Lector (persona)" as persona
+participant ":Lector" as lector
 participant ":Factura" as factura
+participant ":Documento" as doc
 
-actor -> cliente : 1. consultarCliente(Cliente)
-cliente --> actor : Datos del cliente
+persona -> lector : consultarCliente(Cliente)
+activate lector
+lector --> persona : Cliente
 
-actor -> factura : 2. crearFacturaManual(Factura)
+persona -> lector : crearFacturaManual(Factura)
+lector --> factura ** : crear Factura (tipo PUNTUAL)
 activate factura
+factura -> factura : calcular()
 
-factura -> factura : 3. calcular()
-
-    factura -> factura : 4. generarPdfEstandar()
-
-    factura -> factura : 5. enviarPorEmail()
-    factura --> actor : Confirmación de envío
-    factura -> factura : 6. actualizarEstadoCobro()
-
-    deactivate factura
-
+alt #LightGreen Dentro de política
+    factura -> factura : generarPdfEstandar()
+    factura --> doc ** : crear Documento
+    factura -> factura : enviarPorEmail()
+    factura -> factura : actualizarEstadoCobro()
+    factura --> lector : factura emitida y enviada
+else #Pink Fuera de política (extensión 3a)
+    factura --> lector : factura retenida, envío bloqueado
+end
 deactivate factura
 
+lector --> persona : resultado de la factura
+deactivate lector
 @enduml
-
