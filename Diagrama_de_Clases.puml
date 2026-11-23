@@ -159,12 +159,4 @@ Suscripción "0..*" -- "0..*" Documento : contratos
 Notificación "0..*" -- "1..*" Factura : comunica
 Notificación "1" -- "0..*" Incidencia : fallos confirmados
 
-
-
-note bottom of Factura
-  Emitida: contenido y PDF inmutables.
-  Correcciones mediante rectificativa vinculada.
-  Emisión, cobro y seguimiento son independientes.
-end note
-
 @enduml
