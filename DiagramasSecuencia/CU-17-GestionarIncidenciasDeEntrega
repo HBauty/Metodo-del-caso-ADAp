@@ -1,10 +1,16 @@
 @startuml
-actor Administrador
+title TurbineH - Gestionar incidencia de entrega
+
+actor Administrador as Admin
 actor Cliente
-Administrador -> IncidenciaEntrega : getUltimaIncidencia()
-alt EXISTE UNA INCIDENCIA
-IncidenciaEntrega -> Administrador : incidencia
-Administrador -> Administrador: analiza la incidencia
-Administrador -> Cliente: Entrega manual de la factura rectificada
-Administrador -> IncidenciaEntrega : eliminarUltimaIncidencia()
+participant "Incidencia" as Incidencia
+
+Admin -> Admin: consultar incidencias de la factura rectificada
+alt hay incidencia sin resolver
+    Admin -> Cliente: entrega manual de la factura rectificada
+    Admin -> Incidencia: resolver()
+    Incidencia --> Admin: void
+else no hay incidencias pendientes
+    Admin --> Admin: sin resultados
+end
 @enduml
