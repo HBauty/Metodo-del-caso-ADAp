@@ -3,32 +3,62 @@ hide footbox
 skinparam sequenceParticipant underline
 
 actor ": Reloj / Sistema" as sys
-participant ": DataBase" as db
+participant ": DataBase" as db <<infra>>
 participant ": Factura" as fac
-participant ": ServicioEmail" as email
+participant ": ServicioEmail" as email <<infra>>
+participant ": Notificación" as notif
 actor ": Cliente" as cli
 
-sys -> db : 1: ObtenerFacturas()
+sys -> db : 1: ObtenerFacturasVencidas()
 activate db
+note right of db
+  fechaVencimiento superada y estadoFactura distinto
+  de PAGADA y de SEGUIMIENTO_PAUSADO.
+end note
 create fac
-db --> fac : 2: ObtenerFactura
-db --> sys : Factura
+db --> fac : 2: cargar datos
+db --> sys : facturas
 deactivate db
 
-sys -> fac : 3: RevisarVencimientoYGenerarMensaje(idioma, tono)
-activate fac
-fac --> sys : mensaje
-deactivate fac
+loop Por cada factura vencida
+    sys -> email : 3: GenerarMensaje(factura, idioma, tono)
+    activate email
+    note right of email
+      Idioma y tono no son atributos del modelo:
+      los resuelve el servicio de correo.
+    end note
+    email --> sys : mensaje
+    deactivate email
 
-sys -> email : 4: EnviarAvisoCliente(contactoCliente, mensaje)
-activate email
-email ->> cli : 5: EnviarNotificacionImpago(mensaje)
-email --> sys : True (Entregado)
-deactivate email
+    sys -> fac : 4: enviarPorEmail()
+    activate fac
+    fac -> email : 5: EnviarAvisoCliente(contactoCliente, mensaje)
+    activate email
+    email ->> cli : 6: EnviarNotificacionImpago(mensaje)
+    email --> fac : entregado
+    deactivate email
+    fac --> sys : Boolean
+    deactivate fac
 
-sys -> db : 6: RegistrarEnvioHistorial(idFactura, "NOTIFICADA")
-activate db
-db --> sys : True
-deactivate db
+    create notif
+    sys --> notif : 7: crear(tipo, texto)
+
+    sys -> notif : 8: estaEntregada()
+    activate notif
+    notif --> sys : Boolean
+    deactivate notif
+
+    alt #Pink Entrega fallida
+        sys -> fac : 9: registrarIncidenciaEntrega()
+        activate fac
+        fac --> sys : Incidencia abierta
+        deactivate fac
+    end
+
+    sys -> db : 10: GuardarNotificacion(notificacion)
+    activate db
+    db --> sys : True
+    deactivate db
+end
 
 @enduml
