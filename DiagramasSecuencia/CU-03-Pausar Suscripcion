@@ -3,44 +3,57 @@ hide footbox
 skinparam sequenceParticipant underline
 
 actor ": Admin / Lector" as act
-participant ": Interfaz" as ui
-participant ": DataBase" as db
-participant ": Suscripcion" as sub
+participant ": Interfaz" as ui <<boundary>>
+participant ": DataBase" as db <<infra>>
+participant ": Cliente" as cli
+participant ": Suscripción" as sub
 
-act -> ui : 1: SeleccionarSuscripcionYPausar(idSuscripcion)
+act -> ui : 1: SeleccionarClienteYPausarSuscripcion(idCliente)
 activate ui
-ui --> act : 2: SolicitarDatosPausa(motivo, fechaInicio, fechaReactivacion)
+ui --> act : 2: SolicitarDatosPausa(motivo, fechaInicio, fechaReactivacion [opcional])
 deactivate ui
 
-act -> ui : 3: IntroducirDatosPausa(idSuscripcion, motivo, fechaInicio, fechaReactivacion)
+act -> ui : 3: IntroducirDatosPausa(idCliente, motivo, fechaInicio, fechaReactivacion)
 activate ui
 
-ui -> ui : 4: ValidarDatosObligatorios(motivo, fechaInicio, fechaReactivacion)
+ui -> ui : 4: ValidarDatosObligatorios(motivo, fechaInicio)
 
 alt #LightGreen Datos completos (Escenario principal de éxito)
-    ui -> db : 5: ObtenerSuscripcion(idSuscripcion)
+    ui -> db : 5: ObtenerCliente(idCliente)
     activate db
-    
-    create sub
-    db --> sub : 6: ObtenerSuscripcion
-    db --> ui : Suscripcion
+
+    create cli
+    db --> cli : 6: cargar datos (incluye su suscripción)
+    db --> ui : cliente
     deactivate db
 
-    ui -> sub : 7: Pausar(motivo, fechaInicio, fechaReactivacion)
+    ui -> cli : 7: pausarSuscripción(motivo, fechaInicio, fechaReactivacion)
+    activate cli
+
+    cli -> sub : 8: pausar(motivo, inicio, retorno)
     activate sub
-    sub -> sub : CambiarEstado("Pausada")
-    sub -> sub : DetenerFacturacionRecurrente()
-    sub --> ui : True
+    note right of sub
+      estado = pausada
+      proximaEmision = vacío (no se generan cuotas)
+      Las deudas previas se mantienen.
+    end note
+    sub --> cli : True
     deactivate sub
 
-    ui -> db : 8: GuardarSuscripcion(sub)
+    note right of cli
+      estadoFicha = PAUSADO
+    end note
+    cli --> ui : True
+    deactivate cli
+
+    ui -> db : 9: GuardarCliente(cli)
     activate db
     db --> ui : True
     deactivate db
 
     ui --> act : ConfirmarSuscripcionPausada()
 
-else #Pink 3a. Faltan datos obligatorios (motivo o fechas - Termina la secuencia)
+else #Pink 3a. Faltan datos obligatorios (motivo o fecha de inicio - Termina la secuencia)
     ui --> act : ImpedirContinuarYSolicitarCompletarInfo()
 end
 
