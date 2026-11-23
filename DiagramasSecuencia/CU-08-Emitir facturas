@@ -1,37 +1,26 @@
 @startuml
-
 title CU-08: Emitir orden de cobro / Envío de factura automática
+autonumber
 
-actor "Reloj del sistema" as reloj
-
-participant ":Suscripción" as sus
+actor "Proceso interno de facturación" as proceso
 participant ":Factura" as factura
+participant ":Documento" as doc
 
-reloj --> sus : 1. comprobarFechaEmision
-
-activate sus
-
-loop Por cada suscripción activa cuya fecha de emisión ha llegado
-
-    sus --> factura : 2. crearFactura 
+loop #Lightblue Día 1 de cada mes, por cada suscripción activa
+    proceso --> factura ** : crearFactura
     activate factura
 
-    factura -> factura : 3. calcular()
-    factura --> sus : Importe calculado
+    factura -> factura : calcular()
+    factura -> factura : generarPdfEstandar()
+    factura --> doc ** : crearDocumento
+    factura -> factura : enviarPorEmail()
 
-    factura -> factura : 4. generarPdfEstandar()
-    factura --> sus : PDF generado
-
-    factura -> factura : 7. enviarPorEmail()
-    factura --> sus : Confirmación de envío
-
-    factura -> factura : 8. actualizarEstadoCobro()
+    alt #lightgreen Envío correcto
+        factura -> factura : actualizarEstadoCobro()
+    else #lightpink  Fallo de envío
+        factura -> factura : registrarIncidenciaEntrega()
+    end
 
     deactivate factura
-
 end
-
-deactivate sus
-
 @enduml
-
