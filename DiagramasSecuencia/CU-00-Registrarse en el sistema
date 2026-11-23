@@ -3,49 +3,52 @@ hide footbox
 skinparam sequenceParticipant underline
 
 actor ": Empleado" as emp
-participant ": InterfazRegistro" as ui
-participant ": ControladorRegistro" as ctrl
-participant ": DataBase" as db
-participant ": Usuario" as usr
-participant ": ServicioEmail" as email
+participant ": InterfazRegistro" as ui <<boundary>>
+participant ": ControladorRegistro" as ctrl <<control>>
+participant ": DataBase" as db <<infra>>
+participant ": Lector" as usr
+participant ": ServicioEmail" as email <<infra>>
+
 emp -> ui : 1: SolicitarCreacionPerfil()
 activate ui
 ui --> emp : MostrarFormulario()
 deactivate ui
 
-emp -> ui : 2: RegistrarEmpleado(nombre, correo, clave)
+emp -> ui : 2: RegistrarEmpleado(nombre, email, contraseña)
 activate ui
 
-ui -> ctrl : 3: ProcesarAlta(nombre, correo, clave)
+ui -> ctrl : 3: ProcesarAlta(nombre, email, contraseña)
 activate ctrl
 
-ctrl -> ctrl : 4: ValidarDominioCorporativo(correo)
+ctrl -> ctrl : 4: ValidarDominioCorporativo(email)
 
 alt #LightGreen Dominio válido (@turbine...)
-    ctrl -> db : 5: ComprobarCorreoExistente(correo)
+    ctrl -> db : 5: ComprobarCorreoExistente(email)
     activate db
     db --> ctrl : existeCorreo
     deactivate db
 
     alt Correo NO registrado previamente (Escenario principal de éxito)
         create usr
-        ctrl --> usr : 6: CrearUsuario(nombre, correo, clave, "PENDIENTE_ROLES")
+        ctrl --> usr : 6: crear(nombre, email, contraseña)
+        note right of usr
+          Se crea como Lector (rol mínimo) con activo = false.
+          Queda pendiente de que un administrador
+          le asigne permisos y clientes (CU-02).
+        end note
 
         ctrl -> db : 7: GuardarUsuario(usr)
         activate db
+        note right of db
+          La base de datos registra la auditoría
+          de la alta (solo inserción, NFR13).
+        end note
         db --> ctrl : True
         deactivate db
 
-        ctrl ->> email : 8: enviarNotificacionAdministracion(correo)
+        ctrl ->> email : 8: enviarNotificacionAdministracion(email)
 
-     
-
-        ctrl -> db : 10: GuardarRegistroAuditoria(audit)
-        activate db
-        db --> ctrl : True
-        deactivate db
-
-        ctrl --> ui : True (Registro completado)
+        ctrl --> ui : 9: True (Registro completado)
         ui --> emp : ConfirmarRealizacionProceso()
 
     else #Pink 3b. Usuario ya registrado (Termina la secuencia de alta)
