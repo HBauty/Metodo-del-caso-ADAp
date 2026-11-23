@@ -19,19 +19,21 @@ sus --> admin : suscripcion Creada
 
 admin --> sus : 3. solicitarAprobación
 
-alt 
+alt #Pink Suscripción denegada 
     sus --> admin : suscripción denegada
     admin -> sus : 5. pausar(motivo, inicio, retorno)
+    sus -> admin : suscripción pausada
 
-else 
+else #LightGreen Suscripción aprobada
     sus --> admin : suscripción aprobada
-deactivate sus
 
 admin --> doc : 6. crearDocumento
 activate doc
-doc --> admin : Documento creado
+doc --> sus : Documento creado
 deactivate doc 
 
 end
+
+deactivate sus
 
 @enduml
