@@ -8,10 +8,10 @@ participant "Factura" as Factura
 Lector -> Lector: consultarCliente(cliente: Cliente)
 Lector -> Cliente: facturas
 Cliente --> Lector: facturas [0..*]
-alt el cliente tiene facturas
+alt #Pink el cliente tiene facturas
     Lector -> Factura: generarPdfEstandar()
     Factura --> Lector: urlPdf: String
-else sin facturas
+else #LightGreen sin facturas
     Lector --> Lector: sin resultados
 end
 @enduml
