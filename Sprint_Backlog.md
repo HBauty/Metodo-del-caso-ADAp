@@ -206,11 +206,12 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 1 h
 
 ### Sprint planning
-El sprint durará 2 semanas . En este sprint, la tarea principal será construir el diagrama de clases y dejar preparado lo necesario para el siguiente sprint, donde lo planeado es hacer el diagrama E/R.
+El sprint durará 2 semanas. En este sprint, la tarea principal será construir los prototipos de los diagramas de clases, secuencias y arquitectura para hacer el diagrama E/R en el siguiente sprint.
 
 ### Tareas
 - [x] Hacer los diagramas de secuencias *(Hugo, Aquiles y Jose)*
 - [x] Empezar el diagrama de clases *(Ángel, Gabriel y Francisco)*
+- [x] Prototipo diagrama de arquitectura *(Francisco)*
 
 ### Sesión de trabajo 5/11
 
@@ -224,6 +225,14 @@ El sprint durará 2 semanas . En este sprint, la tarea principal será construir
 - [x] Revisar y actualizar el diagrama de clases a partir de las aclaraciones del profesor durante la sesión práctica. *(Rosales, Gabriel y Ángel)*
 - [x] Terminar la primera versión de los diagramas de secuencia. *(Hugo, Jose, Aquiles)*
 
+### Sprint review
+Se han completado correctamente todas las tareas, creado todos los prototipos de los diagramas y están listo para la revisión en el siguiente sprint.
+
+### Sprint retrospective
+Al realizar el diagrama de clases en los primeros días del sprint, no se ha interrumpido El flujo de trabajo, siendo este de los mas fluidos que hemos realizado.
+
+---
+
 ## SPRINT 4
 ### Sesión organizativa 19/11
 
@@ -234,10 +243,10 @@ Hugo, Ángel, Aquiles, Rubén, Gabriel.
 4 h
 
 ### Sprint planning
-El sprint durará 5 días. En este sprint, la tarea principal será terminar los diagramas y crear la presentación para la entrega del parcial del día 24
+El sprint durará 5 días. En este sprint, las tareas a realizar serán refinar los diagramas del sprint anterior, realizar el diagrama E/R y crear la presentación para el parcial del día 24.
 
 ### Tareas
-- [x] Empezar la presentación *(Hugo, Aquiles y Gabriel)* 
+- [x] Crear la presentación *(Hugo, Aquiles y Gabriel)* 
 - [x] Alinear los diagramas de secuencia (CU06-12) con los métodos del diagrama de clases *(Ángel y Aquiles)*
 - [x] Realizar el diagrama entidad-relación. *(Rubén)*
 
@@ -250,8 +259,8 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 2 h
 
 ### Tareas
-- [x] Continuar con la presentación. *(Hugo y Gabriel)*
-- [x] Corrección del casos de uso CU-11 conforme al informe *(Ángel y Francisco)*
+
+- [x] Corrección del casos de uso CU-11 y su diagrama de secuencia conforme al informe *(Ángel, Aquiles y Francisco)*
 - [x] Revisión de las asociaciones en el diagrama de clases. *(Ángel y Francisco)*
 - [x] Continuar diagramas de secuencia (CU06-12). *(Aquiles)*
 - [x] Revisar el diagrama entidad-relación. *(Rubén)*
@@ -264,10 +273,24 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 ### Duración
 2 h
 
+### Tarea
+- [x] Corrección de los casos de uso CU-02 y CU-08 conforme al informe *(Ángel y Aquiles)*
+
+### Sesión organizativa 23/11
+
+### Asistentes
+Hugo, Ángel, Aquiles, Jose, Gabriel y Francisco.
+
+### Duración
+
 ### Tareas
-- [x] Corrección del casos de uso conforme al informe *(Ángel y Aquiles)*
+- [x] Alinear el resto de diagramas de secuencia con los métodos del diagrama de clases *(Hugo y Jose)*
+- [x] Corrección del casos de uso CU-05 y su diagrama de secuencia conforme al informe *(Ángel, Jose y Francisco)*
+- [x] Mejorar mediante colores la presentación de los flujos alternativos en los diagramas de secuencias *(Jose y Aquiles)*
+- [x] Terminar el guión de la presentación. *(Hugo y Gabriel)*
 
+### Sprint review
+Se han completado todas las tareas satisfactoriamente realizando el diagrama E/R, corrigiendo los casos de usos y sus diagramas de secuencia conforme al informe realizado la presentación dejando todo listo para el día 24.
 
-
-
-
+### Sprint retrospective
+La revisión de los casos de usos no nos ha supuesto modificar mucho el trabajo aunque hubiera sido mejor realizarlo en el sprint anterior.
