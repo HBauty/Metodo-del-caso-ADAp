@@ -6,11 +6,11 @@ actor Cliente
 participant "Incidencia" as Incidencia
 
 Admin -> Admin: consultar incidencias de la factura rectificada
-alt hay incidencia sin resolver
+alt #pink hay incidencia sin resolver
     Admin -> Cliente: entrega manual de la factura rectificada
     Admin -> Incidencia: resolver()
     Incidencia --> Admin: void
-else no hay incidencias pendientes
+else #lightgreen no hay incidencias pendientes
     Admin --> Admin: sin resultados
 end
 @enduml
