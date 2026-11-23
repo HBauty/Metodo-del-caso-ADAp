@@ -6,12 +6,12 @@ participant "Cliente" as Cliente
 participant "Factura" as Factura
 
 Admin -> Admin: consultarCliente(cliente: Cliente)
-alt cliente existe y la factura está en su asociación "facturas"
+alt #LightGreen cliente existe y la factura está en su asociación "facturas"
     Admin -> Cliente: facturas
     Cliente --> Admin: facturas [0..*]
     Admin -> Factura: generarPdfEstandar()
     Factura --> Admin: urlPdf: String
-else no existe el cliente o la factura no le pertenece
+else #Pink no existe el cliente o la factura no le pertenece
     Admin --> Admin: error
 end
 @enduml
