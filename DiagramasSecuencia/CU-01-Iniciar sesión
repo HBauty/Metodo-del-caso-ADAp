@@ -3,50 +3,64 @@ hide footbox
 skinparam sequenceParticipant underline
 
 actor ": Usuario" as act
-participant ": InterfazLogin" as ui
-participant ": ControladorAuth" as ctrl
-participant ": DataBase" as db
+participant ": InterfazLogin" as ui <<boundary>>
+participant ": ControladorAuth" as ctrl <<control>>
+participant ": DataBase" as db <<infra>>
 participant ": Usuario" as usr
 
-act -> ui : 1: IniciarSesion(correo, contraseña)
+note over usr
+  Instancia de Lector, Administrador
+  o Superadministrador (el rol es el tipo del objeto).
+end note
+
+act -> ui : 1: IniciarSesion(email, contraseña)
 activate ui
 
-ui -> ctrl : 2: Autenticar(correo, contraseña)
+ui -> ctrl : 2: Autenticar(email, contraseña)
 activate ctrl
 
-ctrl -> ctrl : 3: VerificarDominioCorporativo(correo)
+ctrl -> ctrl : 3: VerificarDominioCorporativo(email)
 
-ctrl -> db : 4: ObtenerUsuario(correo)
+ctrl -> db : 4: ObtenerUsuario(email)
 activate db
 
 alt #LightGreen Usuario existe en el sistema
     create usr
-    db --> usr : 5: CrearUsuario
-    db --> ctrl : Usuario
+    db --> usr : 5: cargar datos
+    db --> ctrl : usuario
     deactivate db
 
-    ctrl -> usr : 6: ValidarCredencialesYEstado(contraseña)
+    ctrl -> usr : 6: autenticar()
     activate usr
-    usr --> ctrl : True (Cuenta activa y clave válida)
+    note right of usr
+      Compara la contraseña introducida
+      y comprueba activo = true.
+    end note
+    usr --> ctrl : Boolean
     deactivate usr
 
-    ctrl -> usr : 7: ObtenerRolYPermisos()
-    activate usr
-    usr --> ctrl : rol, modulos, clientesAsignados
-    deactivate usr
+    alt #LightGreen Credenciales válidas y cuenta activa
+        ctrl -> ctrl : 7: DeterminarRolYModulos(usuario)
+        note right of ctrl
+          Rol = tipo del objeto (Lector, Administrador, Superadministrador).
+          Clientes asignados = atributo Lector.clientes.
+        end note
 
-    ctrl --> ui : 8: AccesoConcedido(rol, modulos, clientesAsignados)
-    ui --> act : 9: CargarEntornoRestringido(modulos, clientesAsignados)
+        ctrl --> ui : 8: AccesoConcedido(rol, modulos, clientesAsignados)
+        ui --> act : 9: CargarEntornoRestringido(modulos, clientesAsignados)
+    else #Pink Contraseña incorrecta o cuenta desactivada (Fin de secuencia)
+        ctrl --> ui : ErrorCredencialesOCuentaInactiva()
+        ui --> act : InformarAccesoDenegado()
+    end
 
 else #Pink Usuario NO existe (Fin de secuencia)
     db --> ctrl : null (Usuario no encontrado)
     deactivate db
-    
+
     ctrl --> ui : ErrorUsuarioNoExiste()
-    deactivate ctrl
-    
     ui --> act : InformarUsuarioNoRegistrado()
-    deactivate ui
 end
 
+deactivate ctrl
+deactivate ui
 @enduml
