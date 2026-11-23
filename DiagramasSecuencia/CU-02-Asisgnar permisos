@@ -3,36 +3,71 @@ hide footbox
 skinparam sequenceParticipant underline
 
 actor ": SuperAdmin / Admin" as admin
-participant ": Interfaz" as ui
-participant ": DataBase" as db
-participant ": Usuario" as usr
+participant ": Interfaz" as ui <<boundary>>
+participant ": DataBase" as db <<infra>>
+participant ": Administrador" as adm
+participant ": Superadministrador" as sup
+participant "lector : Lector" as lec
 
-admin -> ui : 1: SeleccionarORegistrarEmpleado(correo, rolAsignado, listaClientes)
+note over adm
+  Objeto del usuario en sesión.
+  El Superadministrador hereda de Administrador.
+end note
+
+admin -> ui : 1: SeleccionarORegistrarEmpleado(email, rolAsignado, listaClientes)
 activate ui
 
-ui -> ui : 2: ValidarDominioCorporativo(correo)
+ui -> ui : 2: ValidarDominioCorporativo(email)
 
 alt #LightGreen Dominio válido (@turbine...)
-    ui -> db : 3: BuscarEmpleado(correo)
-    activate db
 
-    alt Empleado ya existe en DataBase
-        create usr
-        db --> usr : 4a: ObtenerUsuario
-        db --> ui : Usuario
-    else #LightYellow Empleado nuevo (No registrado)
-        db --> ui : null
-        create usr
-        ui --> usr : 4b: CrearUsuario(correo)
+    alt #LightGreen rolAsignado = Lector
+        ui -> db : 3: BuscarEmpleado(email)
+        activate db
+
+        alt Empleado ya existe en DataBase
+            create lec
+            db --> lec : 4a: cargar datos
+            db --> ui : lector
+        else #LightYellow Empleado nuevo (No registrado)
+            db --> ui : null
+            create lec
+            ui --> lec : 4b: crear(email)
+            ui -> adm : 5: registrarLector(lector)
+            activate adm
+            adm --> ui : True
+            deactivate adm
+        end
+        deactivate db
+
+        loop Por cada cliente de listaClientes
+            ui -> adm : 6: asignarCliente(lector, cliente)
+            activate adm
+            adm --> ui : True
+            deactivate adm
+        end
+
+    else #LightBlue rolAsignado = Administrador (solo Superadministrador)
+        ui -> db : 3: BuscarEmpleado(email)
+        activate db
+
+        alt Empleado nuevo
+            db --> ui : null
+            ui -> sup : 5: crearAdministrador()
+            activate sup
+            sup --> ui : True
+            deactivate sup
+        else Ya es administrador
+            db --> ui : administrador
+            ui -> sup : 5: modificarAdmin()
+            activate sup
+            sup --> ui : True
+            deactivate sup
+        end
+        deactivate db
     end
-    deactivate db
 
-    ui -> usr : 5: AsignarRolYClientes(rolAsignado, listaClientes)
-    activate usr
-    usr --> ui : True
-    deactivate usr
-
-    ui -> db : 6: GuardarConfiguracion(usr)
+    ui -> db : 7: GuardarConfiguracion()
     activate db
     db --> ui : True
     deactivate db
