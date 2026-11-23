@@ -3,11 +3,11 @@ actor Administrador
 actor Cliente
 Cliente -> Administrador: Solicita excepción financiera
 Cliente -> Administrador: nuevaTarifa
-alt APRUEBA EXCEPCION
+alt #LightGreen APRUEBA EXCEPCION
 Administrador -> ClassCliente: getSuscripcion()
 ClassCliente -> Administrador: Suscripcion
 Administrador -> Suscripcion: setTarifa(nuevaTarifa: Decimal)
 Administrador -> ClassCliente: setSuscripcion(nuevaSuscripcion: Suscripcion)
-else DENIEGA EXCEPCION
+else #Pink DENIEGA EXCEPCION
 Administrador -> Cliente: Solicitud denegada
 @enduml
