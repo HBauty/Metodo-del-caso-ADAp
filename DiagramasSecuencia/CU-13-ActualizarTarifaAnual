@@ -1,6 +1,14 @@
 @startuml
+title TurbineH - Resolver revisión anual de un cliente
+
 actor Administrador as Admin
+participant "Cliente" as Cliente
+participant "Suscripción" as Suscripcion
+participant "RevisionAnual" as Revision
+
 Admin -> Cliente: consultarCliente()
-Cliente -> Admin: cliente
-Admin -> RevisionAnual: resolver(cliente, motivo)
+Cliente --> Admin: cliente
+Admin -> Suscripcion: consultar revisiones (acuerdos)
+Suscripcion --> Admin: revisionAnual
+Admin -> Revision: resolver(actor = Admin, motivo)
 @enduml
