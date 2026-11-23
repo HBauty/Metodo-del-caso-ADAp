@@ -1,52 +1,47 @@
+@startuml
+title CU-12: Emitir y enviar una factura o factura rectificativa
+autonumber
 
-@startuml CU12_Emitirfactura
-
-actor "Administrador / Lector" as Usuario
-
+actor "Administrador / Lector (persona)" as persona
 participant ":Lector" as lector
-participant ":Cliente" as client
-participant ":Suscripcion" as sus
-participant ":Factura" as factura
 participant ":Administrador" as admin
+participant ":Factura" as factura
 participant ":Documento" as doc
-participant ":Notificacion" as notificacion
 
-Usuario -> client: 1.Seleccionar cliente
-client --> Usuario: Datos del cliente
+persona -> lector : consultarCliente(Cliente)
+activate lector
+lector --> persona : Cliente
 
-Usuario -> lector: 2.crearfacturaManual(factura)
-lector -> factura: 3.calcular()
-factura --> lector: Importes calculados
+persona -> lector : crearFacturaManual(Factura)
+lector --> factura ** : crear Factura (borrador, o rectificativa vinculada a la original)
+activate factura
+factura -> factura : calcular()
 
-lector -> factura: 4.generarPdfEstandar()
-factura --> lector: PDF generado
-
-alt Datos fiscales incompletos
-    lector --> Usuario: Mostrar errores de validación
-
-else Datos correctos
-
-    alt Requiere aprobación
-        Usuario -> admin: Solicitar aprobación
-        admin -> admin: 5.aprobarfactura(factura)
-        admin --> Usuario: Aprobación registrada
+alt #Pink Datos fiscales incompletos (extensión 3a)
+    factura --> lector : emisión bloqueada, errores indicados
+    lector --> persona : errores de validación
+else #LightGreen Datos fiscales completos
+    opt #LightBlue Importe anómalo o condiciones que requieren aprobación (4a)
+        persona -> admin : aprobarFactura(Factura)
+        activate admin
+        admin --> persona : aprobación registrada
+        deactivate admin
     end
 
-    Usuario -> factura: 6.Confirmar emisión
-    factura -> factura: 7.generarPdfEstandar()
-    factura -> doc: 8.verificarIntegridad(bytes)
-    doc --> factura: Resultado de integridad
+    factura -> factura : generarPdfEstandar()
+    factura --> doc ** : crear Documento (PDF definitivo)
+    doc -> doc : verificarIntegridad(bytes)
+    factura -> factura : enviarPorEmail()
 
-    factura -> factura: 9.enviarPorEmail()
-
-    alt Envío correcto
-        factura -> notificacion: 10.estaEntregada()
-        notificacion --> factura: Resultado de entrega
-
-    else Error de envío
-        factura -> factura: 11.registrarIncidenciaEntrega()
+    alt #LightBlue Envío correcto
+        factura -> factura : actualizarEstadoCobro()
+        factura --> lector : factura emitida y enviada
+    else #Pink Falla el envío (extensión 7a)
+        factura -> factura : registrarIncidenciaEntrega()
+        factura --> lector : factura conservada, incidencia abierta
     end
-
+    lector --> persona : resultado del envío
 end
-
+deactivate factura
+deactivate lector
 @enduml
