@@ -13,9 +13,9 @@ deactivate lector
 persona -> lector : editarCliente(Cliente)
 activate lector
 
-alt Sin conflicto de concurrencia
+alt #LightGreen Sin conflicto de concurrencia
     lector --> persona : ficha actualizada
-else Conflicto de concurrencia
+else #Pink Conflicto de concurrencia
     lector --> persona : aviso de conflicto
     persona -> lector : consultarCliente(Cliente)
     lector --> persona : Cliente (datos actuales)
