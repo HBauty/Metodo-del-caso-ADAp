@@ -127,27 +127,31 @@ Extensiones:
 
 ## CU-05: Notificar avisos e impagos 
 
-**Actor principal:** Lector asignado
+**Actor principal:**  El Administrador o nadie. El administrador puede configurar, suspender o reanudar los recordatorios, o estos pueden ser totalmente automáticos.
 
-**Descripción:** El sistema envía recordatorios de pago o avisos a los clientes.
+**Descripción:** El sistema revisa periódicamente las facturas pendientes y envía los avisos que correspondan según la configuración de recordatorios.
 
 **Precondiciones:** Existen facturas emitidas pendientes de pago o vencidas en el sistema.
 
-**disparador** El reloj del sistema alcanza la programación diaria de revisión de vencimientos 
+**disparador** El planificador interno inicia la revisión diaria de vencimientos.
 
 **Garantía de éxito:** Las comunicaciones se envían en el idioma del cliente y quedan registradas en el historial.
 
 ### Escenario principal de éxito:
 
-1. El sistema revisa diariamente los vencimientos de las facturas no pagadas.
-2. El sistema genera el mensaje adaptando el idioma y el tono (amistoso en días 3 y 5; formal/urgente cada 2-3 días tras vencer), incluyendo datos de soporte.
-3. El sistema envía la notificación al contacto de facturación/cobros del cliente y avisa al empleado interno asignado.
-4. El sistema registra el resultado del envío.
+1.	El sistema revisa diariamente los vencimientos de las facturas no pagadas. Comprueba si hay un recordatorio programado y si su envío está habilitado.
+2.	El sistema prepara el aviso amistoso de los días 3 y 5 o el aviso formal o urgente tras el vencimiento, según corresponda. Tras el vencimiento, los avisos se programan con el intervalo de 2 o 3 días configurado por el Administrador conforme a FR19. El sistema utiliza el idioma del cliente e incluye los datos de soporte.
+3.	El sistema envía la notificación al contacto de facturación/cobros del cliente y avisa al empleado interno asignado.
+4.	El sistema registra el resultado del envío.
+
 
 ### Extensiones:
 
-- **1a.** Factura marcada "En Disputa": El sistema omite el envío de recordatorios hasta la fecha máxima de revisión.
-- **3a.** Fallo de entrega (rebote de correo): El sistema no marca la factura como notificada, crea una incidencia automática y alerta al responsable para corregir el contacto.
+**1a.** Factura marcada "En Disputa": El sistema omite el envío de recordatorios hasta la fecha máxima de revisión.
+**1b.** Suspensión manual (FR19): Un Administrador autenticado selecciona la factura y suspende sus recordatorios. El sistema registra la acción, omite los avisos programados y detiene los reenvíos de recordatorios mientras dure la suspensión.
+**1c.** Reanudación manual (FR19): Un Administrador autenticado solicita reanudar los recordatorios de una factura suspendida. El sistema comprueba que permanece impagada y que su estado permite los avisos. Si procede, registra la reanudación y vuelve a programar el siguiente aviso conforme a FR19, sin enviar los avisos omitidos durante la suspensión.
+**3a.** Fallo de entrega (rebote de correo): El sistema no marca la factura como notificada, crea una incidencia automática (CU-17) y alerta al responsable para corregir el contacto.
+
 
 ---
 
