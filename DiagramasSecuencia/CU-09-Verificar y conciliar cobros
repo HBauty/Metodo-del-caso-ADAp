@@ -14,30 +14,34 @@ reloj -> pago : 1. conectarPasarela()
 activate pago
 pago --> reloj : Movimientos obtenidos
 
-loop Por cada movimiento recibido
+loop #Lightblue Por cada movimiento recibido
 
     pago --> factura : 2. buscarFactura
     activate factura
     factura --> pago : Factura asociada
+    deactivate factura
 
     pago -> pago : 3. compararImporte()
     
-    alt Importe coincidente
+    alt #LightGreen Importe coincidente
         pago --> factura : Pago completo confirmado
+        activate factura
         factura -> factura : actualizarEstadoCobro()
         factura -> factura : pausarSeguimiento(motivo, fecha)
         factura --> pago : Factura pagada
+        deactivate factura
 
         pago --> notificacion : 4. crearNotificacion
         activate notificacion 
         notificacion --> admin : Notificación enviada
         deactivate notificacion 
 
-    else Discrepancia en el importe (2a)
+    else #Pink Discrepancia en el importe (2a)
         pago --> factura : Importe diferente
+        activate factura
         factura -> factura : actualizarEstadoCobro()
         factura --> pago : Diferencia pendiente
-
+        deactivate factura
         pago -> incidencia : 5. registrarIncidenciaEntrega()
         activate incidencia
         incidencia --> pago : Incidencia registrada
