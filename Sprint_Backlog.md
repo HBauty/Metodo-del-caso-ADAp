@@ -246,7 +246,7 @@ Hugo, Ángel, Aquiles, Rubén, Gabriel.
 El sprint durará 5 días. En este sprint, las tareas a realizar serán refinar los diagramas del sprint anterior, realizar el diagrama E/R y crear la presentación para el parcial del día 24.
 
 ### Tareas
-- [x] Crear la presentación *(Hugo, Aquiles y Gabriel)* 
+- [x] Crear la presentación *(Gabriel)* 
 - [x] Alinear los diagramas de secuencia (CU06-12) con los métodos del diagrama de clases *(Ángel y Aquiles)*
 - [x] Realizar el diagrama entidad-relación. *(Rubén)*
 
@@ -287,7 +287,7 @@ Hugo, Ángel, Aquiles, Jose, Gabriel y Francisco.
 - [x] Alinear el resto de diagramas de secuencia con los métodos del diagrama de clases *(Hugo y Jose)*
 - [x] Corrección del casos de uso CU-05 y su diagrama de secuencia conforme al informe *(Ángel, Jose y Francisco)*
 - [x] Mejorar mediante colores la presentación de los flujos alternativos en los diagramas de secuencias *(Jose y Aquiles)*
-- [x] Terminar el guión de la presentación. *(Hugo, Ángel y Gabriel)*
+- [x] Terminar la presentación y su guion. *(Hugo, Ángel y Gabriel)*
 
 ### Sprint review
 Se han completado todas las tareas satisfactoriamente realizando el diagrama E/R, corrigiendo los casos de usos y sus diagramas de secuencia conforme al informe realizado la presentación dejando todo listo para el día 24.
