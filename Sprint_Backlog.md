@@ -282,6 +282,7 @@ Hugo, Ángel, Aquiles, Rubén, Jose, Gabriel y Francisco.
 Hugo, Ángel, Aquiles, Jose, Gabriel y Francisco.
 
 ### Duración
+2 h
 
 ### Tareas
 - [x] Alinear el resto de diagramas de secuencia con los métodos del diagrama de clases. *(Hugo y Jose)*
