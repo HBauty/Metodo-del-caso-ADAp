@@ -284,9 +284,9 @@ Hugo, Ángel, Aquiles, Jose, Gabriel y Francisco.
 ### Duración
 
 ### Tareas
-- [x] Alinear el resto de diagramas de secuencia con los métodos del diagrama de clases *(Hugo y Jose)*
-- [x] Corrección del casos de uso CU-05 y su diagrama de secuencia conforme al informe *(Ángel, Jose y Francisco)*
-- [x] Mejorar mediante colores la presentación de los flujos alternativos en los diagramas de secuencias *(Jose y Aquiles)*
+- [x] Alinear el resto de diagramas de secuencia con los métodos del diagrama de clases. *(Hugo y Jose)*
+- [x] Corrección del casos de uso CU-05 y su diagrama de secuencia conforme al informe. *(Ángel, Jose y Francisco)*
+- [x] Mejorar mediante colores la presentación de los flujos alternativos en los diagramas de secuencias. *(Jose y Aquiles)*
 - [x] Terminar la presentación y su guion. *(Hugo, Ángel y Gabriel)*
 
 ### Sprint review
